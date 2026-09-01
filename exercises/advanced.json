@@ -10425,5 +10425,786 @@
         ]
       }
     ]
+  },
+  {
+    "id": "advanced-refactoring-01",
+    "title": "Refactor: Startup Funding Lookup",
+    "level": "advanced",
+    "cluster": "Refactoring",
+    "topics": [
+      "refactoring",
+      "dry",
+      "code-smells"
+    ],
+    "prompt": "This one's different: it's a refactoring exercise, adapted from Checkr's \"startup-funding\" interview kata (github.com/alexandreaquiles/startup-funding) \u2014 real messy production-style code, translated from Java to a pure Python function so it runs without a CSV file.\n\n`find_funding(rows, options, first=False)` searches a list of startup funding records (`rows`, each a dict with keys like `company_name`, `city`, `state`, `round`, ...) for every row matching all the key/value pairs in `options`. With `first=True` it returns just the first match, raising `LookupError` if none match; otherwise it returns every match as a list, in original order.\n\nThe starter code already passes every test below exactly as written \u2014 that's the point. It's real *bad* code: four nearly-identical filter blocks, copy-pasted with one field name changed each time, and the `first=True` branch duplicates that same filtering logic all over again with `continue`. Your job isn't to make new tests pass \u2014 it's to refactor this into something you'd be comfortable putting in a code review: eliminate the duplication, use better names, keep it readable, without changing what any test observes. There's no automated style grade here; the exercise is your own judgment about what \"better\" looks like.\n\nfind_funding(rows, {\"city\": \"San Francisco\"}, True) -> {\"permalink\": \"stripe\", \"company_name\": \"Stripe\", ...}",
+    "func_name": "find_funding",
+    "starter_code": "def find_funding(rows, options, first=False):\n    if not first:\n        results = rows\n\n        if \"company_name\" in options:\n            filtered = []\n            for row in results:\n                if row[\"company_name\"] == options[\"company_name\"]:\n                    filtered.append(row)\n            results = filtered\n\n        if \"city\" in options:\n            filtered = []\n            for row in results:\n                if row[\"city\"] == options[\"city\"]:\n                    filtered.append(row)\n            results = filtered\n\n        if \"state\" in options:\n            filtered = []\n            for row in results:\n                if row[\"state\"] == options[\"state\"]:\n                    filtered.append(row)\n            results = filtered\n\n        if \"round\" in options:\n            filtered = []\n            for row in results:\n                if row[\"round\"] == options[\"round\"]:\n                    filtered.append(row)\n            results = filtered\n\n        return results\n    else:\n        for row in rows:\n            if \"company_name\" in options:\n                if row[\"company_name\"] == options[\"company_name\"]:\n                    pass\n                else:\n                    continue\n\n            if \"city\" in options:\n                if row[\"city\"] == options[\"city\"]:\n                    pass\n                else:\n                    continue\n\n            if \"state\" in options:\n                if row[\"state\"] == options[\"state\"]:\n                    pass\n                else:\n                    continue\n\n            if \"round\" in options:\n                if row[\"round\"] == options[\"round\"]:\n                    pass\n                else:\n                    continue\n\n            return row\n\n        raise LookupError(\"no matching funding row\")\n",
+    "hint": "There's no single right answer, but a natural path: pull the four filter predicates into one data-driven structure (a dict or list of `(option_key, row_key)` pairs) and loop over it once instead of writing the same `if key in options: ...` block four times. Once filtering is a single reusable helper, both the \"all matches\" and \"first match\" behaviors can call it \u2014 \"first match\" is just `next(iter(matches), default)` with a raise instead of a default.",
+    "tests": [
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "company_name": "Facebook"
+          }
+        ],
+        "expected": [
+          {
+            "permalink": "facebook",
+            "company_name": "Facebook",
+            "number_employees": "5299",
+            "category": "web",
+            "city": "Palo Alto",
+            "state": "CA",
+            "funded_date": "9-Jan-05",
+            "raised_amount": "12700000",
+            "raised_currency": "USD",
+            "round": "a"
+          },
+          {
+            "permalink": "facebook",
+            "company_name": "Facebook",
+            "number_employees": "5299",
+            "category": "web",
+            "city": "Palo Alto",
+            "state": "CA",
+            "funded_date": "1-May-05",
+            "raised_amount": "27500000",
+            "raised_currency": "USD",
+            "round": "b"
+          }
+        ]
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {}
+        ],
+        "expected": [
+          {
+            "permalink": "facebook",
+            "company_name": "Facebook",
+            "number_employees": "5299",
+            "category": "web",
+            "city": "Palo Alto",
+            "state": "CA",
+            "funded_date": "9-Jan-05",
+            "raised_amount": "12700000",
+            "raised_currency": "USD",
+            "round": "a"
+          },
+          {
+            "permalink": "facebook",
+            "company_name": "Facebook",
+            "number_employees": "5299",
+            "category": "web",
+            "city": "Palo Alto",
+            "state": "CA",
+            "funded_date": "1-May-05",
+            "raised_amount": "27500000",
+            "raised_currency": "USD",
+            "round": "b"
+          },
+          {
+            "permalink": "nvidia",
+            "company_name": "Nvidia",
+            "number_employees": "5583",
+            "category": "hardware",
+            "city": "Santa Clara",
+            "state": "CA",
+            "funded_date": "1-Nov-93",
+            "raised_amount": "7000000",
+            "raised_currency": "USD",
+            "round": "a"
+          },
+          {
+            "permalink": "stripe",
+            "company_name": "Stripe",
+            "number_employees": "2000",
+            "category": "web",
+            "city": "San Francisco",
+            "state": "CA",
+            "funded_date": "1-Mar-10",
+            "raised_amount": "2000000",
+            "raised_currency": "USD",
+            "round": "a"
+          },
+          {
+            "permalink": "digg",
+            "company_name": "Digg",
+            "number_employees": "60",
+            "category": "web",
+            "city": "San Francisco",
+            "state": "CA",
+            "funded_date": "1-Dec-06",
+            "raised_amount": "8500000",
+            "raised_currency": "USD",
+            "round": "b"
+          },
+          {
+            "permalink": "geni",
+            "company_name": "Geni",
+            "number_employees": "18",
+            "category": "web",
+            "city": "West Hollywood",
+            "state": "CA",
+            "funded_date": "1-Sep-06",
+            "raised_amount": "10000000",
+            "raised_currency": "USD",
+            "round": "a"
+          }
+        ]
+      },
+      {
+        "args": [
+          [],
+          {
+            "company_name": "Facebook"
+          }
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "city": "San Francisco"
+          }
+        ],
+        "expected": [
+          {
+            "permalink": "stripe",
+            "company_name": "Stripe",
+            "number_employees": "2000",
+            "category": "web",
+            "city": "San Francisco",
+            "state": "CA",
+            "funded_date": "1-Mar-10",
+            "raised_amount": "2000000",
+            "raised_currency": "USD",
+            "round": "a"
+          },
+          {
+            "permalink": "digg",
+            "company_name": "Digg",
+            "number_employees": "60",
+            "category": "web",
+            "city": "San Francisco",
+            "state": "CA",
+            "funded_date": "1-Dec-06",
+            "raised_amount": "8500000",
+            "raised_currency": "USD",
+            "round": "b"
+          }
+        ]
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "state": "CA",
+            "round": "b"
+          }
+        ],
+        "expected": [
+          {
+            "permalink": "facebook",
+            "company_name": "Facebook",
+            "number_employees": "5299",
+            "category": "web",
+            "city": "Palo Alto",
+            "state": "CA",
+            "funded_date": "1-May-05",
+            "raised_amount": "27500000",
+            "raised_currency": "USD",
+            "round": "b"
+          },
+          {
+            "permalink": "digg",
+            "company_name": "Digg",
+            "number_employees": "60",
+            "category": "web",
+            "city": "San Francisco",
+            "state": "CA",
+            "funded_date": "1-Dec-06",
+            "raised_amount": "8500000",
+            "raised_currency": "USD",
+            "round": "b"
+          }
+        ]
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "city": "San Francisco"
+          },
+          true
+        ],
+        "expected": {
+          "permalink": "stripe",
+          "company_name": "Stripe",
+          "number_employees": "2000",
+          "category": "web",
+          "city": "San Francisco",
+          "state": "CA",
+          "funded_date": "1-Mar-10",
+          "raised_amount": "2000000",
+          "raised_currency": "USD",
+          "round": "a"
+        }
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "company_name": "DoesNotExist"
+          },
+          true
+        ],
+        "expect_error": "LookupError"
+      },
+      {
+        "args": [
+          [],
+          {},
+          true
+        ],
+        "expect_error": "LookupError"
+      },
+      {
+        "args": [
+          [
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "9-Jan-05",
+              "raised_amount": "12700000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "facebook",
+              "company_name": "Facebook",
+              "number_employees": "5299",
+              "category": "web",
+              "city": "Palo Alto",
+              "state": "CA",
+              "funded_date": "1-May-05",
+              "raised_amount": "27500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "nvidia",
+              "company_name": "Nvidia",
+              "number_employees": "5583",
+              "category": "hardware",
+              "city": "Santa Clara",
+              "state": "CA",
+              "funded_date": "1-Nov-93",
+              "raised_amount": "7000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "stripe",
+              "company_name": "Stripe",
+              "number_employees": "2000",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Mar-10",
+              "raised_amount": "2000000",
+              "raised_currency": "USD",
+              "round": "a"
+            },
+            {
+              "permalink": "digg",
+              "company_name": "Digg",
+              "number_employees": "60",
+              "category": "web",
+              "city": "San Francisco",
+              "state": "CA",
+              "funded_date": "1-Dec-06",
+              "raised_amount": "8500000",
+              "raised_currency": "USD",
+              "round": "b"
+            },
+            {
+              "permalink": "geni",
+              "company_name": "Geni",
+              "number_employees": "18",
+              "category": "web",
+              "city": "West Hollywood",
+              "state": "CA",
+              "funded_date": "1-Sep-06",
+              "raised_amount": "10000000",
+              "raised_currency": "USD",
+              "round": "a"
+            }
+          ],
+          {
+            "company_name": "Facebook",
+            "round": "a"
+          },
+          true
+        ],
+        "expected": {
+          "permalink": "facebook",
+          "company_name": "Facebook",
+          "number_employees": "5299",
+          "category": "web",
+          "city": "Palo Alto",
+          "state": "CA",
+          "funded_date": "9-Jan-05",
+          "raised_amount": "12700000",
+          "raised_currency": "USD",
+          "round": "a"
+        }
+      }
+    ]
   }
 ]
