@@ -2,6 +2,7 @@ const levelTabs = document.getElementById("level-tabs");
 const levelProgress = document.getElementById("level-progress");
 const dueBadge = document.getElementById("due-badge");
 const exerciseList = document.getElementById("exercise-list");
+const exerciseSearch = document.getElementById("exercise-search");
 const workspace = document.getElementById("workspace");
 const emptyState = document.getElementById("empty-state");
 const exTitle = document.getElementById("ex-title");
@@ -94,40 +95,106 @@ async function getExercisesForLevel(level) {
   return exerciseCache.get(level);
 }
 
+function clusterOpenKey(level, cluster) {
+  return `wr-open-${level}-${cluster}`;
+}
+
+function isClusterOpen(level, cluster, hasActiveExercise) {
+  const stored = localStorage.getItem(clusterOpenKey(level, cluster));
+  if (stored !== null) return stored === "1";
+  return hasActiveExercise; // first time seeing this cluster: start collapsed unless it holds the open exercise
+}
+
 async function loadExercises(level) {
   const exercises = await getExercisesForLevel(level);
   const due = new Set(progress.due_for_review || []);
-  exerciseList.innerHTML = "";
-  let lastCluster = null;
-  for (const ex of exercises) {
-    if (ex.cluster && ex.cluster !== lastCluster) {
-      const header = document.createElement("div");
-      header.className = "cluster-header";
-      header.textContent = ex.cluster;
-      exerciseList.appendChild(header);
-    }
-    lastCluster = ex.cluster || null;
 
-    const item = document.createElement("div");
-    const solved = progress.solved.includes(ex.id);
-    const isDue = due.has(ex.id);
-    item.className = "exercise-item" + (solved ? " solved" : "");
-    if (currentExercise && currentExercise.id === ex.id) item.classList.add("active");
-    item.innerHTML = `
-      <span class="exercise-check">${solved ? "✓" : ""}</span>
-      <span class="exercise-item-body">
-        <span class="exercise-title"></span>
-        <span class="exercise-topics"></span>
-      </span>
-      ${isDue ? '<span class="due-dot" title="Due for review">📌</span>' : ""}`;
-    item.querySelector(".exercise-title").textContent = ex.title;
-    item.querySelector(".exercise-topics").textContent = (ex.topics || []).join(" · ");
-    item.onclick = () => openExercise(ex.id);
-    exerciseList.appendChild(item);
+  const groups = new Map(); // cluster name -> exercises[]
+  for (const ex of exercises) {
+    const cluster = ex.cluster || "Other";
+    if (!groups.has(cluster)) groups.set(cluster, []);
+    groups.get(cluster).push(ex);
   }
+
+  exerciseList.innerHTML = "";
+  for (const [cluster, exList] of groups) {
+    const solvedCount = exList.filter((e) => progress.solved.includes(e.id)).length;
+    const hasActive = !!currentExercise && exList.some((e) => e.id === currentExercise.id);
+
+    const section = document.createElement("details");
+    section.className = "cluster-section";
+    section.dataset.cluster = cluster;
+    section.open = isClusterOpen(level, cluster, hasActive);
+    section.addEventListener("toggle", () => {
+      localStorage.setItem(clusterOpenKey(level, cluster), section.open ? "1" : "0");
+    });
+
+    const summary = document.createElement("summary");
+    summary.className = "cluster-summary";
+    summary.innerHTML = `
+      <svg class="cluster-chevron" viewBox="0 0 16 16" width="10" height="10" aria-hidden="true">
+        <path d="M5 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="cluster-name"></span>
+      <span class="cluster-count${solvedCount === exList.length ? " complete" : ""}"></span>`;
+    summary.querySelector(".cluster-name").textContent = cluster;
+    summary.querySelector(".cluster-count").textContent = `${solvedCount}/${exList.length}`;
+    section.appendChild(summary);
+
+    const itemsHost = document.createElement("div");
+    itemsHost.className = "cluster-items";
+    for (const ex of exList) {
+      const item = document.createElement("div");
+      const solved = progress.solved.includes(ex.id);
+      const isDue = due.has(ex.id);
+      item.className = "exercise-item" + (solved ? " solved" : "");
+      item.dataset.id = ex.id;
+      item.dataset.search = `${ex.title} ${(ex.topics || []).join(" ")} ${cluster}`.toLowerCase();
+      if (currentExercise && currentExercise.id === ex.id) item.classList.add("active");
+      item.innerHTML = `
+        <span class="exercise-check">${solved ? "✓" : ""}</span>
+        <span class="exercise-item-body">
+          <span class="exercise-title"></span>
+          <span class="exercise-topics"></span>
+        </span>
+        ${isDue ? '<span class="due-dot" title="Due for review">📌</span>' : ""}`;
+      item.querySelector(".exercise-title").textContent = ex.title;
+      item.querySelector(".exercise-topics").textContent = (ex.topics || []).join(" · ");
+      item.onclick = () => openExercise(ex.id);
+      itemsHost.appendChild(item);
+    }
+    section.appendChild(itemsHost);
+    exerciseList.appendChild(section);
+  }
+
+  filterExercises(exerciseSearch.value);
   await renderLevelProgress();
   renderDueBadge();
 }
+
+function filterExercises(rawQuery) {
+  const query = rawQuery.trim().toLowerCase();
+  const sections = exerciseList.querySelectorAll(".cluster-section");
+  if (!query) {
+    sections.forEach((section) => {
+      section.classList.remove("hidden");
+      section.querySelectorAll(".exercise-item").forEach((item) => item.classList.remove("hidden"));
+    });
+    return;
+  }
+  sections.forEach((section) => {
+    let anyVisible = false;
+    section.querySelectorAll(".exercise-item").forEach((item) => {
+      const match = item.dataset.search.includes(query);
+      item.classList.toggle("hidden", !match);
+      if (match) anyVisible = true;
+    });
+    section.classList.toggle("hidden", !anyVisible);
+    if (anyVisible) section.open = true;
+  });
+}
+
+exerciseSearch.oninput = () => filterExercises(exerciseSearch.value);
 
 function formatExampleValue(v) {
   return JSON.stringify(v);
@@ -138,10 +205,13 @@ async function openExercise(id) {
     const ex = await api(`/api/exercises/${id}`);
     currentExercise = ex;
 
-    document.querySelectorAll(".exercise-item").forEach((el) => el.classList.remove("active"));
-    const items = [...exerciseList.children];
-    const idx = (await getExercisesForLevel(progress.level)).findIndex((e) => e.id === id);
-    if (items[idx]) items[idx].classList.add("active");
+    exerciseList.querySelectorAll(".exercise-item").forEach((el) => el.classList.remove("active"));
+    const activeItem = exerciseList.querySelector(`.exercise-item[data-id="${CSS.escape(id)}"]`);
+    if (activeItem) {
+      activeItem.classList.add("active");
+      const section = activeItem.closest(".cluster-section");
+      if (section) section.open = true;
+    }
 
     exTitle.textContent = ex.title;
     exTopics.innerHTML = (ex.topics || [])

@@ -131,14 +131,97 @@ main {
 }
 body:has(.banner:not(.hidden)) main { height: calc(100vh - 53px - 37px); }
 
-#exercise-list {
+#sidebar {
   width: 300px;
   flex-shrink: 0;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   border-right: 1px solid var(--border);
+  background: var(--surface);
+  min-height: 0;
+}
+
+.sidebar-search {
+  position: relative;
+  flex-shrink: 0;
   padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.search-icon {
+  position: absolute;
+  left: 21px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  pointer-events: none;
+}
+#exercise-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px 7px 30px;
+  font-size: 13px;
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+#exercise-search:focus {
+  outline: none;
+  border-color: var(--accent);
   background: var(--surface);
 }
+#exercise-search::placeholder { color: var(--text-faint); }
+
+#exercise-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 10px 10px;
+}
+
+.cluster-section { margin-bottom: 2px; }
+
+.cluster-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 4px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  border-radius: var(--radius-sm);
+}
+.cluster-summary::-webkit-details-marker { display: none; }
+.cluster-summary:hover { background: var(--bg); }
+.cluster-chevron {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--text-faint);
+  transition: transform 0.12s ease;
+}
+.cluster-section[open] > .cluster-summary .cluster-chevron { transform: rotate(90deg); }
+.cluster-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cluster-count {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.cluster-count.complete { color: var(--success); }
+.cluster-items { padding-left: 2px; }
 
 .exercise-item {
   display: flex;
@@ -189,16 +272,6 @@ body:has(.banner:not(.hidden)) main { height: calc(100vh - 53px - 37px); }
   margin-left: auto;
   padding-left: 6px;
 }
-
-.cluster-header {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-faint);
-  padding: 14px 10px 4px;
-}
-.cluster-header:first-child { padding-top: 6px; }
 
 .empty-state {
   flex: 1;

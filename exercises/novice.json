@@ -36,96 +36,8 @@
         ],
         "expected": 0
       }
-    ]
-  },
-  {
-    "id": "novice-02-is-even",
-    "title": "Is Even",
-    "level": "novice",
-    "topics": [
-      "conditionals",
-      "basics"
     ],
-    "prompt": "Write a function `is_even(n)` that returns True if n is even, False otherwise.\n\nis_even(0) -> True",
-    "func_name": "is_even",
-    "starter_code": "def is_even(n):\n    pass\n",
-    "tests": [
-      {
-        "args": [
-          4
-        ],
-        "expected": true
-      },
-      {
-        "args": [
-          7
-        ],
-        "expected": false
-      },
-      {
-        "args": [
-          0
-        ],
-        "expected": true
-      }
-    ]
-  },
-  {
-    "id": "novice-03-reverse-string",
-    "title": "Reverse a String",
-    "level": "novice",
-    "topics": [
-      "strings"
-    ],
-    "prompt": "Write a function `reverse_string(s)` that returns s reversed.\n\nreverse_string('hello') -> 'olleh'",
-    "func_name": "reverse_string",
-    "starter_code": "def reverse_string(s):\n    pass\n",
-    "tests": [
-      {
-        "args": [
-          "hello"
-        ],
-        "expected": "olleh"
-      },
-      {
-        "args": [
-          ""
-        ],
-        "expected": ""
-      }
-    ]
-  },
-  {
-    "id": "novice-04-count-vowels",
-    "title": "Count Vowels",
-    "level": "novice",
-    "topics": [
-      "strings",
-      "loops"
-    ],
-    "prompt": "Write a function `count_vowels(s)` that returns the number of vowels (aeiou, case-insensitive) in s.\n\ncount_vowels('AEIOUaeiou') -> 10",
-    "func_name": "count_vowels",
-    "starter_code": "def count_vowels(s):\n    pass\n",
-    "tests": [
-      {
-        "args": [
-          "Hello World"
-        ],
-        "expected": 3
-      },
-      {
-        "args": [
-          ""
-        ],
-        "expected": 0
-      },
-      {
-        "args": [
-          "AEIOUaeiou"
-        ],
-        "expected": 10
-      }
-    ]
+    "cluster": "Arithmetic & Basics"
   },
   {
     "id": "novice-05-max-of-three",
@@ -162,6 +74,5409 @@
           2
         ],
         "expected": 2
+      }
+    ],
+    "cluster": "Arithmetic & Basics"
+  },
+  {
+    "id": "novice-arithmetic-basics-03",
+    "title": "FizzBuzz Classifier",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "conditionals",
+      "numbers"
+    ],
+    "prompt": "Write a function `fizzbuzz(n)` that returns \"Fizz\" if `n` is divisible by 3, \"Buzz\" if divisible by 5, \"FizzBuzz\" if divisible by both, and otherwise the number `n` converted to a string.\n\nfizzbuzz(15) -> \"FizzBuzz\"",
+    "func_name": "fizzbuzz",
+    "starter_code": "def fizzbuzz(n):\n    pass\n",
+    "hint": "Check the \"divisible by both\" case first, since it's the most specific condition.",
+    "tests": [
+      {
+        "args": [
+          3
+        ],
+        "expected": "Fizz"
+      },
+      {
+        "args": [
+          5
+        ],
+        "expected": "Buzz"
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": "7"
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": "FizzBuzz"
+      },
+      {
+        "args": [
+          15
+        ],
+        "expected": "FizzBuzz"
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-04",
+    "title": "Leap Year Checker",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "conditionals",
+      "numbers"
+    ],
+    "prompt": "Write a function `is_leap_year(year)` that returns True if `year` is a leap year and False otherwise. A year is a leap year if it's divisible by 4, except years divisible by 100 are not leap years unless they're also divisible by 400.\n\nis_leap_year(2000) -> True",
+    "func_name": "is_leap_year",
+    "starter_code": "def is_leap_year(year):\n    pass\n",
+    "hint": "Check the divisible-by-400 rule first, then divisible-by-100, then divisible-by-4, using the modulo operator.",
+    "tests": [
+      {
+        "args": [
+          2024
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          1900
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          2001
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          2000
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-05",
+    "title": "Digit Sum",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "numbers",
+      "loops"
+    ],
+    "prompt": "Write a function `digit_sum(n)` that returns the sum of the digits of a non-negative integer `n`.\n\ndigit_sum(1234) -> 10",
+    "func_name": "digit_sum",
+    "starter_code": "def digit_sum(n):\n    pass\n",
+    "hint": "Convert `n` to a string, then loop over its characters and convert each one back to an int.",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          9
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          100
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          1234
+        ],
+        "expected": 10
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-06",
+    "title": "Count Occurrences",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "lists",
+      "loops"
+    ],
+    "prompt": "Write a function `count_occurrences(items, target)` that returns how many times `target` appears in the list `items`.\n\ncount_occurrences([1, 2, 2, 3, 2], 2) -> 3",
+    "func_name": "count_occurrences",
+    "starter_code": "def count_occurrences(items, target):\n    pass\n",
+    "hint": "Loop through the list and increment a counter each time an item equals `target`.",
+    "tests": [
+      {
+        "args": [
+          [],
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          4
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "a"
+          ],
+          "a"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            3,
+            2
+          ],
+          2
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-07",
+    "title": "Celsius to Fahrenheit",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "arithmetic",
+      "numbers"
+    ],
+    "prompt": "Write a function `celsius_to_fahrenheit(c)` that converts a temperature `c` given in Celsius to Fahrenheit, using the formula F = C * 9/5 + 32.\n\ncelsius_to_fahrenheit(37) -> 98.6",
+    "func_name": "celsius_to_fahrenheit",
+    "starter_code": "def celsius_to_fahrenheit(c):\n    pass\n",
+    "hint": "This is a single arithmetic expression \u2014 no loop or conditional needed.",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 32
+      },
+      {
+        "args": [
+          100
+        ],
+        "expected": 212
+      },
+      {
+        "args": [
+          -40
+        ],
+        "expected": -40
+      },
+      {
+        "args": [
+          37
+        ],
+        "expected": 98.6
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-08",
+    "title": "Count Words",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `count_words(sentence)` that returns the number of words in `sentence`, where words are separated by whitespace (any amount of it).\n\ncount_words(\"the quick brown fox\") -> 4",
+    "func_name": "count_words",
+    "starter_code": "def count_words(sentence):\n    pass\n",
+    "hint": "The string method `.split()` with no arguments splits on any whitespace and ignores extra spaces.",
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "  spaced   out   words  "
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "the quick brown fox"
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-r-01",
+    "title": "Average of a List",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "arithmetic",
+      "basics"
+    ],
+    "prompt": "Write a function `average(nums)` that returns the average (arithmetic mean) of a list of numbers as a float. If the list is empty, return 0.0.\n\naverage([2, 4, 6]) -> 4.0",
+    "func_name": "average",
+    "starter_code": "def average(nums):\n    pass\n",
+    "hint": "Use sum(nums) / len(nums), but guard against dividing by zero when the list is empty.",
+    "tests": [
+      {
+        "args": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 1.5
+      },
+      {
+        "args": [
+          [
+            -2,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 2.5
+      }
+    ]
+  },
+  {
+    "id": "novice-arithmetic-basics-r-02",
+    "title": "Minutes to Hours and Minutes",
+    "level": "novice",
+    "cluster": "Arithmetic & Basics",
+    "topics": [
+      "arithmetic",
+      "basics"
+    ],
+    "prompt": "Write a function `minutes_to_hm(total_minutes)` that converts a total number of minutes into a tuple `(hours, minutes)` using integer division and the remainder.\n\nminutes_to_hm(125) -> (2, 5)",
+    "func_name": "minutes_to_hm",
+    "starter_code": "def minutes_to_hm(total_minutes):\n    pass\n",
+    "hint": "divmod(total_minutes, 60) gives you the (hours, minutes) pair directly.",
+    "tests": [
+      {
+        "args": [
+          125
+        ],
+        "expected": [
+          2,
+          5
+        ]
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": [
+          0,
+          0
+        ]
+      },
+      {
+        "args": [
+          59
+        ],
+        "expected": [
+          0,
+          59
+        ]
+      },
+      {
+        "args": [
+          60
+        ],
+        "expected": [
+          1,
+          0
+        ]
+      },
+      {
+        "args": [
+          90
+        ],
+        "expected": [
+          1,
+          30
+        ]
+      },
+      {
+        "args": [
+          1440
+        ],
+        "expected": [
+          24,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-02-is-even",
+    "title": "Is Even",
+    "level": "novice",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `is_even(n)` that returns True if n is even, False otherwise.\n\nis_even(0) -> True",
+    "func_name": "is_even",
+    "starter_code": "def is_even(n):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          4
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": true
+      }
+    ],
+    "cluster": "Conditionals"
+  },
+  {
+    "id": "novice-conditionals-01",
+    "title": "Classify the Sign",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `classify_sign(n)` that returns the string \"positive\" if `n` is greater than 0, \"negative\" if `n` is less than 0, and \"zero\" if `n` equals 0.\n\nclassify_sign(-5) -> \"negative\"",
+    "func_name": "classify_sign",
+    "starter_code": "def classify_sign(n):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          5
+        ],
+        "expected": "positive"
+      },
+      {
+        "args": [
+          -5
+        ],
+        "expected": "negative"
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": "zero"
+      },
+      {
+        "args": [
+          -0.001
+        ],
+        "expected": "negative"
+      },
+      {
+        "args": [
+          3.5
+        ],
+        "expected": "positive"
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-02",
+    "title": "Letter Grade",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `letter_grade(score)` that converts a numeric score (0-100) to a letter grade: \"A\" for 90 and above, \"B\" for 80-89, \"C\" for 70-79, \"D\" for 60-69, and \"F\" below 60.\n\nletter_grade(85) -> \"B\"",
+    "func_name": "letter_grade",
+    "starter_code": "def letter_grade(score):\n    pass\n",
+    "hint": "Check the highest threshold first with `if`, then use `elif` for each lower threshold in descending order.",
+    "tests": [
+      {
+        "args": [
+          95
+        ],
+        "expected": "A"
+      },
+      {
+        "args": [
+          72
+        ],
+        "expected": "C"
+      },
+      {
+        "args": [
+          59
+        ],
+        "expected": "F"
+      },
+      {
+        "args": [
+          90
+        ],
+        "expected": "A"
+      },
+      {
+        "args": [
+          60
+        ],
+        "expected": "D"
+      },
+      {
+        "args": [
+          83
+        ],
+        "expected": "B"
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-03",
+    "title": "Leap Year Check",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `is_leap_year(year)` that returns True if `year` is a leap year. A year is a leap year if it's divisible by 4, except years divisible by 100 are not leap years, unless they're also divisible by 400.\n\nis_leap_year(2024) -> True",
+    "func_name": "is_leap_year",
+    "starter_code": "def is_leap_year(year):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          2000
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          1900
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          2024
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          2023
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          2400
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-04",
+    "title": "Largest of Three",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `largest_of_three(a, b, c)` that returns the largest of the three numbers using conditional comparisons.\n\nlargest_of_three(5, 9, 2) -> 9",
+    "func_name": "largest_of_three",
+    "starter_code": "def largest_of_three(a, b, c):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          1,
+          2,
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          3,
+          2,
+          1
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          2,
+          2,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          -1,
+          -5,
+          -3
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          5,
+          9,
+          2
+        ],
+        "expected": 9
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-05",
+    "title": "In Range",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `in_range(n, low, high)` that returns True if `n` is between `low` and `high`, inclusive of both endpoints.\n\nin_range(5, 1, 10) -> True",
+    "func_name": "in_range",
+    "starter_code": "def in_range(n, low, high):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          5,
+          1,
+          10
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          0,
+          1,
+          10
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          1,
+          1,
+          10
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          10,
+          1,
+          10
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          11,
+          1,
+          10
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          7,
+          1,
+          10
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-06",
+    "title": "Traffic Light Action",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `traffic_action(color)` that returns \"Stop\" for \"red\", \"Slow down\" for \"yellow\", and \"Go\" for \"green\". For any other value, raise a `ValueError`.\n\ntraffic_action(\"green\") -> \"Go\"",
+    "func_name": "traffic_action",
+    "starter_code": "def traffic_action(color):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "red"
+        ],
+        "expected": "Stop"
+      },
+      {
+        "args": [
+          "yellow"
+        ],
+        "expected": "Slow down"
+      },
+      {
+        "args": [
+          "blue"
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          "green"
+        ],
+        "expected": "Go"
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-07",
+    "title": "Fizz Buzz for One Number",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `fizz_buzz_single(n)` that returns \"Fizz\" if `n` is divisible by 3, \"Buzz\" if divisible by 5, \"FizzBuzz\" if divisible by both, and otherwise returns `n` converted to a string.\n\nfizz_buzz_single(15) -> \"FizzBuzz\"",
+    "func_name": "fizz_buzz_single",
+    "starter_code": "def fizz_buzz_single(n):\n    pass\n",
+    "hint": "Check the 'divisible by both' case first, since checking divisibility by 3 or 5 alone would match it too early.",
+    "tests": [
+      {
+        "args": [
+          15
+        ],
+        "expected": "FizzBuzz"
+      },
+      {
+        "args": [
+          9
+        ],
+        "expected": "Fizz"
+      },
+      {
+        "args": [
+          10
+        ],
+        "expected": "Buzz"
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": "7"
+      },
+      {
+        "args": [
+          3
+        ],
+        "expected": "Fizz"
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-08",
+    "title": "BMI Category",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `bmi_category(bmi)` that classifies a BMI value: \"Underweight\" if under 18.5, \"Normal\" if under 25, \"Overweight\" if under 30, and \"Obese\" otherwise.\n\nbmi_category(27.0) -> \"Overweight\"",
+    "func_name": "bmi_category",
+    "starter_code": "def bmi_category(bmi):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          17
+        ],
+        "expected": "Underweight"
+      },
+      {
+        "args": [
+          22
+        ],
+        "expected": "Normal"
+      },
+      {
+        "args": [
+          27
+        ],
+        "expected": "Overweight"
+      },
+      {
+        "args": [
+          31
+        ],
+        "expected": "Obese"
+      },
+      {
+        "args": [
+          18.5
+        ],
+        "expected": "Normal"
+      },
+      {
+        "args": [
+          24.9
+        ],
+        "expected": "Normal"
+      }
+    ]
+  },
+  {
+    "id": "novice-conditionals-09",
+    "title": "Compare Two Numbers",
+    "level": "novice",
+    "cluster": "Conditionals",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `compare_numbers(a, b)` that returns \"equal\" if `a` equals `b`, \"greater\" if `a` is greater than `b`, and \"less\" if `a` is less than `b`.\n\ncompare_numbers(10, 2) -> \"greater\"",
+    "func_name": "compare_numbers",
+    "starter_code": "def compare_numbers(a, b):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          5,
+          3
+        ],
+        "expected": "greater"
+      },
+      {
+        "args": [
+          3,
+          5
+        ],
+        "expected": "less"
+      },
+      {
+        "args": [
+          4,
+          4
+        ],
+        "expected": "equal"
+      },
+      {
+        "args": [
+          -1,
+          -1
+        ],
+        "expected": "equal"
+      },
+      {
+        "args": [
+          10,
+          2
+        ],
+        "expected": "greater"
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-02",
+    "title": "Find the Maximum",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `find_max(nums)` that returns the largest number in a list using a loop (don't use the built-in `max` function). Raise a `ValueError` if the list is empty.\n\nfind_max([3, 7, 2]) -> 7",
+    "func_name": "find_max",
+    "starter_code": "def find_max(nums):\n    pass\n",
+    "hint": "Start by assuming the first element is the largest, then loop over the rest and update your running answer whenever you find something bigger.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            7,
+            2
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            -5,
+            -1,
+            -10
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            4
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          [
+            1,
+            7,
+            7,
+            3
+          ]
+        ],
+        "expected": 7
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-04",
+    "title": "Count Even Numbers",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `count_evens(nums)` that returns the number of even numbers in a list.\n\ncount_evens([1, 2, 3, 4]) -> 2",
+    "func_name": "count_evens",
+    "starter_code": "def count_evens(nums):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            -2,
+            -3,
+            0
+          ]
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-05",
+    "title": "Sum of Multiples",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `sum_multiples(n)` that returns the sum of all multiples of 3 or 5 that are strictly less than `n`.\n\nsum_multiples(10) -> 23",
+    "func_name": "sum_multiples",
+    "starter_code": "def sum_multiples(n):\n    pass\n",
+    "hint": "Loop over every number below n and add it to a running total whenever it's divisible by 3 or by 5.",
+    "tests": [
+      {
+        "args": [
+          10
+        ],
+        "expected": 23
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          16
+        ],
+        "expected": 60
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-06",
+    "title": "Count a Character",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "strings"
+    ],
+    "prompt": "Write a function `count_char(s, ch)` that returns how many times the character `ch` appears in the string `s`.\n\ncount_char(\"banana\", \"a\") -> 3",
+    "func_name": "count_char",
+    "starter_code": "def count_char(s, ch):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "banana",
+          "a"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "",
+          "x"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "hello",
+          "l"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "Mississippi",
+          "s"
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-07",
+    "title": "First Matching Index",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `first_index(nums, target)` that returns the index of the first occurrence of `target` in the list `nums` using a loop (don't use `.index()`). Return -1 if `target` is not found.\n\nfirst_index([5, 3, 8, 3], 3) -> 1",
+    "func_name": "first_index",
+    "starter_code": "def first_index(nums, target):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            5,
+            3,
+            8,
+            3
+          ],
+          3
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          9
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            7
+          ],
+          7
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-08",
+    "title": "Squares Up To N",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `squares_up_to(n)` that returns a list of the squares of the integers from 1 to `n` inclusive.\n\nsquares_up_to(4) -> [1, 4, 9, 16]",
+    "func_name": "squares_up_to",
+    "starter_code": "def squares_up_to(n):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          4
+        ],
+        "expected": [
+          1,
+          4,
+          9,
+          16
+        ]
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          5
+        ],
+        "expected": [
+          1,
+          4,
+          9,
+          16,
+          25
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-09",
+    "title": "Count Uppercase Letters",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "strings"
+    ],
+    "prompt": "Write a function `count_upper(s)` that returns the number of uppercase letters in a string.\n\ncount_upper(\"Hello World\") -> 2",
+    "func_name": "count_upper",
+    "starter_code": "def count_upper(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "Hello World"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "ABC"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "PyThOn"
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-10",
+    "title": "Sum of Digits",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `digit_sum(n)` that returns the sum of the digits of a non-negative integer `n`.\n\ndigit_sum(1234) -> 10",
+    "func_name": "digit_sum",
+    "starter_code": "def digit_sum(n):\n    pass\n",
+    "hint": "Convert n to a string, loop over each character, and add up the integer value of each digit.",
+    "tests": [
+      {
+        "args": [
+          1234
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          100
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-r-01",
+    "title": "Sum Until Negative",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "break",
+      "basics"
+    ],
+    "prompt": "Write a function `sum_until_negative(nums)` that adds up the numbers in a list, stopping as soon as it reaches the first negative number (that negative number is not included in the sum). If the list has no negative numbers, return the sum of the whole list.\n\nsum_until_negative([1, 2, -3, 4]) -> 3",
+    "func_name": "sum_until_negative",
+    "starter_code": "def sum_until_negative(nums):\n    pass\n",
+    "hint": "Loop through the list with a running total; when you see a negative number, use `break` to stop the loop before adding it.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            -3,
+            4
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            5,
+            10,
+            15
+          ]
+        ],
+        "expected": 30
+      },
+      {
+        "args": [
+          [
+            -1,
+            2,
+            3
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            -5,
+            10
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            3,
+            -1,
+            -2,
+            5
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "novice-loops-r-02",
+    "title": "Doubling Steps to Reach a Target",
+    "level": "novice",
+    "cluster": "Loops",
+    "topics": [
+      "loops",
+      "while",
+      "basics"
+    ],
+    "prompt": "Write a function `doubling_steps(start, target)` that returns how many times `start` must be doubled (multiplied by 2) until it becomes greater than or equal to `target`. Assume `start` is a positive number. If `start` is already greater than or equal to `target`, return 0.\n\ndoubling_steps(1, 10) -> 4",
+    "func_name": "doubling_steps",
+    "starter_code": "def doubling_steps(start, target):\n    pass\n",
+    "hint": "Use a `while` loop that keeps doubling a working value and incrementing a counter until the value reaches `target`.",
+    "tests": [
+      {
+        "args": [
+          1,
+          10
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          5,
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          5,
+          4
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          3,
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          2,
+          100
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          1,
+          1
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "novice-03-reverse-string",
+    "title": "Reverse a String",
+    "level": "novice",
+    "topics": [
+      "strings"
+    ],
+    "prompt": "Write a function `reverse_string(s)` that returns s reversed.\n\nreverse_string('hello') -> 'olleh'",
+    "func_name": "reverse_string",
+    "starter_code": "def reverse_string(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": "olleh"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ],
+    "cluster": "Strings Basics"
+  },
+  {
+    "id": "novice-04-count-vowels",
+    "title": "Count Vowels",
+    "level": "novice",
+    "topics": [
+      "strings",
+      "loops"
+    ],
+    "prompt": "Write a function `count_vowels(s)` that returns the number of vowels (aeiou, case-insensitive) in s.\n\ncount_vowels('AEIOUaeiou') -> 10",
+    "func_name": "count_vowels",
+    "starter_code": "def count_vowels(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "Hello World"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "AEIOUaeiou"
+        ],
+        "expected": 10
+      }
+    ],
+    "cluster": "Strings Basics"
+  },
+  {
+    "id": "novice-strings-basics-02",
+    "title": "Palindrome Check",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "conditionals"
+    ],
+    "prompt": "Write a function `is_palindrome(s)` that returns True if `s` reads the same forwards and backwards, and False otherwise. Compare the string exactly as given (don't worry about case or spaces).\n\nis_palindrome(\"racecar\") -> True",
+    "func_name": "is_palindrome",
+    "starter_code": "def is_palindrome(s):\n    pass\n",
+    "hint": "Compare the string to its own reverse using slicing.",
+    "tests": [
+      {
+        "args": [
+          "racecar"
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "a"
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "abccba"
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-03",
+    "title": "Title Case Words",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "loops"
+    ],
+    "prompt": "Write a function `title_case(s)` that returns `s` with the first letter of every word capitalized and the rest of each word lowercased. Words are separated by whitespace.\n\ntitle_case(\"hello world\") -> \"Hello World\"",
+    "func_name": "title_case",
+    "starter_code": "def title_case(s):\n    pass\n",
+    "hint": "Split the string into words, capitalize each one, then join them back together with spaces.",
+    "tests": [
+      {
+        "args": [
+          "hello world"
+        ],
+        "expected": "Hello World"
+      },
+      {
+        "args": [
+          "python IS fun"
+        ],
+        "expected": "Python Is Fun"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "single"
+        ],
+        "expected": "Single"
+      },
+      {
+        "args": [
+          "the quick brown fox"
+        ],
+        "expected": "The Quick Brown Fox"
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-05",
+    "title": "Spaces to Underscores",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `replace_spaces(s)` that returns `s` with every space character replaced by an underscore.\n\nreplace_spaces(\"hello world\") -> \"hello_world\"",
+    "func_name": "replace_spaces",
+    "starter_code": "def replace_spaces(s):\n    pass\n",
+    "hint": "There's a built-in string method that replaces every occurrence of one substring with another.",
+    "tests": [
+      {
+        "args": [
+          "hello world"
+        ],
+        "expected": "hello_world"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "no_spaces_here"
+        ],
+        "expected": "no_spaces_here"
+      },
+      {
+        "args": [
+          "  leading"
+        ],
+        "expected": "__leading"
+      },
+      {
+        "args": [
+          "a b c"
+        ],
+        "expected": "a_b_c"
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-06",
+    "title": "Longest Word",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "loops"
+    ],
+    "prompt": "Write a function `longest_word(s)` that returns the longest word in the whitespace-separated string `s`. If there is a tie, return the first one that appears. If `s` has no words, let the error from an empty sequence propagate.\n\nlongest_word(\"the quick brown fox\") -> \"quick\"",
+    "func_name": "longest_word",
+    "starter_code": "def longest_word(s):\n    pass\n",
+    "hint": "Split `s` into words, then use max() with a key of len to find the longest one.",
+    "tests": [
+      {
+        "args": [
+          "the quick brown fox"
+        ],
+        "expected": "quick"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          "a bb ccc"
+        ],
+        "expected": "ccc"
+      },
+      {
+        "args": [
+          "tie tie"
+        ],
+        "expected": "tie"
+      },
+      {
+        "args": [
+          "I love Python programming"
+        ],
+        "expected": "programming"
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-08",
+    "title": "Truncate with Ellipsis",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "conditionals"
+    ],
+    "prompt": "Write a function `truncate(s, n)` that returns `s` unchanged if its length is `n` or less. Otherwise, return the first `n` characters of `s` followed by \"...\".\n\ntruncate(\"Hello, World!\", 5) -> \"Hello...\"",
+    "func_name": "truncate",
+    "starter_code": "def truncate(s, n):\n    pass\n",
+    "hint": "Compare len(s) to n with an if statement, and use slicing to grab the first n characters when you need to shorten it.",
+    "tests": [
+      {
+        "args": [
+          "Hello, World!",
+          5
+        ],
+        "expected": "Hello..."
+      },
+      {
+        "args": [
+          "Hi",
+          5
+        ],
+        "expected": "Hi"
+      },
+      {
+        "args": [
+          "Hello",
+          5
+        ],
+        "expected": "Hello"
+      },
+      {
+        "args": [
+          "",
+          3
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "Programming is fun",
+          11
+        ],
+        "expected": "Programming..."
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-r-01",
+    "title": "Trim Whitespace",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `strip_whitespace(s)` that returns the string with leading and trailing whitespace removed (interior spaces stay untouched).\n\nstrip_whitespace('  hello  ') -> 'hello'",
+    "func_name": "strip_whitespace",
+    "starter_code": "def strip_whitespace(s):\n    pass\n",
+    "hint": "Python strings have a built-in method for this \u2014 you don't need a loop.",
+    "tests": [
+      {
+        "args": [
+          "  hello  "
+        ],
+        "expected": "hello"
+      },
+      {
+        "args": [
+          "no spaces"
+        ],
+        "expected": "no spaces"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "   "
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "\t\nhi\n\t"
+        ],
+        "expected": "hi"
+      },
+      {
+        "args": [
+          "  hello   world  "
+        ],
+        "expected": "hello   world"
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-r-02",
+    "title": "Join Words with a Separator",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `join_words(words, sep)` that joins a list of strings into one string, placing `sep` between each word.\n\njoin_words(['a', 'b', 'c'], '-') -> 'a-b-c'",
+    "func_name": "join_words",
+    "starter_code": "def join_words(words, sep):\n    pass\n",
+    "hint": "The separator string has a method that takes an iterable of strings and glues them together.",
+    "tests": [
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "c"
+          ],
+          "-"
+        ],
+        "expected": "a-b-c"
+      },
+      {
+        "args": [
+          [],
+          "-"
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          [
+            "only"
+          ],
+          ","
+        ],
+        "expected": "only"
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b"
+          ],
+          ""
+        ],
+        "expected": "ab"
+      },
+      {
+        "args": [
+          [
+            "x",
+            "y",
+            "z"
+          ],
+          ", "
+        ],
+        "expected": "x, y, z"
+      }
+    ]
+  },
+  {
+    "id": "novice-strings-basics-r-03",
+    "title": "Repeat a String",
+    "level": "novice",
+    "cluster": "Strings Basics",
+    "topics": [
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `repeat_string(s, n)` that returns `s` repeated `n` times. If `n` is zero or negative, return an empty string.\n\nrepeat_string('ab', 3) -> 'ababab'",
+    "func_name": "repeat_string",
+    "starter_code": "def repeat_string(s, n):\n    pass\n",
+    "hint": "Python's multiplication operator works on strings, and already does the right thing for zero or negative counts.",
+    "tests": [
+      {
+        "args": [
+          "ab",
+          3
+        ],
+        "expected": "ababab"
+      },
+      {
+        "args": [
+          "x",
+          0
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "hi",
+          1
+        ],
+        "expected": "hi"
+      },
+      {
+        "args": [
+          "",
+          5
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "ab",
+          -2
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "cat",
+          4
+        ],
+        "expected": "catcatcatcat"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-02",
+    "title": "First N Characters",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "slicing",
+      "strings"
+    ],
+    "prompt": "Write a function `first_n_chars(s, n)` that returns the first `n` characters of `s`. If `n` is larger than the length of `s`, return the whole string.\n\nfirst_n_chars(\"hello\", 3) -> \"hel\"",
+    "func_name": "first_n_chars",
+    "starter_code": "def first_n_chars(s, n):\n    pass\n",
+    "hint": "A basic slice `s[:n]` already handles an `n` larger than the string's length without extra checks.",
+    "tests": [
+      {
+        "args": [
+          "hi",
+          10
+        ],
+        "expected": "hi"
+      },
+      {
+        "args": [
+          "hello",
+          0
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "",
+          5
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "python",
+          4
+        ],
+        "expected": "pyth"
+      },
+      {
+        "args": [
+          "hello",
+          3
+        ],
+        "expected": "hel"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-03",
+    "title": "Last N Characters",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "slicing",
+      "strings"
+    ],
+    "prompt": "Write a function `last_n_chars(s, n)` that returns the last `n` characters of `s`. If `n` is 0 or negative, return an empty string. If `n` is larger than the length of `s`, return the whole string.\n\nlast_n_chars(\"hello\", 3) -> \"llo\"",
+    "func_name": "last_n_chars",
+    "starter_code": "def last_n_chars(s, n):\n    pass\n",
+    "hint": "Slicing with a negative start (`s[-n:]`) grabs the last `n` characters, but handle `n <= 0` separately since `s[-0:]` is the same as `s[0:]`.",
+    "tests": [
+      {
+        "args": [
+          "hi",
+          10
+        ],
+        "expected": "hi"
+      },
+      {
+        "args": [
+          "hello",
+          0
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "",
+          5
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "python",
+          4
+        ],
+        "expected": "thon"
+      },
+      {
+        "args": [
+          "hello",
+          3
+        ],
+        "expected": "llo"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-04",
+    "title": "Every Other Character",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "slicing",
+      "strings"
+    ],
+    "prompt": "Write a function `every_other_char(s)` that returns a new string containing every other character of `s`, starting with the first one.\n\nevery_other_char(\"abcdef\") -> \"ace\"",
+    "func_name": "every_other_char",
+    "starter_code": "def every_other_char(s):\n    pass\n",
+    "hint": "A slice's step argument controls how many characters it skips: `s[::2]` takes every second character.",
+    "tests": [
+      {
+        "args": [
+          "a"
+        ],
+        "expected": "a"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "abcde"
+        ],
+        "expected": "ace"
+      },
+      {
+        "args": [
+          "abcdef"
+        ],
+        "expected": "ace"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-05",
+    "title": "Format Currency",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "string-formatting",
+      "f-strings"
+    ],
+    "prompt": "Write a function `format_currency(amount)` that returns `amount` formatted as a dollar string with exactly two decimal places, prefixed with `$`.\n\nformat_currency(3.14159) -> \"$3.14\"",
+    "func_name": "format_currency",
+    "starter_code": "def format_currency(amount):\n    pass\n",
+    "hint": "An f-string format spec like `f\"{amount:.2f}\"` rounds to a fixed number of decimal places.",
+    "tests": [
+      {
+        "args": [
+          5
+        ],
+        "expected": "$5.00"
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": "$0.00"
+      },
+      {
+        "args": [
+          1234.5
+        ],
+        "expected": "$1234.50"
+      },
+      {
+        "args": [
+          3.14159
+        ],
+        "expected": "$3.14"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-06",
+    "title": "Zero-Pad a Number",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "string-formatting",
+      "string-methods"
+    ],
+    "prompt": "Write a function `zero_pad(n, width)` that returns `n` converted to a string and padded on the left with zeros so the result is at least `width` characters long. A negative number's sign stays in front of the zeros.\n\nzero_pad(42, 5) -> \"00042\"",
+    "func_name": "zero_pad",
+    "starter_code": "def zero_pad(n, width):\n    pass\n",
+    "hint": "`str.zfill(width)` pads a numeric string with leading zeros and keeps a leading `-` sign in place.",
+    "tests": [
+      {
+        "args": [
+          123,
+          2
+        ],
+        "expected": "123"
+      },
+      {
+        "args": [
+          -5,
+          3
+        ],
+        "expected": "-05"
+      },
+      {
+        "args": [
+          5,
+          3
+        ],
+        "expected": "005"
+      },
+      {
+        "args": [
+          42,
+          5
+        ],
+        "expected": "00042"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-07",
+    "title": "Center Text",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "string-formatting",
+      "string-methods"
+    ],
+    "prompt": "Write a function `center_text(s, width, fillchar)` that returns `s` centered within a field of length `width`, padded with `fillchar` on both sides. If `s` is already at least `width` characters long, return it unchanged.\n\ncenter_text(\"hi\", 6, \"*\") -> \"**hi**\"",
+    "func_name": "center_text",
+    "starter_code": "def center_text(s, width, fillchar):\n    pass\n",
+    "hint": "`str.center(width, fillchar)` does exactly this, including leaving `s` unchanged when it's already wide enough.",
+    "tests": [
+      {
+        "args": [
+          "hello",
+          5,
+          "*"
+        ],
+        "expected": "hello"
+      },
+      {
+        "args": [
+          "a",
+          4,
+          "-"
+        ],
+        "expected": "-a--"
+      },
+      {
+        "args": [
+          "",
+          4,
+          "x"
+        ],
+        "expected": "xxxx"
+      },
+      {
+        "args": [
+          "hi",
+          6,
+          "*"
+        ],
+        "expected": "**hi**"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-08",
+    "title": "Format a Percentage",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "string-formatting",
+      "f-strings"
+    ],
+    "prompt": "Write a function `format_percentage(fraction)` that converts a fraction (e.g. 0.5) to a percentage string with one decimal place and a trailing `%` sign.\n\nformat_percentage(0.1234) -> \"12.3%\"",
+    "func_name": "format_percentage",
+    "starter_code": "def format_percentage(fraction):\n    pass\n",
+    "hint": "Multiply the fraction by 100 and format it with `:.1f` before appending the `%` character.",
+    "tests": [
+      {
+        "args": [
+          1
+        ],
+        "expected": "100.0%"
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": "0.0%"
+      },
+      {
+        "args": [
+          0.5
+        ],
+        "expected": "50.0%"
+      },
+      {
+        "args": [
+          0.1234
+        ],
+        "expected": "12.3%"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-10",
+    "title": "Format a Name with Initial",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "string-formatting",
+      "strings"
+    ],
+    "prompt": "Write a function `format_initial(name)` that takes a full name string like `\"First Last\"` and returns it formatted as `\"F. Last\"`, using the first letter of the first name followed by a period, a space, and the rest of the name. If `name` has no space in it, let the resulting `ValueError` propagate.\n\nformat_initial(\"John Smith\") -> \"J. Smith\"",
+    "func_name": "format_initial",
+    "starter_code": "def format_initial(name):\n    pass\n",
+    "hint": "Split on the first space with `name.split(\" \", 1)` to get the first name and the rest, then build the result with an f-string.",
+    "tests": [
+      {
+        "args": [
+          "Alice Wonderland"
+        ],
+        "expected": "A. Wonderland"
+      },
+      {
+        "args": [
+          "Madonna"
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          "Mary Jane Watson"
+        ],
+        "expected": "M. Jane Watson"
+      },
+      {
+        "args": [
+          "John Smith"
+        ],
+        "expected": "J. Smith"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-r-01",
+    "title": "Group Characters with a Separator",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "strings",
+      "slicing",
+      "loops"
+    ],
+    "prompt": "Write a function `group_digits(s, n)` that returns a new string built from `s` by inserting a hyphen \"-\" after every `n` characters, counting from the left. The last group may be shorter than `n` if `len(s)` is not a multiple of `n`.\n\ngroup_digits(\"123456789\", 3) -> \"123-456-789\"",
+    "func_name": "group_digits",
+    "starter_code": "def group_digits(s, n):\n    pass\n",
+    "hint": "Loop over the string with `range(0, len(s), n)` and slice out `s[i:i+n]` on each step, then join the pieces with \"-\".",
+    "tests": [
+      {
+        "args": [
+          "123456789",
+          3
+        ],
+        "expected": "123-456-789"
+      },
+      {
+        "args": [
+          "12345",
+          2
+        ],
+        "expected": "12-34-5"
+      },
+      {
+        "args": [
+          "",
+          3
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "abcdef",
+          6
+        ],
+        "expected": "abcdef"
+      },
+      {
+        "args": [
+          "a",
+          1
+        ],
+        "expected": "a"
+      },
+      {
+        "args": [
+          "abcdefgh",
+          3
+        ],
+        "expected": "abc-def-gh"
+      }
+    ]
+  },
+  {
+    "id": "novice-string-formatting-r-02",
+    "title": "Swap Letter Case",
+    "level": "novice",
+    "cluster": "String Formatting & Slicing",
+    "topics": [
+      "strings",
+      "formatting"
+    ],
+    "prompt": "Write a function `swap_case(s)` that returns a copy of `s` with every uppercase letter converted to lowercase and every lowercase letter converted to uppercase. Non-letter characters stay unchanged.\n\nswap_case(\"Hello World\") -> \"hELLO wORLD\"",
+    "func_name": "swap_case",
+    "starter_code": "def swap_case(s):\n    pass\n",
+    "hint": "Python strings have a built-in method that does exactly this in one call.",
+    "tests": [
+      {
+        "args": [
+          "Hello World"
+        ],
+        "expected": "hELLO wORLD"
+      },
+      {
+        "args": [
+          "ABC"
+        ],
+        "expected": "abc"
+      },
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": "ABC"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          "Python3.9!"
+        ],
+        "expected": "pYTHON3.9!"
+      },
+      {
+        "args": [
+          "MiXeD123"
+        ],
+        "expected": "mIxEd123"
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-01",
+    "title": "First Element",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "indexing"
+    ],
+    "prompt": "Write a function `first_element(items)` that returns the first element of the list `items`. Assume the list may be empty -- in that case, let the natural `IndexError` propagate (don't catch it).\n\nfirst_element([10, 20, 30]) -> 10",
+    "func_name": "first_element",
+    "starter_code": "def first_element(items):\n    pass\n",
+    "hint": "A list's first element is at index 0.",
+    "tests": [
+      {
+        "args": [
+          [
+            10,
+            20,
+            30
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          [
+            7
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "IndexError"
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "expected": "a"
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-02",
+    "title": "Last Element",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "indexing"
+    ],
+    "prompt": "Write a function `last_element(items)` that returns the last element of the list `items`. Assume the list may be empty -- in that case, let the natural `IndexError` propagate (don't catch it).\n\nlast_element([10, 20, 30]) -> 30",
+    "func_name": "last_element",
+    "starter_code": "def last_element(items):\n    pass\n",
+    "hint": "Negative indexing lets you reach the end of a list directly: items[-1].",
+    "tests": [
+      {
+        "args": [
+          [
+            10,
+            20,
+            30
+          ]
+        ],
+        "expected": 30
+      },
+      {
+        "args": [
+          [
+            7
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "IndexError"
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-03",
+    "title": "Is In List",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "membership"
+    ],
+    "prompt": "Write a function `is_member(items, value)` that returns `True` if `value` appears anywhere in the list `items`, and `False` otherwise.\n\nis_member([1, 2, 3], 2) -> True",
+    "func_name": "is_member",
+    "starter_code": "def is_member(items, value):\n    pass\n",
+    "hint": "Python's `in` operator checks list membership directly.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b"
+          ],
+          "b"
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-05",
+    "title": "Reverse a List",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "reversing"
+    ],
+    "prompt": "Write a function `reverse_list(items)` that returns a NEW list with the elements of `items` in reverse order. Do not modify the original list.\n\nreverse_list([1, 2, 3]) -> [3, 2, 1]",
+    "func_name": "reverse_list",
+    "starter_code": "def reverse_list(items):\n    pass\n",
+    "hint": "Slicing with a step of -1 (items[::-1]) produces a reversed copy without touching the original.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          4,
+          3,
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-06",
+    "title": "Largest Value",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "aggregation"
+    ],
+    "prompt": "Write a function `list_max(items)` that returns the largest value in the list `items`. Assume the list may be empty -- in that case, let the natural `ValueError` propagate (don't catch it).\n\nlist_max([3, 7, 2]) -> 7",
+    "func_name": "list_max",
+    "starter_code": "def list_max(items):\n    pass\n",
+    "hint": "Python's built-in `max()` finds the largest value in a sequence and raises `ValueError` on an empty one.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            7,
+            2
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            -5,
+            -1,
+            -10
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          [
+            4
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            1,
+            9,
+            9,
+            3
+          ]
+        ],
+        "expected": 9
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-07",
+    "title": "Smallest Value",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "aggregation"
+    ],
+    "prompt": "Write a function `list_min(items)` that returns the smallest value in the list `items`. Assume the list may be empty -- in that case, let the natural `ValueError` propagate (don't catch it).\n\nlist_min([3, 7, 2]) -> 2",
+    "func_name": "list_min",
+    "starter_code": "def list_min(items):\n    pass\n",
+    "hint": "Python's built-in `min()` finds the smallest value in a sequence and raises `ValueError` on an empty one.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            7,
+            2
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            -5,
+            -1,
+            -10
+          ]
+        ],
+        "expected": -10
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          [
+            4
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            1,
+            9,
+            0,
+            3
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-08",
+    "title": "Append Without Mutating",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "concatenation"
+    ],
+    "prompt": "Write a function `append_value(items, value)` that returns a NEW list equal to `items` with `value` added to the end. The original list passed in must not be modified.\n\nappend_value([1, 2], 3) -> [1, 2, 3]",
+    "func_name": "append_value",
+    "starter_code": "def append_value(items, value):\n    pass\n",
+    "hint": "Concatenating two lists with `+` builds a new list, unlike `.append()` which mutates in place.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            "a"
+          ],
+          "b"
+        ],
+        "expected": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          4
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-09",
+    "title": "First N Elements",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "slicing"
+    ],
+    "prompt": "Write a function `first_n(items, n)` that returns a new list containing the first `n` elements of `items`. If `n` is greater than the length of `items`, return the whole list.\n\nfirst_n([1, 2, 3, 4, 5], 3) -> [1, 2, 3]",
+    "func_name": "first_n",
+    "starter_code": "def first_n(items, n):\n    pass\n",
+    "hint": "Slicing with items[:n] never raises an error even when n exceeds the list length.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          10
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [],
+          5
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          2
+        ],
+        "expected": [
+          "a",
+          "b"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-10",
+    "title": "Remove All Occurrences",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "filtering"
+    ],
+    "prompt": "Write a function `remove_all(items, value)` that returns a new list containing all elements of `items` except those equal to `value`. The relative order of the remaining elements should be preserved.\n\nremove_all([1, 2, 3, 2, 1], 2) -> [1, 3, 1]",
+    "func_name": "remove_all",
+    "starter_code": "def remove_all(items, value):\n    pass\n",
+    "hint": "Build the result with a loop (or list comprehension) that keeps every element not equal to value.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          2
+        ],
+        "expected": [
+          1,
+          3,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1
+          ],
+          1
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "a"
+          ],
+          "a"
+        ],
+        "expected": [
+          "b"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-1-r-01",
+    "title": "Join List Items with a Separator",
+    "level": "novice",
+    "cluster": "Lists I",
+    "topics": [
+      "lists",
+      "strings",
+      "basics"
+    ],
+    "prompt": "Write a function `join_items(items, sep)` that returns a single string made by joining every element of the list `items` with the separator `sep` between each pair. Convert each item to a string before joining (items may not already be strings).\n\njoin_items([1, 2, 3], \"-\") -> \"1-2-3\"",
+    "func_name": "join_items",
+    "starter_code": "def join_items(items, sep):\n    pass\n",
+    "hint": "Build a list of string versions of each item, then use `sep.join(...)` to combine them.",
+    "tests": [
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "c"
+          ],
+          ","
+        ],
+        "expected": "a,b,c"
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          "-"
+        ],
+        "expected": "1-2-3"
+      },
+      {
+        "args": [
+          [],
+          ","
+        ],
+        "expected": ""
+      },
+      {
+        "args": [
+          [
+            "only"
+          ],
+          ","
+        ],
+        "expected": "only"
+      },
+      {
+        "args": [
+          [
+            1,
+            "two",
+            3
+          ],
+          " "
+        ],
+        "expected": "1 two 3"
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-01",
+    "title": "Index of the Maximum",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "searching",
+      "loops"
+    ],
+    "prompt": "Write a function `index_of_max(nums)` that returns the index of the largest value in a list of numbers. If there are ties, return the index of the first occurrence. Raise a `ValueError` if the list is empty.\n\nindex_of_max([3, 7, 7, 2]) -> 1",
+    "func_name": "index_of_max",
+    "starter_code": "def index_of_max(nums):\n    pass\n",
+    "hint": "Track the index of the best value seen so far, and update it only when you find something strictly greater.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            7,
+            7,
+            2
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -1,
+            -5,
+            -2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-02",
+    "title": "Second Largest Value",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "sorting",
+      "sets"
+    ],
+    "prompt": "Write a function `second_largest(nums)` that returns the second-largest *distinct* value in a list of numbers. Raise a `ValueError` if the list doesn't contain at least two distinct values.\n\nsecond_largest([4, 1, 4, 7, 7, 2]) -> 4",
+    "func_name": "second_largest",
+    "starter_code": "def second_largest(nums):\n    pass\n",
+    "hint": "Build a set to drop duplicates, then sort the distinct values in descending order and pick the second one.",
+    "tests": [
+      {
+        "args": [
+          [
+            4,
+            1,
+            4,
+            7,
+            7,
+            2
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            5,
+            5,
+            5
+          ]
+        ],
+        "expect_error": "ValueError"
+      },
+      {
+        "args": [
+          [
+            -1,
+            -2,
+            -3
+          ]
+        ],
+        "expected": -2
+      },
+      {
+        "args": [
+          [
+            10,
+            9,
+            8,
+            7
+          ]
+        ],
+        "expected": 9
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-03",
+    "title": "Is Sorted Ascending?",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "sorting",
+      "validation"
+    ],
+    "prompt": "Write a function `is_sorted_ascending(nums)` that returns `True` if the list is sorted in non-decreasing order (each element is less than or equal to the next one), and `False` otherwise. An empty list or a single-element list counts as sorted.\n\nis_sorted_ascending([1, 2, 2, 5]) -> True",
+    "func_name": "is_sorted_ascending",
+    "starter_code": "def is_sorted_ascending(nums):\n    pass\n",
+    "hint": "Walk through consecutive pairs; the moment you find one where the earlier element is greater than the next, you know the list isn't sorted.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            5
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            2,
+            1
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-04",
+    "title": "Sort by String Length",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "sorting",
+      "strings"
+    ],
+    "prompt": "Write a function `sort_by_length(words)` that returns a new list of strings sorted by length, shortest first. If two strings have the same length, keep their original relative order.\n\nsort_by_length([\"banana\", \"kiwi\", \"fig\", \"apple\"]) -> [\"fig\", \"kiwi\", \"apple\", \"banana\"]",
+    "func_name": "sort_by_length",
+    "starter_code": "def sort_by_length(words):\n    pass\n",
+    "hint": "Python's `sorted()` is stable and accepts a `key` function -- pass `len` as the key.",
+    "tests": [
+      {
+        "args": [
+          [
+            "banana",
+            "kiwi",
+            "fig",
+            "apple"
+          ]
+        ],
+        "expected": [
+          "fig",
+          "kiwi",
+          "apple",
+          "banana"
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "a",
+            "bb",
+            "cc",
+            "d"
+          ]
+        ],
+        "expected": [
+          "a",
+          "d",
+          "bb",
+          "cc"
+        ]
+      },
+      {
+        "args": [
+          [
+            "same",
+            "size",
+            "test"
+          ]
+        ],
+        "expected": [
+          "same",
+          "size",
+          "test"
+        ]
+      },
+      {
+        "args": [
+          [
+            "longest",
+            "short"
+          ]
+        ],
+        "expected": [
+          "short",
+          "longest"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-05",
+    "title": "First Index of a Value",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "searching",
+      "loops"
+    ],
+    "prompt": "Write a function `first_index_of(nums, target)` that returns the index of the first occurrence of `target` in `nums`, or `-1` if it isn't found.\n\nfirst_index_of([4, 2, 7, 2, 9], 2) -> 1",
+    "func_name": "first_index_of",
+    "starter_code": "def first_index_of(nums, target):\n    pass\n",
+    "hint": "Use `enumerate` to get both the index and the value as you loop, and return as soon as you find a match.",
+    "tests": [
+      {
+        "args": [
+          [
+            4,
+            2,
+            7,
+            2,
+            9
+          ],
+          2
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          5
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1
+          ],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          1
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-06",
+    "title": "Count Values Above a Threshold",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "searching",
+      "conditionals"
+    ],
+    "prompt": "Write a function `count_above(nums, threshold)` that returns how many numbers in `nums` are strictly greater than `threshold`.\n\ncount_above([1, 5, 8, 3, 9], 4) -> 3",
+    "func_name": "count_above",
+    "starter_code": "def count_above(nums, threshold):\n    pass\n",
+    "hint": "Loop through the list and keep a running counter, or use `sum()` with a generator expression.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            5,
+            8,
+            3,
+            9
+          ],
+          4
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [],
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          10
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5,
+            5,
+            5
+          ],
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -1,
+            0,
+            1,
+            2
+          ],
+          -5
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-07",
+    "title": "Merge Two Sorted Lists",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "sorting",
+      "merging"
+    ],
+    "prompt": "Write a function `merge_sorted(a, b)` that takes two lists, each already sorted in ascending order, and returns a single sorted list containing all elements from both.\n\nmerge_sorted([1, 3, 5], [2, 4, 6]) -> [1, 2, 3, 4, 5, 6]",
+    "func_name": "merge_sorted",
+    "starter_code": "def merge_sorted(a, b):\n    pass\n",
+    "hint": "You don't need a fancy merge algorithm here -- combine the two lists with `+` and sort the result.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "args": [
+          [],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          []
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [],
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "expected": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            4,
+            7
+          ],
+          [
+            2,
+            3,
+            9
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          7,
+          9
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-08",
+    "title": "Find the Median",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "sorting",
+      "statistics"
+    ],
+    "prompt": "Write a function `find_median(nums)` that returns the median value of a list of numbers. For a list with an odd number of elements, return the middle value after sorting. For an even number of elements, return the average of the two middle values.\n\nfind_median([4, 1, 3, 2]) -> 2.5",
+    "func_name": "find_median",
+    "starter_code": "def find_median(nums):\n    pass\n",
+    "hint": "Sort the list first, then use integer division to find the middle index (or the two middle indexes when the length is even).",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            4,
+            1,
+            3,
+            2
+          ]
+        ],
+        "expected": 2.5
+      },
+      {
+        "args": [
+          [
+            7
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "IndexError"
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 1.5
+      },
+      {
+        "args": [
+          [
+            5,
+            3,
+            8,
+            1,
+            9
+          ]
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-09",
+    "title": "Remove Duplicates, Keep Order",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "searching",
+      "sets"
+    ],
+    "prompt": "Write a function `dedupe_preserve_order(nums)` that returns a new list with duplicate values removed, keeping only the first occurrence of each value, in original order.\n\ndedupe_preserve_order([1, 2, 1, 3, 2, 4]) -> [1, 2, 3, 4]",
+    "func_name": "dedupe_preserve_order",
+    "starter_code": "def dedupe_preserve_order(nums):\n    pass\n",
+    "hint": "Keep a `set` of values you've already added to the result list, and skip any value already in that set.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            1,
+            3,
+            2,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            5,
+            5,
+            5,
+            5
+          ]
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "a",
+            "c"
+          ]
+        ],
+        "expected": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-lists-2-10",
+    "title": "Closest Value to a Target",
+    "level": "novice",
+    "cluster": "Lists II",
+    "topics": [
+      "lists",
+      "searching",
+      "comparisons"
+    ],
+    "prompt": "Write a function `closest_value(nums, target)` that returns the value in `nums` closest to `target`. If two values are equally close, return the smaller one. Assume `nums` is non-empty.\n\nclosest_value([1, 5, 9, 12], 8) -> 9",
+    "func_name": "closest_value",
+    "starter_code": "def closest_value(nums, target):\n    pass\n",
+    "hint": "Track the best candidate found so far using `abs(value - target)`, and break ties by preferring the smaller value.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            5,
+            9,
+            12
+          ],
+          8
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          [
+            2,
+            8
+          ],
+          5
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            4
+          ],
+          100
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            -5,
+            -1,
+            3
+          ],
+          0
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            10,
+            20,
+            30
+          ],
+          25
+        ],
+        "expected": 20
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-01",
+    "title": "Get With Default",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "dict-get"
+    ],
+    "prompt": "Write a function `get_with_default(d, key, default)` that returns `d[key]` if `key` is in `d`, otherwise returns `default`.\n\nget_with_default({'a': 1}, 'b', 0) -> 0",
+    "func_name": "get_with_default",
+    "starter_code": "def get_with_default(d, key, default):\n    pass\n",
+    "hint": "The dictionary's `.get(key, default)` method does exactly this in one call.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 1
+          },
+          "a",
+          0
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          {
+            "a": 1
+          },
+          "b",
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          {},
+          "x",
+          null
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          },
+          "b",
+          99
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-02",
+    "title": "Has Key",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "membership"
+    ],
+    "prompt": "Write a function `has_key(d, key)` that returns `True` if `key` exists in dictionary `d`, and `False` otherwise.\n\nhas_key({'x': 1}, 'y') -> False",
+    "func_name": "has_key",
+    "starter_code": "def has_key(d, key):\n    pass\n",
+    "hint": "Use the `in` operator directly on the dictionary; it checks keys, not values.",
+    "tests": [
+      {
+        "args": [
+          {
+            "x": 1
+          },
+          "x"
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          {
+            "x": 1
+          },
+          "y"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          {},
+          "x"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          },
+          "b"
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-03",
+    "title": "Count Characters",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "loops",
+      "counting"
+    ],
+    "prompt": "Write a function `count_chars(s)` that returns a dictionary mapping each character in the string `s` to the number of times it appears.\n\ncount_chars('aab') -> {'a': 2, 'b': 1}",
+    "func_name": "count_chars",
+    "starter_code": "def count_chars(s):\n    pass\n",
+    "hint": "Start with an empty dict, loop over each character, and use `.get(ch, 0) + 1` to build up the count.",
+    "tests": [
+      {
+        "args": [
+          "aab"
+        ],
+        "expected": {
+          "a": 2,
+          "b": 1
+        }
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          "aaaa"
+        ],
+        "expected": {
+          "a": 4
+        }
+      },
+      {
+        "args": [
+          "abc"
+        ],
+        "expected": {
+          "a": 1,
+          "b": 1,
+          "c": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-04",
+    "title": "Invert a Dictionary",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "dict-comprehension"
+    ],
+    "prompt": "Write a function `invert_dict(d)` that returns a new dictionary where each value in `d` becomes a key mapped to its original key. Assume all values in `d` are unique.\n\ninvert_dict({'a': 'x', 'b': 'y'}) -> {'x': 'a', 'y': 'b'}",
+    "func_name": "invert_dict",
+    "starter_code": "def invert_dict(d):\n    pass\n",
+    "hint": "A dict comprehension iterating over `d.items()` and swapping `k` and `v` does this in one line.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": "x",
+            "b": "y"
+          }
+        ],
+        "expected": {
+          "x": "a",
+          "y": "b"
+        }
+      },
+      {
+        "args": [
+          {}
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          {
+            "a": "1",
+            "b": "2",
+            "c": "3"
+          }
+        ],
+        "expected": {
+          "1": "a",
+          "2": "b",
+          "3": "c"
+        }
+      },
+      {
+        "args": [
+          {
+            "only": "single"
+          }
+        ],
+        "expected": {
+          "single": "only"
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-05",
+    "title": "Sum Dictionary Values",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "sum"
+    ],
+    "prompt": "Write a function `sum_values(d)` that returns the sum of all values in dictionary `d`.\n\nsum_values({'a': 1, 'b': 2}) -> 3",
+    "func_name": "sum_values",
+    "starter_code": "def sum_values(d):\n    pass\n",
+    "hint": "`d.values()` gives you an iterable of just the values, which `sum()` accepts directly.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          }
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          {}
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          {
+            "x": -5,
+            "y": 5
+          }
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          {
+            "a": 10
+          }
+        ],
+        "expected": 10
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-06",
+    "title": "Key With the Max Value",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "max"
+    ],
+    "prompt": "Write a function `max_value_key(d)` that returns the key associated with the largest value in dictionary `d`. Assume `d` is non-empty and has a unique maximum value.\n\nmax_value_key({'a': 3, 'b': 7, 'c': 1}) -> 'b'",
+    "func_name": "max_value_key",
+    "starter_code": "def max_value_key(d):\n    pass\n",
+    "hint": "`max(d, key=d.get)` iterates over the dict's keys and picks the one whose looked-up value is largest.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 3,
+            "b": 7,
+            "c": 1
+          }
+        ],
+        "expected": "b"
+      },
+      {
+        "args": [
+          {
+            "only": 5
+          }
+        ],
+        "expected": "only"
+      },
+      {
+        "args": [
+          {
+            "a": -1,
+            "b": -10
+          }
+        ],
+        "expected": "a"
+      },
+      {
+        "args": [
+          {
+            "x": 1,
+            "y": 2,
+            "z": 100
+          }
+        ],
+        "expected": "z"
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-07",
+    "title": "Merge Two Dictionaries",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "merging"
+    ],
+    "prompt": "Write a function `merge_dicts(d1, d2)` that returns a new dictionary containing all key-value pairs from `d1` and `d2`. If a key appears in both, the value from `d2` should be used.\n\nmerge_dicts({'a': 1}, {'a': 2, 'b': 3}) -> {'a': 2, 'b': 3}",
+    "func_name": "merge_dicts",
+    "starter_code": "def merge_dicts(d1, d2):\n    pass\n",
+    "hint": "Copy `d1` first with `.copy()` so you don't mutate the caller's dict, then call `.update(d2)` on the copy.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 1
+          },
+          {
+            "a": 2,
+            "b": 3
+          }
+        ],
+        "expected": {
+          "a": 2,
+          "b": 3
+        }
+      },
+      {
+        "args": [
+          {},
+          {
+            "x": 1
+          }
+        ],
+        "expected": {
+          "x": 1
+        }
+      },
+      {
+        "args": [
+          {
+            "x": 1
+          },
+          {}
+        ],
+        "expected": {
+          "x": 1
+        }
+      },
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          },
+          {
+            "b": 20,
+            "c": 3
+          }
+        ],
+        "expected": {
+          "a": 1,
+          "b": 20,
+          "c": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-08",
+    "title": "Filter By Value",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "dict-comprehension",
+      "filtering"
+    ],
+    "prompt": "Write a function `filter_by_value(d, threshold)` that returns a new dictionary containing only the key-value pairs from `d` whose value is greater than or equal to `threshold`.\n\nfilter_by_value({'a': 1, 'b': 5, 'c': 10}, 5) -> {'b': 5, 'c': 10}",
+    "func_name": "filter_by_value",
+    "starter_code": "def filter_by_value(d, threshold):\n    pass\n",
+    "hint": "A dict comprehension over `d.items()` with an `if v >= threshold` clause does this in one line.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 5,
+            "c": 10
+          },
+          5
+        ],
+        "expected": {
+          "b": 5,
+          "c": 10
+        }
+      },
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          },
+          10
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          {},
+          0
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          {
+            "x": 3,
+            "y": 3,
+            "z": 2
+          },
+          3
+        ],
+        "expected": {
+          "x": 3,
+          "y": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-09",
+    "title": "Remove a Key",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "pop"
+    ],
+    "prompt": "Write a function `remove_key(d, key)` that returns a new dictionary with `key` removed, if present. If `key` is not in `d`, return a dictionary equal to `d` unchanged. Do not modify the original dictionary.\n\nremove_key({'a': 1, 'b': 2}, 'a') -> {'b': 2}",
+    "func_name": "remove_key",
+    "starter_code": "def remove_key(d, key):\n    pass\n",
+    "hint": "Copy `d` first with `.copy()`, then call `.pop(key, None)` on the copy so a missing key doesn't raise an error.",
+    "tests": [
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2
+          },
+          "a"
+        ],
+        "expected": {
+          "b": 2
+        }
+      },
+      {
+        "args": [
+          {
+            "a": 1
+          },
+          "z"
+        ],
+        "expected": {
+          "a": 1
+        }
+      },
+      {
+        "args": [
+          {},
+          "x"
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          {
+            "a": 1,
+            "b": 2,
+            "c": 3
+          },
+          "b"
+        ],
+        "expected": {
+          "a": 1,
+          "c": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-dicts-10",
+    "title": "Sorted Keys",
+    "level": "novice",
+    "cluster": "Dictionaries",
+    "topics": [
+      "dicts",
+      "sorting"
+    ],
+    "prompt": "Write a function `sorted_keys(d)` that returns a list of the dictionary's keys sorted in alphabetical order.\n\nsorted_keys({'banana': 1, 'apple': 2}) -> ['apple', 'banana']",
+    "func_name": "sorted_keys",
+    "starter_code": "def sorted_keys(d):\n    pass\n",
+    "hint": "`sorted()` works directly on `d.keys()` (or just `d`, since iterating a dict gives its keys).",
+    "tests": [
+      {
+        "args": [
+          {
+            "banana": 1,
+            "apple": 2
+          }
+        ],
+        "expected": [
+          "apple",
+          "banana"
+        ]
+      },
+      {
+        "args": [
+          {}
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          {
+            "z": 1,
+            "a": 2,
+            "m": 3
+          }
+        ],
+        "expected": [
+          "a",
+          "m",
+          "z"
+        ]
+      },
+      {
+        "args": [
+          {
+            "only": 1
+          }
+        ],
+        "expected": [
+          "only"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-01",
+    "title": "Swap a Pair",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "tuples",
+      "unpacking"
+    ],
+    "prompt": "Write a function `swap_pair(pair)` that takes a 2-element tuple, unpacks it into two variables, and returns a new tuple with the two values swapped.\n\nswap_pair((1, 2)) -> (2, 1)",
+    "func_name": "swap_pair",
+    "starter_code": "def swap_pair(pair):\n    pass\n",
+    "hint": "Unpack the tuple into two named variables with `a, b = pair`, then return a new tuple built from those variables in the opposite order.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": [
+          "b",
+          "a"
+        ]
+      },
+      {
+        "args": [
+          [
+            5,
+            5
+          ]
+        ],
+        "expected": [
+          5,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-02",
+    "title": "Unique and Sorted",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "sorting"
+    ],
+    "prompt": "Write a function `unique_sorted(nums)` that removes duplicate values from a list of numbers and returns the remaining values as a sorted list.\n\nunique_sorted([3, 1, 2, 1, 3]) -> [1, 2, 3]",
+    "func_name": "unique_sorted",
+    "starter_code": "def unique_sorted(nums):\n    pass\n",
+    "hint": "Converting a list to a `set` drops duplicates automatically; `sorted()` on that set gives you an ordered list back.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2,
+            1,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            2
+          ]
+        ],
+        "expected": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-03",
+    "title": "Count Unique Items",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "basics"
+    ],
+    "prompt": "Write a function `count_unique(items)` that returns how many distinct values appear in a list.\n\ncount_unique([1, 1, 2, 3]) -> 3",
+    "func_name": "count_unique",
+    "starter_code": "def count_unique(items):\n    pass\n",
+    "hint": "Build a `set` from the list to collapse duplicates, then take its `len`.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            "a",
+            "a",
+            "b"
+          ]
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-04",
+    "title": "Elements in Both",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "set-operations"
+    ],
+    "prompt": "Write a function `common_elements(a, b)` that returns a sorted list of the values that appear in both list `a` and list `b`.\n\ncommon_elements([1, 2, 3], [2, 3, 4]) -> [2, 3]",
+    "func_name": "common_elements",
+    "starter_code": "def common_elements(a, b):\n    pass\n",
+    "hint": "Convert both lists to sets and use the `&` operator (set intersection) to find shared values, then sort the result.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-05",
+    "title": "Only in the First",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "set-operations"
+    ],
+    "prompt": "Write a function `only_in_first(a, b)` that returns a sorted list of the values that appear in list `a` but not in list `b`.\n\nonly_in_first([1, 2, 3], [2, 3]) -> [1]",
+    "func_name": "only_in_first",
+    "starter_code": "def only_in_first(a, b):\n    pass\n",
+    "hint": "Convert both lists to sets and use the `-` operator (set difference) to find values only in the first, then sort the result.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          []
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-06",
+    "title": "Symmetric Difference",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "set-operations"
+    ],
+    "prompt": "Write a function `sym_diff(a, b)` that returns a sorted list of the values that appear in exactly one of the two lists (not in both).\n\nsym_diff([1, 2, 3], [2, 3, 4]) -> [1, 4]",
+    "func_name": "sym_diff",
+    "starter_code": "def sym_diff(a, b):\n    pass\n",
+    "hint": "Convert both lists to sets and use the `^` operator (symmetric difference), then sort the result.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-07",
+    "title": "Is Everything Included?",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "set-operations"
+    ],
+    "prompt": "Write a function `is_subset(a, b)` that returns `True` if every value in list `a` also appears in list `b`, and `False` otherwise.\n\nis_subset([1, 2], [1, 2, 3]) -> True",
+    "func_name": "is_subset",
+    "starter_code": "def is_subset(a, b):\n    pass\n",
+    "hint": "Convert both lists to sets and use the `<=` operator, which checks whether the left set is a subset of the right set.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-08",
+    "title": "Min and Max as a Tuple",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "tuples",
+      "basics"
+    ],
+    "prompt": "Write a function `min_max(nums)` that returns a tuple `(smallest, largest)` for a non-empty list of numbers. If the list is empty, raise a `ValueError`.\n\nmin_max([3, 1, 2]) -> (1, 3)",
+    "func_name": "min_max",
+    "starter_code": "def min_max(nums):\n    pass\n",
+    "hint": "Check for an empty list first and raise `ValueError`. Otherwise return `(min(nums), max(nums))` as a tuple.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          5,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            -1,
+            -5,
+            -3
+          ]
+        ],
+        "expected": [
+          -5,
+          -1
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expect_error": "ValueError"
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-09",
+    "title": "Has Duplicates?",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "basics"
+    ],
+    "prompt": "Write a function `has_duplicates(items)` that returns `True` if any value in the list appears more than once, and `False` otherwise.\n\nhas_duplicates([1, 2, 2]) -> True",
+    "func_name": "has_duplicates",
+    "starter_code": "def has_duplicates(items):\n    pass\n",
+    "hint": "A `set` drops duplicates, so if the set is shorter than the original list, something repeated. Compare `len(items)` to `len(set(items))`.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            2
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b",
+            "a"
+          ]
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-tuples-sets-10",
+    "title": "Distinct Vowels",
+    "level": "novice",
+    "cluster": "Tuples & Sets",
+    "topics": [
+      "sets",
+      "strings"
+    ],
+    "prompt": "Write a function `distinct_vowels(s)` that returns the number of distinct vowels (a, e, i, o, u) that appear anywhere in the string, ignoring case.\n\ndistinct_vowels(\"hello world\") -> 2",
+    "func_name": "distinct_vowels",
+    "starter_code": "def distinct_vowels(s):\n    pass\n",
+    "hint": "Build a set of the vowel letters and a set of the string's lowercase characters, then use `&` (set intersection) and take its `len`.",
+    "tests": [
+      {
+        "args": [
+          "hello world"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "AEIOUaeiou"
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          "xyz"
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-01",
+    "title": "Greet With a Default",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "default-arguments"
+    ],
+    "prompt": "Write a function `greet(name, greeting=\"Hello\")` that returns the string `f\"{greeting}, {name}!\"`. If the caller doesn't pass a `greeting`, use the default `\"Hello\"`; if they do pass one, use that instead.\n\ngreet(\"Bob\", \"Hi\") -> \"Hi, Bob!\"",
+    "func_name": "greet",
+    "starter_code": "def greet(name, greeting=\"Hello\"):\n    pass\n",
+    "hint": "A default parameter value is only used when the caller omits that argument; passing a second positional argument overrides it.",
+    "tests": [
+      {
+        "args": [
+          "Ana"
+        ],
+        "expected": "Hello, Ana!"
+      },
+      {
+        "args": [
+          "Bob",
+          "Hi"
+        ],
+        "expected": "Hi, Bob!"
+      },
+      {
+        "args": [
+          "",
+          "Yo"
+        ],
+        "expected": "Yo, !"
+      },
+      {
+        "args": [
+          "Zoe"
+        ],
+        "expected": "Hello, Zoe!"
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-02",
+    "title": "Return Min and Max",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "multiple-return-values"
+    ],
+    "prompt": "Write a function `min_max(nums)` that returns a tuple `(minimum, maximum)` containing the smallest and largest values in `nums`. Assume `nums` is non-empty.\n\nmin_max([3, 1, 2]) -> (1, 3)",
+    "func_name": "min_max",
+    "starter_code": "def min_max(nums):\n    pass\n",
+    "hint": "A function can return more than one value at once by returning a tuple, e.g. `return a, b`.",
+    "tests": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          1,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": [
+          5,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            -3,
+            -1,
+            -7
+          ]
+        ],
+        "expected": [
+          -7,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            4,
+            4,
+            4
+          ]
+        ],
+        "expected": [
+          4,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            10,
+            -2,
+            33,
+            0
+          ]
+        ],
+        "expected": [
+          -2,
+          33
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-03",
+    "title": "Running Total",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "scope",
+      "global-keyword"
+    ],
+    "prompt": "A module-level variable `TOTAL` starts at `0`. Write a function `add_to_total(amount)` that adds `amount` to `TOTAL` using the `global` keyword and returns the new value of `TOTAL`. Each call should build on the running total left by the previous call.\n\nadd_to_total(5) -> 5 (then) add_to_total(3) -> 8",
+    "func_name": "add_to_total",
+    "starter_code": "TOTAL = 0\n\n\ndef add_to_total(amount):\n    pass\n",
+    "hint": "Without the `global` keyword, writing to `TOTAL` inside the function would create a new local variable instead of updating the module-level one.",
+    "tests": [
+      {
+        "args": [
+          10
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          5
+        ],
+        "expected": 15
+      },
+      {
+        "args": [
+          -2
+        ],
+        "expected": 13
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": 20
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-04",
+    "title": "Local Shadow Check",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "scope",
+      "local-variables"
+    ],
+    "prompt": "A module-level variable `GLOBAL_X` is set to `100`. Write a function `shadow_check(x)` that doubles its local parameter `x` and returns a tuple `(x, GLOBAL_X)` \u2014 showing that reassigning the local parameter `x` inside the function has no effect on the separate global variable `GLOBAL_X`.\n\nshadow_check(5) -> (10, 100)",
+    "func_name": "shadow_check",
+    "starter_code": "GLOBAL_X = 100\n\n\ndef shadow_check(x):\n    pass\n",
+    "hint": "The parameter `x` is a local variable that only shadows any outer name called `x` \u2014 it never touches `GLOBAL_X`, which is a completely different name.",
+    "tests": [
+      {
+        "args": [
+          5
+        ],
+        "expected": [
+          10,
+          100
+        ]
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": [
+          0,
+          100
+        ]
+      },
+      {
+        "args": [
+          -3
+        ],
+        "expected": [
+          -6,
+          100
+        ]
+      },
+      {
+        "args": [
+          50
+        ],
+        "expected": [
+          100,
+          100
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-05",
+    "title": "Sum Any Number of Args",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "variadic-arguments"
+    ],
+    "prompt": "Write a function `sum_all(*nums)` that accepts any number of positional numeric arguments and returns their sum. Calling it with no arguments returns `0`.\n\nsum_all(1, 2, 3) -> 6",
+    "func_name": "sum_all",
+    "starter_code": "def sum_all(*nums):\n    pass\n",
+    "hint": "`*nums` collects all positional arguments into a tuple inside the function, which you can pass straight to the built-in `sum`.",
+    "tests": [
+      {
+        "args": [
+          1,
+          2,
+          3
+        ],
+        "expected": 6
+      },
+      {
+        "args": [],
+        "expected": 0
+      },
+      {
+        "args": [
+          5
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          -1,
+          -2,
+          -3
+        ],
+        "expected": -6
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-06",
+    "title": "Merge Option Overrides",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "kwargs"
+    ],
+    "prompt": "Write a function `merge_options(overrides)` where `overrides` is a dict. Inside it, define a nested function `_defaults(color=\"black\", size=\"M\", qty=1)` that returns a dict `{\"color\": color, \"size\": size, \"qty\": qty}`. Call `_defaults(**overrides)` to unpack the override dict as keyword arguments, and return the result.\n\nmerge_options({\"color\": \"red\", \"qty\": 3}) -> {\"color\": \"red\", \"size\": \"M\", \"qty\": 3}",
+    "func_name": "merge_options",
+    "starter_code": "def merge_options(overrides):\n    def _defaults(color=\"black\", size=\"M\", qty=1):\n        pass\n    return _defaults(**overrides)\n",
+    "hint": "`**overrides` unpacks a dict's keys as keyword-argument names, so any key present in `overrides` overrides that parameter's default in `_defaults`.",
+    "tests": [
+      {
+        "args": [
+          {
+            "size": "L"
+          }
+        ],
+        "expected": {
+          "color": "black",
+          "size": "L",
+          "qty": 1
+        }
+      },
+      {
+        "args": [
+          {}
+        ],
+        "expected": {
+          "color": "black",
+          "size": "M",
+          "qty": 1
+        }
+      },
+      {
+        "args": [
+          {
+            "color": "red",
+            "qty": 3
+          }
+        ],
+        "expected": {
+          "color": "red",
+          "size": "M",
+          "qty": 3
+        }
+      },
+      {
+        "args": [
+          {
+            "color": "blue",
+            "size": "S",
+            "qty": 5
+          }
+        ],
+        "expected": {
+          "color": "blue",
+          "size": "S",
+          "qty": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-07",
+    "title": "Multiplier Factory",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "nested-functions"
+    ],
+    "prompt": "Write a function `apply_multiplier(n, x)` that defines a nested function `multiplier(value)` returning `value * n`, then calls `multiplier(x)` and returns the result. The nested function should read `n` from the enclosing function's scope.\n\napply_multiplier(3, 4) -> 12",
+    "func_name": "apply_multiplier",
+    "starter_code": "def apply_multiplier(n, x):\n    def multiplier(value):\n        pass\n    return multiplier(x)\n",
+    "hint": "A function defined inside another function can read variables from the enclosing function's scope, like `n` here, without it being passed in as a parameter.",
+    "tests": [
+      {
+        "args": [
+          3,
+          4
+        ],
+        "expected": 12
+      },
+      {
+        "args": [
+          0,
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          -2,
+          6
+        ],
+        "expected": -12
+      },
+      {
+        "args": [
+          10,
+          10
+        ],
+        "expected": 100
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-08",
+    "title": "Generate Sequential IDs",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "default-arguments",
+      "local-variables"
+    ],
+    "prompt": "Write a function `generate_ids(n, start=1)` that returns a list of `n` consecutive integers beginning at `start`. Use a local variable to track the current id as you build the list.\n\ngenerate_ids(3, 100) -> [100, 101, 102]",
+    "func_name": "generate_ids",
+    "starter_code": "def generate_ids(n, start=1):\n    pass\n",
+    "hint": "Keep a local variable (e.g. `current`) that starts at `start` and increments by 1 each loop iteration, appending it to a list you build up locally.",
+    "tests": [
+      {
+        "args": [
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          3,
+          100
+        ],
+        "expected": [
+          100,
+          101,
+          102
+        ]
+      },
+      {
+        "args": [
+          5,
+          0
+        ],
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-09",
+    "title": "Safe Divide",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "default-arguments",
+      "conditionals"
+    ],
+    "prompt": "Write a function `safe_divide(a, b, default=None)` that returns `a / b`, unless `b` is `0`, in which case it returns `default` instead of raising an error.\n\nsafe_divide(5, 0, -1) -> -1",
+    "func_name": "safe_divide",
+    "starter_code": "def safe_divide(a, b, default=None):\n    pass\n",
+    "hint": "Check whether `b == 0` before dividing, and return `default` in that branch instead of performing the division.",
+    "tests": [
+      {
+        "args": [
+          10,
+          2
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          5,
+          0
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          5,
+          0,
+          -1
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          9,
+          3
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "novice-functions-scope-10",
+    "title": "Sum of Squares via Helper",
+    "level": "novice",
+    "cluster": "Functions & Scope",
+    "topics": [
+      "functions",
+      "scope"
+    ],
+    "prompt": "Write a helper function `square(x)` that returns `x * x`, and a function `sum_of_squares(nums)` that uses a local running-total variable and calls `square` on each element of `nums`, returning the sum of all the squares.\n\nsum_of_squares([1, 2, 3]) -> 14",
+    "func_name": "sum_of_squares",
+    "starter_code": "def square(x):\n    pass\n\n\ndef sum_of_squares(nums):\n    pass\n",
+    "hint": "`sum_of_squares` can call `square`, a separate function defined at module scope, from inside its own loop \u2014 functions can freely call other functions defined in an enclosing scope.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 14
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -2,
+            3
+          ]
+        ],
+        "expected": 13
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": 25
       }
     ]
   }
