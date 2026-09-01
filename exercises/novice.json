@@ -1,0 +1,168 @@
+[
+  {
+    "id": "novice-01-sum-list",
+    "title": "Sum a List",
+    "level": "novice",
+    "topics": [
+      "loops",
+      "basics"
+    ],
+    "prompt": "Write a function `sum_list(nums)` that returns the sum of a list of numbers.\n\nsum_list([-1, 1]) -> 0",
+    "func_name": "sum_list",
+    "starter_code": "def sum_list(nums):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            -1,
+            1
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "novice-02-is-even",
+    "title": "Is Even",
+    "level": "novice",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `is_even(n)` that returns True if n is even, False otherwise.\n\nis_even(0) -> True",
+    "func_name": "is_even",
+    "starter_code": "def is_even(n):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          4
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": true
+      }
+    ]
+  },
+  {
+    "id": "novice-03-reverse-string",
+    "title": "Reverse a String",
+    "level": "novice",
+    "topics": [
+      "strings"
+    ],
+    "prompt": "Write a function `reverse_string(s)` that returns s reversed.\n\nreverse_string('hello') -> 'olleh'",
+    "func_name": "reverse_string",
+    "starter_code": "def reverse_string(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": "olleh"
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "novice-04-count-vowels",
+    "title": "Count Vowels",
+    "level": "novice",
+    "topics": [
+      "strings",
+      "loops"
+    ],
+    "prompt": "Write a function `count_vowels(s)` that returns the number of vowels (aeiou, case-insensitive) in s.\n\ncount_vowels('AEIOUaeiou') -> 10",
+    "func_name": "count_vowels",
+    "starter_code": "def count_vowels(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "Hello World"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "AEIOUaeiou"
+        ],
+        "expected": 10
+      }
+    ]
+  },
+  {
+    "id": "novice-05-max-of-three",
+    "title": "Max of Three",
+    "level": "novice",
+    "topics": [
+      "conditionals",
+      "basics"
+    ],
+    "prompt": "Write a function `max_of_three(a, b, c)` that returns the largest of three numbers.\n\nmax_of_three(2, 2, 2) -> 2",
+    "func_name": "max_of_three",
+    "starter_code": "def max_of_three(a, b, c):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          1,
+          2,
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          5,
+          2,
+          1
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          2,
+          2,
+          2
+        ],
+        "expected": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>python-weightroom</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏋️</text></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="offline-banner" class="banner banner-error hidden">
+    Can't reach the local server. Make sure it's running
+    (<code>uv run python app.py</code>) and you're at <code>http://localhost:5050</code> — reload once it's up.
+  </div>
+
+  <header>
+    <div class="brand">
+      <span class="brand-mark">🏋️</span>
+      <span class="brand-name">python-weightroom</span>
+    </div>
+    <div class="header-right">
+      <div id="due-badge" class="due-badge hidden"></div>
+      <div id="level-progress" class="level-progress"></div>
+      <div class="level-tabs" id="level-tabs">
+        <button class="level-tab" data-level="novice">Novice</button>
+        <button class="level-tab" data-level="intermediate">Intermediate</button>
+        <button class="level-tab" data-level="advanced">Advanced</button>
+        <button class="level-tab" data-level="expert">Expert</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="level-up-banner" class="banner banner-success hidden"></div>
+
+  <main>
+    <aside id="exercise-list"></aside>
+
+    <section id="workspace" class="hidden">
+      <div class="panes">
+        <div class="pane problem-pane">
+          <h2 id="ex-title"></h2>
+          <div id="ex-topics" class="chip-row"></div>
+          <p id="ex-prompt"></p>
+
+          <div class="example-block">
+            <h3>Example</h3>
+            <pre id="ex-example"></pre>
+            <p id="ex-hidden-count" class="muted"></p>
+          </div>
+
+          <button id="hint-toggle" class="link-btn hidden">Show hint</button>
+          <p id="ex-hint" class="hint hidden"></p>
+        </div>
+
+        <div class="pane editor-pane">
+          <div class="editor-toolbar">
+            <button id="run-btn">
+              <span id="run-btn-spinner" class="spinner hidden"></span>
+              <span id="run-btn-label">Run Tests</span>
+            </button>
+            <button id="reset-btn" class="secondary-btn">Reset</button>
+          </div>
+          <div id="editor-host"></div>
+          <div id="ex-results"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="empty-state" class="empty-state">
+      <p>Pick an exercise from the list to get started.</p>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

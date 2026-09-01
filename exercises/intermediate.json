@@ -1,0 +1,6357 @@
+[
+  {
+    "id": "intermediate-01-word-count",
+    "title": "Word Frequency",
+    "level": "intermediate",
+    "topics": [
+      "dicts",
+      "strings"
+    ],
+    "prompt": "Write a function `word_count(text)` that returns a dict mapping each lowercase word to how many times it appears. Split on whitespace.\n\nword_count('the cat sat on the mat') -> {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}",
+    "func_name": "word_count",
+    "starter_code": "def word_count(text):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "the cat sat on the mat"
+        ],
+        "expected": {
+          "the": 2,
+          "cat": 1,
+          "sat": 1,
+          "on": 1,
+          "mat": 1
+        }
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": {}
+      }
+    ]
+  },
+  {
+    "id": "intermediate-02-fibonacci",
+    "title": "Fibonacci",
+    "level": "intermediate",
+    "topics": [
+      "recursion",
+      "algorithms"
+    ],
+    "prompt": "Write a function `fibonacci(n)` that returns the nth Fibonacci number (fibonacci(0) == 0, fibonacci(1) == 1).\n\nfibonacci(10) -> 55",
+    "func_name": "fibonacci",
+    "starter_code": "def fibonacci(n):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          10
+        ],
+        "expected": 55
+      }
+    ]
+  },
+  {
+    "id": "intermediate-03-dedupe-preserve-order",
+    "title": "Dedupe Preserving Order",
+    "level": "intermediate",
+    "topics": [
+      "lists",
+      "sets"
+    ],
+    "prompt": "Write a function `dedupe(items)` that returns a list with duplicates removed, preserving first-occurrence order.\n\ndedupe([1, 2, 2, 3, 1, 4]) -> [1, 2, 3, 4]",
+    "func_name": "dedupe",
+    "starter_code": "def dedupe(items):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            3,
+            1,
+            4
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "intermediate-04-is-palindrome",
+    "title": "Is Palindrome",
+    "level": "intermediate",
+    "topics": [
+      "strings"
+    ],
+    "prompt": "Write a function `is_palindrome(s)` that returns True if s reads the same forwards and backwards, ignoring case and non-alphanumeric characters.\n\nis_palindrome('hello') -> False",
+    "func_name": "is_palindrome",
+    "starter_code": "def is_palindrome(s):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          "A man, a plan, a canal: Panama"
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "hello"
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "intermediate-05-flatten",
+    "title": "Flatten One Level",
+    "level": "intermediate",
+    "topics": [
+      "lists",
+      "comprehensions"
+    ],
+    "prompt": "Write a function `flatten(nested)` that flattens a list of lists into a single list, one level deep.\n\nflatten([[1, 2], [3], [], [4, 5]]) -> [1, 2, 3, 4, 5]",
+    "func_name": "flatten",
+    "starter_code": "def flatten(nested):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3
+            ],
+            [],
+            [
+              4,
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-parse-log",
+    "title": "Parse an event log into per-user event counts",
+    "level": "intermediate",
+    "topics": [
+      "strings",
+      "dicts",
+      "parsing"
+    ],
+    "prompt": "Each line looks like:\n\n    1699999999 user=42 event=play content=movie_a\n\nSome lines are malformed (missing fields) \u2014 skip them silently.\nReturn a dict mapping user id (str) -> number of valid events for that user.",
+    "func_name": "parse_log",
+    "starter_code": "def parse_log(lines):\n    # lines: list[str] like '1699999999 user=42 event=play content=movie_a'\n    # return: dict {user_id(str): count}\n    ...\n",
+    "hint": "Split on whitespace, split each token on '=', guard the required keys. Counter.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": {}
+      },
+      {
+        "args": [
+          [
+            "1486 user=4",
+            "1376 user=5",
+            "3880 user=1 event=play content=m1",
+            "260 user=1 event=play content=m2",
+            "7595 user=5 event=play content=m1",
+            "1875 user=1",
+            "4094 user=1 event=play content=m1",
+            "1124 user=5 event=play content=m3",
+            "754 user=1 event=play content=m2",
+            "4955 user=5",
+            "4366 user=4 event=play content=m1",
+            "8687 user=2 event=play content=m3",
+            "1157 user=1 event=play content=m1",
+            "7747 user=3",
+            "1250 user=4",
+            "1235 user=5 event=play content=m3",
+            "5673 user=2",
+            "2314 user=1 event=play content=m3",
+            "6820 user=3 event=play content=m2",
+            "2533 user=1",
+            "2533 user=3 event=play content=m2",
+            "5728 user=1 event=play content=m2",
+            "7670 user=3 event=play content=m2",
+            "7715 user=1 event=play content=m3",
+            "8507 user=2 event=play content=m2",
+            "3042 user=3 event=play content=m2",
+            "8681 user=4 event=play content=m1",
+            "4186 user=4 event=play content=m3",
+            "2576 user=2 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "1": 8,
+          "5": 3,
+          "4": 3,
+          "2": 3,
+          "3": 4
+        }
+      },
+      {
+        "args": [
+          [
+            "5301 user=2 event=play content=m2",
+            "3509 user=1",
+            "623 user=1 event=play content=m1",
+            "5194 user=5 event=play content=m2",
+            "4218 user=4",
+            "3308 user=1 event=play content=m1",
+            "7530 user=4",
+            "5919 user=5 event=play content=m1",
+            "6901 user=5 event=play content=m1",
+            "989 user=5 event=play content=m2",
+            "8996 user=5",
+            "2146 user=4 event=play content=m1",
+            "2375 user=5"
+          ]
+        ],
+        "expected": {
+          "2": 1,
+          "1": 2,
+          "5": 4,
+          "4": 1
+        }
+      },
+      {
+        "args": [
+          [
+            "2803 user=1 event=play content=m1",
+            "2430 user=1 event=play content=m1",
+            "5316 user=1 event=play content=m1",
+            "4589 user=4 event=play content=m3",
+            "9466 user=3 event=play content=m1",
+            "4266 user=5",
+            "9257 user=3 event=play content=m2",
+            "6150 user=5",
+            "9626 user=3 event=play content=m2",
+            "7219 user=1 event=play content=m1",
+            "5045 user=4",
+            "6472 user=1",
+            "7858 user=3 event=play content=m1",
+            "2576 user=4 event=play content=m2",
+            "9839 user=5 event=play content=m2",
+            "9307 user=2",
+            "7774 user=4 event=play content=m3",
+            "7666 user=1 event=play content=m3",
+            "7796 user=1",
+            "9635 user=1 event=play content=m2",
+            "4746 user=3 event=play content=m2",
+            "4814 user=5 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "1": 6,
+          "4": 3,
+          "3": 5,
+          "5": 2
+        }
+      },
+      {
+        "args": [
+          [
+            "4572 user=5 event=play content=m1",
+            "3343 user=5 event=play content=m2",
+            "5261 user=5 event=play content=m2",
+            "8639 user=3",
+            "1960 user=5 event=play content=m1",
+            "465 user=3 event=play content=m2",
+            "723 user=1 event=play content=m1",
+            "8449 user=2 event=play content=m2",
+            "1131 user=4 event=play content=m2",
+            "9500 user=3 event=play content=m1",
+            "298 user=3 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "5": 4,
+          "3": 3,
+          "1": 1,
+          "2": 1,
+          "4": 1
+        }
+      },
+      {
+        "args": [
+          [
+            "3762 user=3 event=play content=m1",
+            "2293 user=4 event=play content=m3",
+            "2385 user=5 event=play content=m3",
+            "8298 user=2 event=play content=m3",
+            "5350 user=4 event=play content=m1",
+            "9998 user=5 event=play content=m3",
+            "1126 user=4",
+            "6692 user=3 event=play content=m1",
+            "5148 user=5 event=play content=m1",
+            "5672 user=5 event=play content=m3",
+            "860 user=4 event=play content=m1",
+            "4804 user=4 event=play content=m2",
+            "3966 user=3",
+            "5843 user=1 event=play content=m3",
+            "1224 user=3 event=play content=m3",
+            "3219 user=1 event=play content=m3",
+            "2318 user=5 event=play content=m3",
+            "4174 user=2 event=play content=m3",
+            "9829 user=1 event=play content=m2",
+            "6092 user=3 event=play content=m2",
+            "6028 user=4 event=play content=m1",
+            "5125 user=3",
+            "1974 user=5 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "3": 4,
+          "4": 5,
+          "5": 6,
+          "2": 2,
+          "1": 3
+        }
+      },
+      {
+        "args": [
+          [
+            "8749 user=1 event=play content=m3",
+            "3014 user=5 event=play content=m2",
+            "4472 user=3 event=play content=m3",
+            "2773 user=2 event=play content=m1",
+            "3917 user=5 event=play content=m1",
+            "2855 user=4 event=play content=m2",
+            "6708 user=5 event=play content=m3",
+            "9621 user=4 event=play content=m2",
+            "6112 user=4 event=play content=m3",
+            "8669 user=1 event=play content=m2",
+            "7690 user=5",
+            "9138 user=4",
+            "4193 user=2 event=play content=m1",
+            "4811 user=1 event=play content=m3",
+            "8980 user=5 event=play content=m1",
+            "7630 user=5 event=play content=m2",
+            "1768 user=4 event=play content=m3",
+            "3236 user=4",
+            "5504 user=2 event=play content=m1",
+            "3271 user=4 event=play content=m2",
+            "5178 user=1",
+            "913 user=5",
+            "5570 user=3 event=play content=m2",
+            "9450 user=5 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "1": 3,
+          "5": 6,
+          "3": 2,
+          "2": 3,
+          "4": 5
+        }
+      },
+      {
+        "args": [
+          [
+            "146 user=4 event=play content=m2",
+            "4649 user=5 event=play content=m3",
+            "9985 user=3 event=play content=m1",
+            "3184 user=2 event=play content=m3",
+            "6841 user=4 event=play content=m3",
+            "7129 user=3 event=play content=m2",
+            "8087 user=3 event=play content=m2",
+            "2586 user=2 event=play content=m1",
+            "3811 user=4",
+            "5798 user=5 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "4": 2,
+          "5": 2,
+          "3": 3,
+          "2": 2
+        }
+      },
+      {
+        "args": [
+          [
+            "7279 user=2 event=play content=m1",
+            "1134 user=5 event=play content=m3",
+            "4005 user=1",
+            "7954 user=4 event=play content=m2",
+            "8408 user=2 event=play content=m2",
+            "1053 user=5 event=play content=m2",
+            "8210 user=1 event=play content=m1",
+            "7017 user=2",
+            "4938 user=2 event=play content=m1",
+            "5503 user=4 event=play content=m3",
+            "7061 user=2 event=play content=m3",
+            "5169 user=4 event=play content=m1",
+            "3773 user=1 event=play content=m2",
+            "4369 user=2 event=play content=m1",
+            "6457 user=5 event=play content=m1",
+            "2395 user=2 event=play content=m1",
+            "6770 user=3 event=play content=m3",
+            "5674 user=1 event=play content=m1",
+            "272 user=2 event=play content=m1",
+            "3874 user=3 event=play content=m3",
+            "8140 user=1 event=play content=m2",
+            "9551 user=3 event=play content=m3"
+          ]
+        ],
+        "expected": {
+          "2": 7,
+          "5": 3,
+          "4": 3,
+          "1": 4,
+          "3": 3
+        }
+      },
+      {
+        "args": [
+          [
+            "9235 user=5 event=play content=m2",
+            "280 user=3 event=play content=m1",
+            "2023 user=3 event=play content=m2",
+            "4013 user=5 event=play content=m2",
+            "7067 user=4 event=play content=m2",
+            "2917 user=1 event=play content=m1",
+            "6037 user=5",
+            "3762 user=2 event=play content=m1",
+            "2081 user=5 event=play content=m2",
+            "8330 user=5",
+            "8483 user=1 event=play content=m1",
+            "7885 user=1 event=play content=m1"
+          ]
+        ],
+        "expected": {
+          "5": 3,
+          "3": 2,
+          "4": 1,
+          "1": 3,
+          "2": 1
+        }
+      },
+      {
+        "args": [
+          [
+            "3780 user=3 event=play content=m3",
+            "4827 user=4 event=play content=m1",
+            "4315 user=4 event=play content=m1",
+            "5108 user=4 event=play content=m3",
+            "5343 user=1 event=play content=m3",
+            "3040 user=5 event=play content=m3",
+            "9931 user=1 event=play content=m2",
+            "7123 user=1 event=play content=m3",
+            "1541 user=3 event=play content=m1",
+            "9337 user=5 event=play content=m2",
+            "623 user=5 event=play content=m3",
+            "8591 user=4 event=play content=m1",
+            "8480 user=4",
+            "8490 user=3 event=play content=m3",
+            "1643 user=2 event=play content=m2",
+            "8403 user=1 event=play content=m1",
+            "5413 user=1 event=play content=m3",
+            "1251 user=5 event=play content=m1",
+            "173 user=5 event=play content=m2",
+            "3544 user=1 event=play content=m1",
+            "2935 user=4 event=play content=m3",
+            "9496 user=1 event=play content=m2",
+            "530 user=3 event=play content=m3",
+            "8889 user=5 event=play content=m2",
+            "3995 user=2",
+            "276 user=1 event=play content=m1",
+            "4876 user=1"
+          ]
+        ],
+        "expected": {
+          "3": 4,
+          "4": 5,
+          "1": 8,
+          "5": 6,
+          "2": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-sessionize-py",
+    "title": "Sessionize timestamps in Python",
+    "level": "intermediate",
+    "topics": [
+      "algorithms",
+      "sorting"
+    ],
+    "prompt": "Given an unsorted list of epoch timestamps for one user, sort them and\nassign session numbers starting at 1. A new session begins when the gap from\nthe previous timestamp is strictly greater than `gap`.\n\nReturn the list of session numbers aligned to the SORTED timestamps.\n\nsessionize([15610, 16210, 3000, 13600, 13610, 8600, 8000]) -> [1, 2, 2, 3, 3, 4, 4]",
+    "func_name": "sessionize",
+    "starter_code": "def sessionize(timestamps, gap=1800):\n    # timestamps: list[int], unsorted\n    # return: list[int] session numbers starting at 1, aligned to SORTED order\n    ...\n",
+    "hint": "Sort first. Track prev. This is Block B's SQL problem in another language \u2014 know both.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            3030,
+            8750,
+            8660,
+            8030,
+            8050,
+            3010,
+            3000,
+            3020,
+            8740,
+            8060,
+            8720,
+            8730,
+            8040
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            23100,
+            1070,
+            13090,
+            6070,
+            31310,
+            23090,
+            28710,
+            1060,
+            18090,
+            28700,
+            23700,
+            8070,
+            8080,
+            13080,
+            29310
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          2,
+          3,
+          3,
+          4,
+          4,
+          5,
+          6,
+          6,
+          6,
+          7,
+          7,
+          7,
+          8
+        ]
+      },
+      {
+        "args": [
+          [
+            8080,
+            10140,
+            15150,
+            15270,
+            3080,
+            10150,
+            15210,
+            3070,
+            3060,
+            10080,
+            3000
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            4390,
+            1670,
+            11400,
+            1070,
+            2330,
+            1730,
+            1010,
+            9400,
+            12000,
+            2390,
+            4400
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          4,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            3670,
+            1670,
+            1610,
+            5670,
+            1600
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            7990,
+            10590,
+            12610,
+            7930,
+            10610,
+            10600,
+            2260,
+            7330,
+            1660,
+            8590,
+            2270,
+            12670,
+            2330,
+            1600
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            3070,
+            1010,
+            5070,
+            3010
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            8720,
+            8120,
+            9330,
+            3000,
+            8730,
+            3060,
+            8060,
+            14390,
+            14330
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            6670,
+            6070,
+            11550,
+            1060,
+            6060,
+            6880,
+            6760,
+            6740,
+            10890,
+            8890,
+            6820,
+            6730,
+            6750,
+            6890,
+            11490
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          4,
+          4,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            15610,
+            16210,
+            3000,
+            13600,
+            13610,
+            8600,
+            8000
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          2,
+          3,
+          3,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-topk",
+    "title": "Top-K frequent elements",
+    "level": "intermediate",
+    "topics": [
+      "dicts",
+      "sorting"
+    ],
+    "prompt": "Return the k most frequent items, most frequent first.\nBreak ties by the item's natural ascending order.\n\ntop_k(['f'], 1) -> ['f']",
+    "func_name": "top_k",
+    "starter_code": "def top_k(items, k):\n    # return: list of the k most frequent items,\n    # ties broken by the item's natural sort order\n    ...\n",
+    "hint": "Counter, then sorted with key=lambda kv: (-count, key). The negative is the whole trick.",
+    "tests": [
+      {
+        "args": [
+          [],
+          3
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "a",
+            "a",
+            "a",
+            "e",
+            "a",
+            "f",
+            "f",
+            "a",
+            "a",
+            "c",
+            "b",
+            "a",
+            "a",
+            "a",
+            "c",
+            "f",
+            "e",
+            "d",
+            "e",
+            "d",
+            "b",
+            "a",
+            "b",
+            "f",
+            "a",
+            "a",
+            "e",
+            "d",
+            "b"
+          ],
+          1
+        ],
+        "expected": [
+          "a"
+        ]
+      },
+      {
+        "args": [
+          [
+            "d",
+            "a",
+            "e",
+            "f",
+            "a",
+            "e",
+            "e",
+            "a",
+            "c",
+            "e",
+            "a",
+            "f",
+            "c",
+            "d",
+            "c",
+            "c",
+            "b",
+            "f",
+            "b",
+            "d",
+            "e",
+            "f",
+            "a",
+            "e",
+            "a",
+            "a",
+            "c",
+            "b",
+            "f",
+            "d",
+            "f",
+            "d",
+            "b",
+            "a",
+            "a"
+          ],
+          4
+        ],
+        "expected": [
+          "a",
+          "e",
+          "f",
+          "c"
+        ]
+      },
+      {
+        "args": [
+          [
+            "a",
+            "e",
+            "b",
+            "b",
+            "a",
+            "c",
+            "a",
+            "e",
+            "b",
+            "f",
+            "c"
+          ],
+          4
+        ],
+        "expected": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      {
+        "args": [
+          [
+            "d",
+            "c",
+            "f"
+          ],
+          1
+        ],
+        "expected": [
+          "c"
+        ]
+      },
+      {
+        "args": [
+          [
+            "c",
+            "b",
+            "c",
+            "b",
+            "d",
+            "a",
+            "e",
+            "d",
+            "c",
+            "d",
+            "c",
+            "e"
+          ],
+          4
+        ],
+        "expected": [
+          "c",
+          "d",
+          "b",
+          "e"
+        ]
+      },
+      {
+        "args": [
+          [
+            "a",
+            "d",
+            "e",
+            "b",
+            "d",
+            "f",
+            "e",
+            "d",
+            "c",
+            "c",
+            "a",
+            "b",
+            "d",
+            "d",
+            "a",
+            "e",
+            "a",
+            "d",
+            "d",
+            "f",
+            "c",
+            "f",
+            "b",
+            "c",
+            "a",
+            "f",
+            "f",
+            "b",
+            "e",
+            "c",
+            "b"
+          ],
+          3
+        ],
+        "expected": [
+          "d",
+          "a",
+          "b"
+        ]
+      },
+      {
+        "args": [
+          [
+            "f",
+            "a",
+            "a",
+            "d",
+            "b",
+            "a",
+            "c",
+            "a",
+            "b",
+            "e",
+            "a",
+            "f",
+            "c",
+            "c",
+            "d",
+            "a",
+            "e",
+            "c",
+            "a",
+            "f",
+            "d",
+            "b",
+            "a",
+            "d",
+            "b",
+            "f",
+            "d",
+            "e",
+            "b"
+          ],
+          3
+        ],
+        "expected": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      {
+        "args": [
+          [
+            "e",
+            "f",
+            "d",
+            "b",
+            "e",
+            "b",
+            "c",
+            "a",
+            "c",
+            "e",
+            "b",
+            "d",
+            "e",
+            "d"
+          ],
+          3
+        ],
+        "expected": [
+          "e",
+          "b",
+          "d"
+        ]
+      },
+      {
+        "args": [
+          [
+            "b",
+            "a",
+            "e",
+            "b",
+            "b",
+            "e",
+            "a",
+            "f",
+            "c"
+          ],
+          2
+        ],
+        "expected": [
+          "b",
+          "a"
+        ]
+      },
+      {
+        "args": [
+          [
+            "f"
+          ],
+          1
+        ],
+        "expected": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-merge-intervals",
+    "title": "Merge overlapping intervals",
+    "level": "intermediate",
+    "topics": [
+      "arrays",
+      "sorting"
+    ],
+    "prompt": "Merge all overlapping intervals. Touching intervals (end == next start)\nDO merge. Return sorted by start.\n\nmerge_intervals([[13, 14], [30, 38], [3, 10], [12, 16], [20, 23], [11, 12]]) -> [[3, 10], [11, 16], [20, 23], [30, 38]]",
+    "func_name": "merge_intervals",
+    "starter_code": "def merge_intervals(intervals):\n    # intervals: list[tuple[int,int]]\n    # return: merged list, sorted by start\n    ...\n",
+    "hint": "Sort by start, then one pass extending the last interval. Watch the touching case.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              3,
+              3
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              21,
+              22
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              11,
+              18
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            11,
+            18
+          ],
+          [
+            21,
+            22
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              14,
+              16
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              22,
+              23
+            ],
+            [
+              27,
+              27
+            ],
+            [
+              16,
+              23
+            ],
+            [
+              28,
+              31
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              29,
+              36
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            10
+          ],
+          [
+            14,
+            23
+          ],
+          [
+            27,
+            27
+          ],
+          [
+            28,
+            36
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              18,
+              18
+            ],
+            [
+              8,
+              16
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              8,
+              11
+            ],
+            [
+              20,
+              23
+            ],
+            [
+              14,
+              22
+            ],
+            [
+              21,
+              21
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            6
+          ],
+          [
+            8,
+            23
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              2,
+              2
+            ],
+            [
+              10,
+              12
+            ],
+            [
+              22,
+              29
+            ],
+            [
+              21,
+              27
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              17,
+              20
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9
+          ],
+          [
+            10,
+            12
+          ],
+          [
+            17,
+            20
+          ],
+          [
+            21,
+            29
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              5
+            ],
+            [
+              24,
+              25
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            0,
+            5
+          ],
+          [
+            24,
+            25
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              4,
+              8
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              21,
+              21
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              30,
+              32
+            ],
+            [
+              24,
+              31
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            9
+          ],
+          [
+            13,
+            17
+          ],
+          [
+            21,
+            21
+          ],
+          [
+            24,
+            32
+          ]
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              12,
+              17
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              18,
+              25
+            ],
+            [
+              15,
+              15
+            ],
+            [
+              25,
+              32
+            ],
+            [
+              27,
+              29
+            ],
+            [
+              14,
+              22
+            ],
+            [
+              26,
+              33
+            ],
+            [
+              9,
+              13
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            9,
+            33
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              24,
+              26
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            24,
+            26
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              13,
+              14
+            ],
+            [
+              30,
+              38
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              12,
+              16
+            ],
+            [
+              20,
+              23
+            ],
+            [
+              11,
+              12
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            3,
+            10
+          ],
+          [
+            11,
+            16
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            30,
+            38
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-group-anagrams",
+    "title": "Group anagrams",
+    "level": "intermediate",
+    "topics": [
+      "dicts",
+      "strings"
+    ],
+    "prompt": "Group words that are anagrams of each other.\nSort each group ascending, then sort the outer list by each group's first element.\n\ngroup_anagrams(['abt', 'tan', 'tea', 'ate', 'tan', 'eat', 'bat', 'tea', 'tan', 'nat']) -> [['abt', 'bat'], ['ate', 'eat', 'tea', 'tea'], ['nat', 'tan', 'tan', 'tan']]",
+    "func_name": "group_anagrams",
+    "starter_code": "def group_anagrams(words):\n    # return: list of groups, each group sorted;\n    # outer list sorted by its first element\n    ...\n",
+    "hint": "defaultdict(list) keyed by ''.join(sorted(word)).",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "tea",
+            "eat",
+            "tea",
+            "eat",
+            "tea",
+            "tea",
+            "bat",
+            "ate"
+          ]
+        ],
+        "expected": [
+          [
+            "ate",
+            "eat",
+            "eat",
+            "tea",
+            "tea",
+            "tea",
+            "tea"
+          ],
+          [
+            "bat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "eat"
+          ]
+        ],
+        "expected": [
+          [
+            "eat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "bat"
+          ]
+        ],
+        "expected": [
+          [
+            "bat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "abt",
+            "abt",
+            "tan",
+            "tea",
+            "tan",
+            "tea",
+            "eat",
+            "abt",
+            "ate",
+            "tea"
+          ]
+        ],
+        "expected": [
+          [
+            "abt",
+            "abt",
+            "abt"
+          ],
+          [
+            "ate",
+            "eat",
+            "tea",
+            "tea",
+            "tea"
+          ],
+          [
+            "tan",
+            "tan"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "abt",
+            "tea",
+            "tea",
+            "eat",
+            "nat",
+            "tea",
+            "nat",
+            "abt",
+            "bat"
+          ]
+        ],
+        "expected": [
+          [
+            "abt",
+            "abt",
+            "bat"
+          ],
+          [
+            "eat",
+            "tea",
+            "tea",
+            "tea"
+          ],
+          [
+            "nat",
+            "nat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "ate",
+            "ate",
+            "abt",
+            "eat",
+            "tea"
+          ]
+        ],
+        "expected": [
+          [
+            "abt"
+          ],
+          [
+            "ate",
+            "ate",
+            "eat",
+            "tea"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "bat"
+          ]
+        ],
+        "expected": [
+          [
+            "bat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "abt",
+            "tab",
+            "tan"
+          ]
+        ],
+        "expected": [
+          [
+            "abt",
+            "tab"
+          ],
+          [
+            "tan"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "tea"
+          ]
+        ],
+        "expected": [
+          [
+            "tea"
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "abt",
+            "tan",
+            "tea",
+            "ate",
+            "tan",
+            "eat",
+            "bat",
+            "tea",
+            "tan",
+            "nat"
+          ]
+        ],
+        "expected": [
+          [
+            "abt",
+            "bat"
+          ],
+          [
+            "ate",
+            "eat",
+            "tea",
+            "tea"
+          ],
+          [
+            "nat",
+            "tan",
+            "tan",
+            "tan"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-dedupe-latest",
+    "title": "Keep latest record per key",
+    "level": "intermediate",
+    "topics": [
+      "dicts"
+    ],
+    "prompt": "Records arrive out of order and duplicated. For each key keep only the\nrecord with the largest ts. If two share the same ts, keep the one that appears\nLAST in the input. Return sorted by key.\n\ndedupe_latest([['b', 5, 463], ['b', 5, 170], ['b', 3, 814], ['b', 5, 324], ['b', 5, 184]]) -> [['b', 5, 184]]",
+    "func_name": "dedupe_latest",
+    "starter_code": "def dedupe_latest(records):\n    # records: list[tuple[key, ts, payload]]\n    # return: list of surviving records sorted by key\n    ...\n",
+    "hint": "One dict pass. The `>=` vs `>` is the whole question \u2014 re-read the tie rule.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              "a",
+              1,
+              192
+            ],
+            [
+              "c",
+              1,
+              787
+            ],
+            [
+              "c",
+              1,
+              200
+            ],
+            [
+              "b",
+              2,
+              117
+            ],
+            [
+              "a",
+              1,
+              454
+            ],
+            [
+              "c",
+              5,
+              595
+            ],
+            [
+              "c",
+              4,
+              252
+            ],
+            [
+              "a",
+              2,
+              830
+            ],
+            [
+              "a",
+              1,
+              615
+            ],
+            [
+              "b",
+              2,
+              166
+            ],
+            [
+              "c",
+              5,
+              577
+            ],
+            [
+              "a",
+              5,
+              791
+            ],
+            [
+              "a",
+              5,
+              692
+            ],
+            [
+              "a",
+              3,
+              944
+            ],
+            [
+              "c",
+              1,
+              760
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            692
+          ],
+          [
+            "b",
+            2,
+            166
+          ],
+          [
+            "c",
+            5,
+            577
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              3,
+              372
+            ],
+            [
+              "a",
+              2,
+              564
+            ],
+            [
+              "c",
+              1,
+              620
+            ],
+            [
+              "a",
+              1,
+              441
+            ],
+            [
+              "a",
+              4,
+              773
+            ],
+            [
+              "b",
+              2,
+              155
+            ],
+            [
+              "a",
+              5,
+              608
+            ],
+            [
+              "a",
+              1,
+              670
+            ],
+            [
+              "a",
+              2,
+              127
+            ],
+            [
+              "b",
+              1,
+              642
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            608
+          ],
+          [
+            "b",
+            3,
+            372
+          ],
+          [
+            "c",
+            1,
+            620
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "c",
+              3,
+              565
+            ],
+            [
+              "a",
+              4,
+              383
+            ],
+            [
+              "c",
+              1,
+              281
+            ],
+            [
+              "b",
+              2,
+              407
+            ],
+            [
+              "a",
+              4,
+              142
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            4,
+            142
+          ],
+          [
+            "b",
+            2,
+            407
+          ],
+          [
+            "c",
+            3,
+            565
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              3,
+              607
+            ],
+            [
+              "b",
+              5,
+              936
+            ],
+            [
+              "b",
+              4,
+              146
+            ],
+            [
+              "b",
+              5,
+              274
+            ],
+            [
+              "b",
+              5,
+              934
+            ],
+            [
+              "b",
+              3,
+              381
+            ],
+            [
+              "a",
+              2,
+              526
+            ],
+            [
+              "b",
+              1,
+              642
+            ],
+            [
+              "a",
+              4,
+              485
+            ],
+            [
+              "c",
+              3,
+              756
+            ],
+            [
+              "a",
+              3,
+              210
+            ],
+            [
+              "c",
+              2,
+              694
+            ],
+            [
+              "b",
+              2,
+              968
+            ],
+            [
+              "c",
+              3,
+              912
+            ],
+            [
+              "b",
+              1,
+              180
+            ],
+            [
+              "b",
+              2,
+              148
+            ],
+            [
+              "b",
+              1,
+              324
+            ],
+            [
+              "c",
+              1,
+              911
+            ],
+            [
+              "c",
+              3,
+              412
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            4,
+            485
+          ],
+          [
+            "b",
+            5,
+            934
+          ],
+          [
+            "c",
+            3,
+            412
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "a",
+              5,
+              363
+            ],
+            [
+              "a",
+              4,
+              306
+            ],
+            [
+              "a",
+              4,
+              299
+            ],
+            [
+              "c",
+              4,
+              612
+            ],
+            [
+              "a",
+              3,
+              979
+            ],
+            [
+              "a",
+              5,
+              819
+            ],
+            [
+              "b",
+              2,
+              698
+            ],
+            [
+              "a",
+              3,
+              161
+            ],
+            [
+              "b",
+              5,
+              256
+            ],
+            [
+              "b",
+              5,
+              583
+            ],
+            [
+              "b",
+              2,
+              234
+            ],
+            [
+              "a",
+              5,
+              269
+            ],
+            [
+              "a",
+              5,
+              171
+            ],
+            [
+              "c",
+              3,
+              275
+            ],
+            [
+              "a",
+              1,
+              753
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            171
+          ],
+          [
+            "b",
+            5,
+            583
+          ],
+          [
+            "c",
+            4,
+            612
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "a",
+              2,
+              140
+            ],
+            [
+              "b",
+              4,
+              854
+            ],
+            [
+              "b",
+              2,
+              942
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            2,
+            140
+          ],
+          [
+            "b",
+            4,
+            854
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              5,
+              747
+            ],
+            [
+              "b",
+              4,
+              426
+            ],
+            [
+              "c",
+              5,
+              967
+            ],
+            [
+              "a",
+              5,
+              195
+            ],
+            [
+              "b",
+              3,
+              520
+            ],
+            [
+              "b",
+              5,
+              383
+            ],
+            [
+              "c",
+              1,
+              818
+            ],
+            [
+              "b",
+              3,
+              319
+            ],
+            [
+              "b",
+              5,
+              507
+            ],
+            [
+              "a",
+              3,
+              998
+            ],
+            [
+              "b",
+              2,
+              895
+            ],
+            [
+              "b",
+              2,
+              489
+            ],
+            [
+              "b",
+              1,
+              175
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            195
+          ],
+          [
+            "b",
+            5,
+            507
+          ],
+          [
+            "c",
+            5,
+            967
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              3,
+              539
+            ],
+            [
+              "c",
+              4,
+              290
+            ],
+            [
+              "b",
+              4,
+              260
+            ],
+            [
+              "b",
+              5,
+              478
+            ],
+            [
+              "c",
+              5,
+              454
+            ],
+            [
+              "a",
+              2,
+              631
+            ],
+            [
+              "c",
+              4,
+              923
+            ],
+            [
+              "c",
+              4,
+              775
+            ],
+            [
+              "a",
+              4,
+              776
+            ],
+            [
+              "a",
+              1,
+              475
+            ],
+            [
+              "b",
+              1,
+              243
+            ],
+            [
+              "c",
+              3,
+              457
+            ],
+            [
+              "b",
+              3,
+              797
+            ],
+            [
+              "c",
+              5,
+              438
+            ],
+            [
+              "c",
+              3,
+              676
+            ],
+            [
+              "a",
+              5,
+              933
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            933
+          ],
+          [
+            "b",
+            5,
+            478
+          ],
+          [
+            "c",
+            5,
+            438
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "a",
+              5,
+              810
+            ],
+            [
+              "c",
+              2,
+              447
+            ],
+            [
+              "c",
+              3,
+              428
+            ],
+            [
+              "b",
+              3,
+              186
+            ],
+            [
+              "c",
+              5,
+              696
+            ],
+            [
+              "c",
+              1,
+              943
+            ],
+            [
+              "a",
+              3,
+              480
+            ],
+            [
+              "a",
+              1,
+              504
+            ],
+            [
+              "a",
+              1,
+              313
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5,
+            810
+          ],
+          [
+            "b",
+            3,
+            186
+          ],
+          [
+            "c",
+            5,
+            696
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              5,
+              463
+            ],
+            [
+              "b",
+              5,
+              170
+            ],
+            [
+              "b",
+              3,
+              814
+            ],
+            [
+              "b",
+              5,
+              324
+            ],
+            [
+              "b",
+              5,
+              184
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "b",
+            5,
+            184
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-two-sum",
+    "title": "Two sum (index pair)",
+    "level": "intermediate",
+    "topics": [
+      "arrays",
+      "hash-map"
+    ],
+    "prompt": "Return the index pair (i, j), i < j, whose values sum to target.\nIf several qualify, return the one with the smallest i, then smallest j.\nReturn None if there is none.\n\ntwo_sum([3, 0, -1, -2, 6, 8, -8, 8, -6], -6) -> [1, 8]",
+    "func_name": "two_sum",
+    "starter_code": "def two_sum(nums, target):\n    # return: (i, j) with i < j and nums[i]+nums[j]==target, or None\n    # if several, return the pair with the smallest i, then smallest j\n    ...\n",
+    "hint": "The smallest-i-then-smallest-j rule makes the naive double loop correct. A dict pass needs care.",
+    "tests": [
+      {
+        "args": [
+          [],
+          5
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            3
+          ],
+          3
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            -5,
+            -8,
+            -6,
+            -7,
+            -6,
+            -5,
+            3,
+            -1,
+            -8
+          ],
+          -6
+        ],
+        "expected": [
+          0,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            3,
+            7
+          ],
+          8
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            -6,
+            -3,
+            -5,
+            -8
+          ],
+          10
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            -1,
+            -6,
+            6,
+            -6,
+            -6,
+            8,
+            -7,
+            0,
+            -6
+          ],
+          3
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            3,
+            0,
+            -1,
+            -2,
+            6,
+            8,
+            -8,
+            8,
+            -6
+          ],
+          -6
+        ],
+        "expected": [
+          1,
+          8
+        ]
+      },
+      {
+        "args": [
+          [
+            -4,
+            7,
+            4,
+            -3,
+            -7,
+            -6,
+            7
+          ],
+          -1
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            -2,
+            -4,
+            -8
+          ],
+          5
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            8,
+            -4,
+            1
+          ],
+          8
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            5,
+            0
+          ],
+          -5
+        ],
+        "expected": null
+      },
+      {
+        "args": [
+          [
+            0,
+            -4,
+            1,
+            -4
+          ],
+          8
+        ],
+        "expected": null
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-valid-parens",
+    "title": "Valid parentheses",
+    "level": "intermediate",
+    "topics": [
+      "stacks",
+      "strings"
+    ],
+    "prompt": "Return True if the string of ()[]{} is balanced and correctly nested.\n\nvalid_parens('}])(({]') -> False",
+    "func_name": "valid_parens",
+    "starter_code": "def valid_parens(s):\n    # return: bool\n    ...\n",
+    "hint": "Stack. Closing char maps to its opener. Don't forget the empty-stack guard.",
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "]((({(}}(([)"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "([}{]{])()}("
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "])(}{]({"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          "({{([{(}[]"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          "[)})]"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          "}({(([)}"
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          "}])(({]"
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-word-freq",
+    "title": "Word frequency with stopwords",
+    "level": "intermediate",
+    "topics": [
+      "strings",
+      "dicts"
+    ],
+    "prompt": "Lowercase the text, split on whitespace, strip surrounding punctuation\n(.,!?;:), drop stopwords and empty tokens. Return the top n (word, count) pairs,\nmost frequent first, ties broken alphabetically.\n\nword_freq('view! view stream view. roku. play! roku. stream play, a. stream! view! stream, roku view! roku! roku stream. view, roku! roku. a. roku,', ['a', 'the'], 5) -> [['roku', 8], ['view', 6], ['stream', 5], ['play', 2]]",
+    "func_name": "word_freq",
+    "starter_code": "def word_freq(text, stopwords, n):\n    # return: list[tuple[word, count]], top n\n    ...\n",
+    "hint": "str.strip(chars) strips from both ends. Counter + the (-count, word) sort key again.",
+    "tests": [
+      {
+        "args": [
+          "",
+          [],
+          5
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          "the the movie the, roku the stream! a! roku roku view a! roku movie! the a stream movie, play, stream. movie. play a the, roku! movie! roku the! roku a. roku",
+          [
+            "a",
+            "the"
+          ],
+          3
+        ],
+        "expected": [
+          [
+            "roku",
+            8
+          ],
+          [
+            "movie",
+            5
+          ],
+          [
+            "stream",
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          "a. movie, play play, movie roku, roku, view. view! the!",
+          [
+            "a",
+            "the"
+          ],
+          3
+        ],
+        "expected": [
+          [
+            "movie",
+            2
+          ],
+          [
+            "play",
+            2
+          ],
+          [
+            "roku",
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          "stream! play view! view. play! stream, the. play! view a view! play, movie. stream movie. a, roku, view! movie the! roku stream roku view, stream! the, view movie! roku play. movie! a. view, view.",
+          [
+            "a",
+            "the"
+          ],
+          5
+        ],
+        "expected": [
+          [
+            "view",
+            9
+          ],
+          [
+            "movie",
+            5
+          ],
+          [
+            "play",
+            5
+          ],
+          [
+            "stream",
+            5
+          ],
+          [
+            "roku",
+            4
+          ]
+        ]
+      },
+      {
+        "args": [
+          "roku. stream view, a. play! stream. roku a. roku movie, roku movie movie view. roku play! movie, roku! view, a, play, movie. view view, stream! play, a movie! stream.",
+          [
+            "a",
+            "the"
+          ],
+          3
+        ],
+        "expected": [
+          [
+            "movie",
+            6
+          ],
+          [
+            "roku",
+            6
+          ],
+          [
+            "view",
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          "play stream! roku! roku! stream the! play, play! roku! movie! roku, a, movie, roku. a! view! movie view! movie the, view! the. a, stream, stream, a, a. a, the. stream, stream! stream view view. stream, roku play movie roku. stream,",
+          [
+            "a",
+            "the"
+          ],
+          4
+        ],
+        "expected": [
+          [
+            "stream",
+            9
+          ],
+          [
+            "roku",
+            7
+          ],
+          [
+            "movie",
+            5
+          ],
+          [
+            "view",
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          "the, stream! a. stream movie movie, view. roku! play. a roku. movie. a! view, roku! the, the, view! the stream. a. stream! a! the play view, play, roku! movie. movie view, a, play. the roku.",
+          [
+            "a",
+            "the"
+          ],
+          5
+        ],
+        "expected": [
+          [
+            "movie",
+            5
+          ],
+          [
+            "roku",
+            5
+          ],
+          [
+            "view",
+            5
+          ],
+          [
+            "play",
+            4
+          ],
+          [
+            "stream",
+            4
+          ]
+        ]
+      },
+      {
+        "args": [
+          "movie. a. movie, movie a! stream, stream! play, roku, the, a, the view. a, a. stream, stream, movie. play. the! roku. play, view. stream! a! view! view! a! movie, a movie! view. the! play a. view, roku stream!",
+          [
+            "a",
+            "the"
+          ],
+          3
+        ],
+        "expected": [
+          [
+            "movie",
+            6
+          ],
+          [
+            "stream",
+            6
+          ],
+          [
+            "view",
+            6
+          ]
+        ]
+      },
+      {
+        "args": [
+          "stream! a. a! movie! stream! a a! the roku. a, roku! stream. stream roku, a the view, play, stream, a! movie. play! the, a, view, view. roku. a! a! play, a, view! play, movie! stream. view,",
+          [
+            "a",
+            "the"
+          ],
+          2
+        ],
+        "expected": [
+          [
+            "stream",
+            6
+          ],
+          [
+            "view",
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          "play. the. a, movie. play! the! view movie the. view! movie! play. movie,",
+          [
+            "a",
+            "the"
+          ],
+          5
+        ],
+        "expected": [
+          [
+            "movie",
+            4
+          ],
+          [
+            "play",
+            3
+          ],
+          [
+            "view",
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          "view! view stream view. roku. play! roku. stream play, a. stream! view! stream, roku view! roku! roku stream. view, roku! roku. a. roku,",
+          [
+            "a",
+            "the"
+          ],
+          5
+        ],
+        "expected": [
+          [
+            "roku",
+            8
+          ],
+          [
+            "view",
+            6
+          ],
+          [
+            "stream",
+            5
+          ],
+          [
+            "play",
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-runlength",
+    "title": "Run-length encode",
+    "level": "intermediate",
+    "topics": [
+      "strings"
+    ],
+    "prompt": "Compress a string into (character, run_length) pairs for each consecutive run.\n'aaabbc' -> [('a',3),('b',2),('c',1)]. Empty string -> [].",
+    "func_name": "rle",
+    "starter_code": "def rle(s):\n    # return: list[tuple[char, run_length]]\n    ...\n",
+    "hint": "One pass, mutate the last tuple. itertools.groupby is the one-liner \u2014 know both.",
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          "aaacaaabaaaabc"
+        ],
+        "expected": [
+          [
+            "a",
+            3
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "a",
+            3
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            4
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "c",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "cbaaaaacbaacbac"
+        ],
+        "expected": [
+          [
+            "c",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            5
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            2
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "c",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "cc"
+        ],
+        "expected": [
+          [
+            "c",
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          "b"
+        ],
+        "expected": [
+          [
+            "b",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "abbbbaabcacaababb"
+        ],
+        "expected": [
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            4
+          ],
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          "aacba"
+        ],
+        "expected": [
+          [
+            "a",
+            2
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "ca"
+        ],
+        "expected": [
+          [
+            "c",
+            1
+          ],
+          [
+            "a",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "abac"
+        ],
+        "expected": [
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "c",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "bbab"
+        ],
+        "expected": [
+          [
+            "b",
+            2
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          "aabababa"
+        ],
+        "expected": [
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ],
+          [
+            "b",
+            1
+          ],
+          [
+            "a",
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-count-valleys",
+    "title": "Counting Valleys (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "arrays",
+      "simulation"
+    ],
+    "prompt": "A hiker starts and ends at sea level (elevation 0). Each step is 'U' (up\none unit) or 'D' (down one unit). A valley is any maximal stretch strictly\nbelow sea level -- it starts with the step that first goes below 0, and ends\nwith the step that comes back up to 0.\n\nReturn the number of valleys traversed.\n'UDDDUDUU' -> 1  (one dip below sea level, however deep or long)\n'DDUUUUDD' -> 1\n''         -> 0",
+    "func_name": "count_valleys",
+    "starter_code": "def count_valleys(steps):\n    # steps: str of 'U'/'D' -- a hiker's path, starts and ends at sea level\n    # return: int, number of valleys traversed\n    ...\n",
+    "hint": "One pass, track elevation as a running sum (+1/-1). Only count a valley on the step that brings elevation back to exactly 0 from below -- not on every 'U', and not on entry.",
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "UD"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "DU"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "DUUUDDUDDDUDUUUDDDUUDDDUDUUU"
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          "UUDUDUUUDDDDDU"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "UUUDDUDUDUDDDUDU"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "UUDDUDDDUU"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "UUUDDDUDDDUUDUDDUDUUDU"
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          "UUDUDUDUDUUUUDDDUDDDUD"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "UUDUDD"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "DDDUUDDUDUDUDUDDUUUDUU"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "DUUD"
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "UUUDDUDDDUDU"
+        ],
+        "expected": 2
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-jumping-clouds",
+    "title": "Jumping on the Clouds (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "arrays",
+      "greedy"
+    ],
+    "prompt": "Clouds are numbered 0..n-1. c[i] == 0 means safe (cumulus), c[i] == 1\nmeans a thunderhead you must avoid. From your current cloud you may jump to\ni+1 or i+2, but only onto a safe cloud, and never out of bounds. It's always\npossible to win. Return the minimum number of jumps from cloud 0 to the last\ncloud.\n\nc = [0, 0, 1, 0, 0, 1, 0] -> 4   (e.g. 0->1->3->4->6)\nc = [0, 0, 0, 0, 1, 0]    -> 3",
+    "func_name": "jumping_on_clouds",
+    "starter_code": "def jumping_on_clouds(c):\n    # c: list[int] of 0/1 -- 0 = safe cloud, 1 = thunderhead to avoid\n    # from index i you may land on i+1 or i+2 (if in bounds and safe)\n    # return: int, minimum jumps from index 0 to the last index\n    ...\n",
+    "hint": "Greedy: always take the 2-jump unless it lands on a thunderhead or goes out of bounds, then take the 1-jump instead. No DP/BFS needed -- valid input never has two consecutive thunderheads, so greedy is always optimal.",
+    "tests": [
+      {
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-repeated-string",
+    "title": "Repeated String (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "strings",
+      "math"
+    ],
+    "prompt": "A string is formed by repeating s end-to-end until the result has\nlength n (the last copy may be cut short). Return how many 'a' characters\nare in that string. n can be up to 10**12 -- do not construct the string.\n\nrepeatedString('aba', 10) -> 7",
+    "func_name": "repeatedString",
+    "starter_code": "def repeatedString(s, n):\n    # s: str, n: int -- s repeated end-to-end until it reaches length n\n    # return: count of 'a' in that length-n string\n    # n can be enormous (up to 10**12) -- do not build the actual string\n    ...\n",
+    "hint": "n // len(s) full copies, each contributing s.count('a'). The leftover n % len(s) characters are always the PREFIX s[:n % len(s)] -- that's where the repetition would have continued. Add those two pieces, no loop over n.",
+    "tests": [
+      {
+        "args": [
+          "a",
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "abc",
+          2
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          "a",
+          1000000000000
+        ],
+        "expected": 1000000000000
+      },
+      {
+        "args": [
+          "aaaeaaac",
+          122
+        ],
+        "expected": 92
+      },
+      {
+        "args": [
+          "a",
+          9
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          "ededba",
+          94
+        ],
+        "expected": 15
+      },
+      {
+        "args": [
+          "ae",
+          250
+        ],
+        "expected": 125
+      },
+      {
+        "args": [
+          "aeda",
+          46
+        ],
+        "expected": 23
+      },
+      {
+        "args": [
+          "eaceacdcc",
+          128
+        ],
+        "expected": 29
+      },
+      {
+        "args": [
+          "deae",
+          37
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          "c",
+          74
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "dbaaedba",
+          286
+        ],
+        "expected": 107
+      },
+      {
+        "args": [
+          "baca",
+          272
+        ],
+        "expected": 136
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-hourglass-sum",
+    "title": "2D Array \u2014 Hourglass Sum (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "arrays",
+      "2d"
+    ],
+    "prompt": "arr is always 6x6. An hourglass is these 7 cells:\n  a b c\n    d\n  e f g\n(top row of 3, the single center of the row below, bottom row of 3). There\nare 16 hourglasses in a 6x6 grid -- one for each position where the top-left\ncorner (a) can sit, rows 0-3 and columns 0-3. Return the largest hourglass\nsum.\n\nhourglass_sum([[9, 6, -8, -9, 5, -7], [0, 4, 1, -5, 6, -2], [-9, 2, 9, 2, 4, -4], [-7, -9, -3, -3, 8, -5], [7, -5, -1, -8, 5, 2], [2, 0, 3, 4, 2, -2]]) -> 13",
+    "func_name": "hourglass_sum",
+    "starter_code": "def hourglass_sum(arr):\n    # arr: 6x6 list[list[int]]\n    # an hourglass is 7 cells shaped like:\n    #   a b c\n    #     d\n    #   e f g\n    # return: the largest hourglass sum in arr (16 possible hourglasses)\n    ...\n",
+    "hint": "Brute force IS the intended solution -- 16 hourglasses, fixed 6x6 input, no need for anything cleverer. Nest r,c over range(4) each (the top-left corner of every hourglass that fits), sum the 7 fixed offsets, track the max. Start best=None (not 0) since all-negative grids are valid input.",
+    "tests": [
+      {
+        "args": [
+          [
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              -9,
+              -9,
+              -9,
+              -9,
+              -9
+            ]
+          ]
+        ],
+        "expected": -63
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            [
+              5,
+              -6,
+              -9,
+              -7,
+              9,
+              -8
+            ],
+            [
+              -7,
+              -6,
+              2,
+              -2,
+              -9,
+              -9
+            ],
+            [
+              -9,
+              2,
+              6,
+              5,
+              -5,
+              -7
+            ],
+            [
+              -4,
+              -6,
+              -9,
+              7,
+              6,
+              -2
+            ],
+            [
+              -7,
+              8,
+              5,
+              -7,
+              -7,
+              7
+            ],
+            [
+              9,
+              -8,
+              -1,
+              8,
+              -7,
+              0
+            ]
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          [
+            [
+              6,
+              2,
+              -1,
+              -2,
+              -3,
+              5
+            ],
+            [
+              7,
+              -9,
+              7,
+              -7,
+              -9,
+              1
+            ],
+            [
+              -5,
+              6,
+              3,
+              -4,
+              -8,
+              -7
+            ],
+            [
+              9,
+              6,
+              -4,
+              -7,
+              8,
+              -3
+            ],
+            [
+              -5,
+              -9,
+              2,
+              -6,
+              7,
+              -5
+            ],
+            [
+              0,
+              5,
+              -8,
+              4,
+              -1,
+              -8
+            ]
+          ]
+        ],
+        "expected": 22
+      },
+      {
+        "args": [
+          [
+            [
+              -4,
+              -1,
+              -5,
+              0,
+              -5,
+              5
+            ],
+            [
+              -8,
+              9,
+              3,
+              2,
+              6,
+              1
+            ],
+            [
+              9,
+              5,
+              6,
+              -8,
+              6,
+              -4
+            ],
+            [
+              5,
+              7,
+              5,
+              0,
+              -1,
+              -6
+            ],
+            [
+              -4,
+              4,
+              4,
+              -6,
+              7,
+              -6
+            ],
+            [
+              6,
+              3,
+              -1,
+              -3,
+              2,
+              -6
+            ]
+          ]
+        ],
+        "expected": 32
+      },
+      {
+        "args": [
+          [
+            [
+              -4,
+              9,
+              -1,
+              -5,
+              1,
+              5
+            ],
+            [
+              -7,
+              -7,
+              3,
+              -3,
+              -8,
+              0
+            ],
+            [
+              -8,
+              -2,
+              7,
+              -7,
+              1,
+              0
+            ],
+            [
+              5,
+              -7,
+              9,
+              -1,
+              -7,
+              4
+            ],
+            [
+              -3,
+              -6,
+              3,
+              -3,
+              5,
+              7
+            ],
+            [
+              -2,
+              2,
+              -3,
+              7,
+              4,
+              -4
+            ]
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          [
+            [
+              9,
+              -3,
+              0,
+              -8,
+              2,
+              8
+            ],
+            [
+              -5,
+              6,
+              8,
+              6,
+              1,
+              -5
+            ],
+            [
+              -5,
+              -8,
+              -4,
+              -5,
+              8,
+              -7
+            ],
+            [
+              1,
+              -4,
+              -9,
+              -8,
+              -7,
+              -5
+            ],
+            [
+              -3,
+              -8,
+              4,
+              3,
+              1,
+              -3
+            ],
+            [
+              3,
+              -1,
+              8,
+              0,
+              4,
+              1
+            ]
+          ]
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            [
+              9,
+              -5,
+              8,
+              -7,
+              -1,
+              -1
+            ],
+            [
+              4,
+              3,
+              9,
+              -1,
+              7,
+              -6
+            ],
+            [
+              3,
+              -1,
+              -3,
+              0,
+              9,
+              3
+            ],
+            [
+              -8,
+              2,
+              5,
+              -2,
+              6,
+              -4
+            ],
+            [
+              3,
+              0,
+              -9,
+              -7,
+              6,
+              3
+            ],
+            [
+              0,
+              4,
+              6,
+              -4,
+              3,
+              6
+            ]
+          ]
+        ],
+        "expected": 24
+      },
+      {
+        "args": [
+          [
+            [
+              -4,
+              0,
+              9,
+              2,
+              2,
+              -3
+            ],
+            [
+              -4,
+              7,
+              9,
+              5,
+              6,
+              -9
+            ],
+            [
+              5,
+              -6,
+              -9,
+              2,
+              6,
+              -7
+            ],
+            [
+              -5,
+              9,
+              1,
+              2,
+              0,
+              0
+            ],
+            [
+              9,
+              1,
+              9,
+              0,
+              9,
+              -3
+            ],
+            [
+              7,
+              -1,
+              -7,
+              8,
+              -3,
+              1
+            ]
+          ]
+        ],
+        "expected": 25
+      },
+      {
+        "args": [
+          [
+            [
+              7,
+              1,
+              1,
+              5,
+              -1,
+              -7
+            ],
+            [
+              7,
+              9,
+              9,
+              8,
+              -6,
+              -2
+            ],
+            [
+              -1,
+              2,
+              -5,
+              -9,
+              3,
+              -8
+            ],
+            [
+              -8,
+              -3,
+              -5,
+              1,
+              7,
+              2
+            ],
+            [
+              4,
+              7,
+              -7,
+              0,
+              -1,
+              6
+            ],
+            [
+              9,
+              -2,
+              2,
+              7,
+              -7,
+              -9
+            ]
+          ]
+        ],
+        "expected": 14
+      },
+      {
+        "args": [
+          [
+            [
+              9,
+              1,
+              9,
+              -2,
+              -4,
+              6
+            ],
+            [
+              6,
+              -5,
+              8,
+              -7,
+              -5,
+              8
+            ],
+            [
+              -2,
+              -4,
+              7,
+              7,
+              3,
+              1
+            ],
+            [
+              -5,
+              8,
+              9,
+              8,
+              5,
+              -8
+            ],
+            [
+              2,
+              -7,
+              2,
+              4,
+              -8,
+              -7
+            ],
+            [
+              1,
+              -2,
+              -3,
+              2,
+              7,
+              3
+            ]
+          ]
+        ],
+        "expected": 32
+      },
+      {
+        "args": [
+          [
+            [
+              9,
+              6,
+              -8,
+              -9,
+              5,
+              -7
+            ],
+            [
+              0,
+              4,
+              1,
+              -5,
+              6,
+              -2
+            ],
+            [
+              -9,
+              2,
+              9,
+              2,
+              4,
+              -4
+            ],
+            [
+              -7,
+              -9,
+              -3,
+              -3,
+              8,
+              -5
+            ],
+            [
+              7,
+              -5,
+              -1,
+              -8,
+              5,
+              2
+            ],
+            [
+              2,
+              0,
+              3,
+              4,
+              2,
+              -2
+            ]
+          ]
+        ],
+        "expected": 13
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-rot-left",
+    "title": "Left Rotation (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "arrays"
+    ],
+    "prompt": "Rotate array a left by d positions -- the first d elements move to the\nend, in order, everything else shifts left to fill the gap.\n\nrotLeft([1,2,3,4,5], 2) -> [3,4,5,1,2]\nrotLeft([1,2,3,4,5], 4) -> [5,1,2,3,4]",
+    "func_name": "rotLeft",
+    "starter_code": "def rotLeft(a, d):\n    # a: list[int], d: int -- number of LEFT rotations (0 <= d <= len(a))\n    # return: list[int], a rotated left by d\n    ...\n",
+    "hint": "Slice, don't loop. a[d:] is everything from index d onward (this becomes the front), a[:d] is the first d elements (this becomes the back). Concatenate with + -- .append() bolts on ONE element (even if that element is a whole list), it doesn't flatten two lists together.",
+    "tests": [
+      {
+        "args": [
+          [],
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          0
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          7
+        ],
+        "expected": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          0
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          0
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          1
+        ],
+        "expected": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          0
+        ],
+        "expected": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "args": [
+          [],
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          0
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          5
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          7
+        ],
+        "expected": [
+          8,
+          9,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-ransom-note",
+    "title": "Hash Tables: Ransom Note (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "dicts",
+      "strings"
+    ],
+    "prompt": "Given the words in a magazine and the words needed for a ransom note,\nreturn whether the note can be built entirely from words cut out of the\nmagazine. Each word in the magazine can be used at most once. Word matching\nis case-sensitive and order doesn't matter -- only counts.\n\nmagazine = ['give','me','one','grand','today','night']\nnote = ['give','one','grand','today']\n-> True\n\nmagazine = ['two','times','three','is','not','four']\nnote = ['two','times','two','is','four']\n-> False   (magazine only has one 'two', note needs two)",
+    "func_name": "checkMagazine",
+    "starter_code": "def checkMagazine(magazine, note):\n    # magazine: list[str], note: list[str] -- both already split into words\n    # return True if note can be built from magazine's words (each magazine\n    # word usable at most once, case-sensitive, order doesn't matter), else False\n    ...\n",
+    "hint": "Counter both lists. Walk the note's Counter (word, needed-count) pairs -- if the magazine's count for any word is less than needed (including 0, if the word never appears in the magazine at all), print 'No' and return immediately. If you get through every word in note without failing, print 'Yes'.",
+    "tests": [
+      {
+        "args": [
+          [],
+          []
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "a"
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "a",
+            "a",
+            "a",
+            "e",
+            "a",
+            "f",
+            "f",
+            "a",
+            "a",
+            "c",
+            "b",
+            "a",
+            "a",
+            "a"
+          ],
+          [
+            "a",
+            "c",
+            "a",
+            "a",
+            "a",
+            "b",
+            "a",
+            "f",
+            "a"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "b",
+            "a",
+            "f",
+            "e",
+            "d",
+            "a",
+            "e",
+            "f",
+            "a",
+            "e",
+            "e",
+            "a",
+            "c",
+            "e",
+            "a"
+          ],
+          [
+            "c",
+            "c",
+            "b",
+            "f",
+            "b",
+            "d",
+            "e"
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [],
+          [
+            "a",
+            "a",
+            "c",
+            "b",
+            "f",
+            "d",
+            "f",
+            "d"
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "a",
+            "a",
+            "e",
+            "d",
+            "b"
+          ],
+          [
+            "a"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [],
+          [
+            "a",
+            "e",
+            "b",
+            "f",
+            "c"
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "a",
+            "d",
+            "c",
+            "f",
+            "a",
+            "b",
+            "c",
+            "b",
+            "c",
+            "b",
+            "d",
+            "a",
+            "e",
+            "d"
+          ],
+          [
+            "c",
+            "e",
+            "d",
+            "d",
+            "a",
+            "d",
+            "e"
+          ]
+        ],
+        "expected": false
+      },
+      {
+        "args": [
+          [
+            "d",
+            "f",
+            "e",
+            "d",
+            "c"
+          ],
+          [
+            "d"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "a",
+            "e",
+            "a",
+            "d",
+            "d",
+            "f",
+            "c",
+            "f",
+            "b",
+            "c",
+            "a",
+            "f",
+            "f"
+          ],
+          [
+            "e",
+            "c"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "f",
+            "c",
+            "d",
+            "f"
+          ],
+          [
+            "c",
+            "f",
+            "f"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            "b"
+          ],
+          [
+            "f"
+          ]
+        ],
+        "expected": false
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-bubble-sort",
+    "title": "Sorting: Bubble Sort (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "sorting",
+      "algorithms"
+    ],
+    "prompt": "Run bubble sort on array a, counting every swap performed. Return a\ndict: {\"swaps\": total swap count, \"first\": first element of the sorted\narray, \"last\": last element of the sorted array}.\n\n[6, 4, 1] -> {\"swaps\": 3, \"first\": 1, \"last\": 6}",
+    "func_name": "countSwaps",
+    "starter_code": "def countSwaps(a):\n    # a: list[int]\n    # run actual bubble sort on a, counting every swap\n    # return {\"swaps\": N, \"first\": a[0], \"last\": a[-1]} after sorting\n    ...\n",
+    "hint": "This is the one problem in the bank where the brute-force approach IS the required approach -- the problem is literally asking you to implement bubble sort itself, not find a faster algorithm. Standard nested loop: outer i over range(n), inner j over range(n-1), swap a[j]/a[j+1] and increment a counter whenever a[j] > a[j+1]. Print, don't return -- three separate print() calls, not one combined return value.",
+    "tests": [
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": {
+          "swaps": 0,
+          "first": 1,
+          "last": 1
+        }
+      },
+      {
+        "args": [
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": {
+          "swaps": 3,
+          "first": 1,
+          "last": 3
+        }
+      },
+      {
+        "args": [
+          [
+            2,
+            1,
+            2,
+            10,
+            1,
+            2,
+            2,
+            6
+          ]
+        ],
+        "expected": {
+          "swaps": 7,
+          "first": 1,
+          "last": 10
+        }
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1,
+            6
+          ]
+        ],
+        "expected": {
+          "swaps": 0,
+          "first": 1,
+          "last": 6
+        }
+      },
+      {
+        "args": [
+          [
+            10,
+            8,
+            10,
+            8,
+            3,
+            2,
+            3,
+            2,
+            1,
+            9,
+            8
+          ]
+        ],
+        "expected": {
+          "swaps": 35,
+          "first": 1,
+          "last": 10
+        }
+      },
+      {
+        "args": [
+          [
+            2,
+            9,
+            8,
+            2
+          ]
+        ],
+        "expected": {
+          "swaps": 3,
+          "first": 2,
+          "last": 9
+        }
+      },
+      {
+        "args": [
+          [
+            2,
+            9,
+            10,
+            1,
+            5,
+            9,
+            2,
+            5,
+            8,
+            6
+          ]
+        ],
+        "expected": {
+          "swaps": 20,
+          "first": 1,
+          "last": 10
+        }
+      },
+      {
+        "args": [
+          [
+            4,
+            4,
+            8,
+            9,
+            1
+          ]
+        ],
+        "expected": {
+          "swaps": 4,
+          "first": 1,
+          "last": 9
+        }
+      },
+      {
+        "args": [
+          [
+            2,
+            1,
+            6,
+            3,
+            8,
+            7,
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": {
+          "swaps": 17,
+          "first": 1,
+          "last": 8
+        }
+      },
+      {
+        "args": [
+          [
+            8,
+            3,
+            2,
+            9,
+            4,
+            3,
+            1,
+            6,
+            2,
+            9
+          ]
+        ],
+        "expected": {
+          "swaps": 22,
+          "first": 1,
+          "last": 9
+        }
+      },
+      {
+        "args": [
+          [
+            5,
+            8,
+            1
+          ]
+        ],
+        "expected": {
+          "swaps": 2,
+          "first": 1,
+          "last": 8
+        }
+      },
+      {
+        "args": [
+          [
+            5,
+            1,
+            3,
+            5,
+            3,
+            5,
+            3
+          ]
+        ],
+        "expected": {
+          "swaps": 7,
+          "first": 1,
+          "last": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-mark-and-toys",
+    "title": "Mark and Toys (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "greedy",
+      "sorting"
+    ],
+    "prompt": "Mark wants to maximize the NUMBER of toys he buys without exceeding\nbudget k. Each toy can only be bought once. Return the max count of toys he\ncan afford (not which ones, just how many).\n\nprices=[1,12,5,111,200,1000,10], k=50 -> 4",
+    "func_name": "maximumToys",
+    "starter_code": "def maximumToys(prices, k):\n    # prices: list[int], k: int (budget)\n    # return: int, max NUMBER of toys buyable without exceeding budget k\n    # (not which toys, just the count)\n    ...\n",
+    "hint": "Greedy: sort ascending, buy cheapest first, stop the instant the next toy would push you over budget. Buying cheap items first always maximizes COUNT for a fixed budget -- swapping any bought cheap item for a pricier unbought one can only use up more budget for the same one toy, never help. Track a running total and break as soon as adding the next price would exceed k -- don't just skip it and keep scanning, later prices are even bigger once sorted.",
+    "tests": [
+      {
+        "args": [
+          [],
+          10
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            5
+          ],
+          5
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            4,
+            1,
+            3,
+            19,
+            2,
+            3,
+            4
+          ],
+          49
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            8,
+            1,
+            1,
+            1,
+            12
+          ],
+          41
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            16,
+            20,
+            15,
+            5,
+            3,
+            6,
+            4,
+            1,
+            17
+          ],
+          31
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            3,
+            18,
+            15
+          ],
+          4
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            3,
+            17,
+            19,
+            2,
+            9,
+            18,
+            3,
+            10,
+            16
+          ],
+          54
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            9,
+            8,
+            7,
+            15,
+            17
+          ],
+          42
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [],
+          60
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            3,
+            1,
+            11,
+            5,
+            16,
+            13,
+            6,
+            2
+          ],
+          4
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            16,
+            6,
+            3,
+            18,
+            7,
+            5,
+            1,
+            12,
+            4
+          ],
+          33
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            10,
+            15
+          ],
+          2
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-sorting-comparator",
+    "title": "Sorting: Comparator (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "sorting",
+      "comparators"
+    ],
+    "prompt": "Sort a list of (name, score) players by score, HIGHEST first. Ties\n(equal scores) break by name, alphabetically ascending. Implement this using\nan actual comparator function -- one that takes two players and returns\nnegative/zero/positive -- passed through functools.cmp_to_key, rather than\na plain sort key. The point of this problem is understanding how a\ncomparator's return value encodes ordering.\n\n[(\"amy\",100), (\"david\",100), (\"heraldo\",50), (\"aakansha\",75), (\"aleksa\",150)]\n-> [(\"aleksa\",150), (\"amy\",100), (\"david\",100), (\"aakansha\",75), (\"heraldo\",50)]",
+    "func_name": "sort_players",
+    "starter_code": "def sort_players(players):\n    # players: list[tuple[name(str), score(int)]]\n    # sort by score DESCENDING; ties broken by name ASCENDING (alphabetical)\n    # return: the sorted list of (name, score) tuples\n    ...\n",
+    "hint": "A comparator returns: negative if a belongs BEFORE b, positive if a belongs AFTER b, zero if they're equivalent for ordering purposes. For descending score, `b[1] - a[1]` is negative exactly when a's score is HIGHER than b's (a should come first) -- that's the flip from the usual ascending `a - b`. On a score tie, fall through to comparing names the normal ascending way. Wrap the comparator with functools.cmp_to_key() and pass that as sorted()'s key= -- sorted() doesn't accept a raw 2-argument comparator directly, cmp_to_key adapts it into something sorted() can use.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              "a",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "b",
+              5
+            ],
+            [
+              "a",
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            5
+          ],
+          [
+            "b",
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "amy",
+              1
+            ],
+            [
+              "amy",
+              5
+            ],
+            [
+              "amy",
+              1
+            ],
+            [
+              "amy",
+              3
+            ],
+            [
+              "bob",
+              1
+            ],
+            [
+              "amy",
+              1
+            ],
+            [
+              "cy",
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "amy",
+            5
+          ],
+          [
+            "cy",
+            5
+          ],
+          [
+            "amy",
+            3
+          ],
+          [
+            "amy",
+            1
+          ],
+          [
+            "amy",
+            1
+          ],
+          [
+            "amy",
+            1
+          ],
+          [
+            "bob",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "ba",
+              4
+            ],
+            [
+              "bob",
+              1
+            ],
+            [
+              "bob",
+              1
+            ],
+            [
+              "amy",
+              5
+            ],
+            [
+              "ab",
+              2
+            ],
+            [
+              "amy",
+              5
+            ],
+            [
+              "ab",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "amy",
+            5
+          ],
+          [
+            "amy",
+            5
+          ],
+          [
+            "ba",
+            4
+          ],
+          [
+            "ab",
+            2
+          ],
+          [
+            "ab",
+            1
+          ],
+          [
+            "bob",
+            1
+          ],
+          [
+            "bob",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "ba",
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "ba",
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              "ba",
+              1
+            ],
+            [
+              "dee",
+              3
+            ],
+            [
+              "ab",
+              3
+            ],
+            [
+              "cy",
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "ab",
+            3
+          ],
+          [
+            "dee",
+            3
+          ],
+          [
+            "cy",
+            2
+          ],
+          [
+            "ba",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "ab",
+              5
+            ],
+            [
+              "dee",
+              1
+            ],
+            [
+              "ba",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "ab",
+            5
+          ],
+          [
+            "ba",
+            1
+          ],
+          [
+            "dee",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              "bob",
+              4
+            ],
+            [
+              "dee",
+              4
+            ],
+            [
+              "bob",
+              1
+            ],
+            [
+              "amy",
+              5
+            ],
+            [
+              "ab",
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "amy",
+            5
+          ],
+          [
+            "bob",
+            4
+          ],
+          [
+            "dee",
+            4
+          ],
+          [
+            "ab",
+            2
+          ],
+          [
+            "bob",
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "ba",
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "ba",
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              "amy",
+              3
+            ],
+            [
+              "amy",
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "amy",
+            5
+          ],
+          [
+            "amy",
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-making-anagrams",
+    "title": "Strings: Making Anagrams (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "strings",
+      "dicts"
+    ],
+    "prompt": "Given strings a and b, find the minimum number of character deletions\n(from either string) needed to make a and b anagrams of each other.\n\na='cde', b='abc' -> 4",
+    "func_name": "makingAnagrams",
+    "starter_code": "def makingAnagrams(a, b):\n    # a, b: str\n    # return: int, minimum total characters to DELETE (from either string)\n    # so that a and b become anagrams of each other\n    ...\n",
+    "hint": "Counter both strings. For every character that appears in EITHER string (set(ca) | set(cb), not just one side's keys), the number of copies that can't be matched up between a and b is abs(ca[c] - cb[c]) -- each of those has to be deleted from whichever side has the surplus. Sum that over every character. Same shape as ransom_note's Counter comparison, but symmetric -- surplus on EITHER side counts, not just 'note needs more than magazine has'.",
+    "tests": [
+      {
+        "args": [
+          "",
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "a",
+          "a"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "abc",
+          ""
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "aaaaaac",
+          "aaa"
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          "ddbab",
+          "a"
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          "dbadaaac",
+          "acdccbbd"
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          "aaacbddb",
+          ""
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          "d",
+          "ab"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "ac",
+          "b"
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          "cdadcabcbc",
+          "da"
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          "dcdcddadb",
+          "dccabdd"
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          "a",
+          "dcbcabc"
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          "cd",
+          "a"
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-sock-merchant",
+    "title": "Sock Merchant (HackerRank warmup)",
+    "level": "intermediate",
+    "topics": [
+      "dicts"
+    ],
+    "prompt": "A pile of n socks, each with a color in ar. Count how many matching\npairs can be made.\n\nn=9, ar=[10,20,20,10,10,30,50,10,20] -> 3",
+    "func_name": "sockMerchant",
+    "starter_code": "def sockMerchant(n, ar):\n    # n: int, number of socks (== len(ar))\n    # ar: list[int], color of each sock\n    # return: int, number of matching pairs that can be made\n    ...\n",
+    "hint": "Counter the colors. Each color with count c contributes c // 2 pairs (integer division -- a leftover single sock, if c is odd, just doesn't pair with anything). Sum across every color.",
+    "tests": [
+      {
+        "args": [
+          0,
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          1,
+          [
+            5
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          2,
+          [
+            3,
+            3
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          14,
+          [
+            1,
+            1,
+            1,
+            5,
+            1,
+            1,
+            1,
+            3,
+            2,
+            1,
+            1,
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          15,
+          [
+            5,
+            4,
+            2,
+            1,
+            2,
+            1,
+            1,
+            5,
+            4,
+            2,
+            1,
+            5,
+            4,
+            1,
+            5
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          2,
+          [
+            5,
+            5
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          1,
+          [
+            3
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          2,
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          11,
+          [
+            3,
+            2,
+            2,
+            4,
+            5,
+            1,
+            5,
+            1,
+            1,
+            3,
+            2
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          15,
+          [
+            4,
+            2,
+            1,
+            1,
+            5,
+            4,
+            2,
+            1,
+            5,
+            2,
+            2,
+            1,
+            3,
+            1,
+            5
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          4,
+          [
+            3,
+            4,
+            1,
+            4
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          8,
+          [
+            1,
+            2,
+            3,
+            2,
+            3,
+            2,
+            4,
+            1
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          12,
+          [
+            3,
+            4,
+            3,
+            5,
+            4,
+            4,
+            1,
+            4,
+            5,
+            2,
+            4,
+            5
+          ]
+        ],
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "id": "intermediate-drill-target-range",
+    "title": "Contiguous range of a target in a sorted list",
+    "level": "intermediate",
+    "topics": [
+      "binary-search",
+      "arrays"
+    ],
+    "prompt": "Given a list of integers sorted in non-decreasing order and a target\nvalue, return the (start, end) indices of the contiguous run of that target --\ninclusive on both ends. If the target isn't present (including on an empty list),\nreturn (-1, -1).\n\nExample: [5,7,7,7,8,9], target 7 -> (1, 3)",
+    "func_name": "target_range",
+    "starter_code": "def target_range(nums, target):\n    # nums: list[int], sorted non-decreasing\n    # return: (start, end) inclusive indices of target's run, or (-1, -1) if absent\n    ...\n",
+    "hint": "bisect_left = first occurrence. bisect_right - 1 = last occurrence. lo == hi means absent -- and on an empty list both calls return 0, so the empty-array case falls out of the same check instead of needing its own guard.",
+    "tests": [
+      {
+        "args": [
+          [],
+          5
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": [
+          0,
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          9
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            5,
+            7,
+            7,
+            7,
+            8,
+            9
+          ],
+          7
+        ],
+        "expected": [
+          1,
+          3
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            5,
+            5,
+            7,
+            7
+          ],
+          1
+        ],
+        "expected": [
+          5,
+          8
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          -1
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            4,
+            4,
+            4,
+            5,
+            7,
+            7,
+            7,
+            8,
+            8,
+            8
+          ],
+          2
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            5,
+            6,
+            7,
+            7,
+            7,
+            8,
+            8,
+            8
+          ],
+          -1
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            0,
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            6,
+            7,
+            8
+          ],
+          1
+        ],
+        "expected": [
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            2,
+            5,
+            5,
+            6,
+            7,
+            7,
+            7,
+            7
+          ],
+          -1
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1,
+            2,
+            2,
+            4,
+            4,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            8,
+            8
+          ],
+          9
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            3,
+            4,
+            5,
+            5,
+            7
+          ],
+          0
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            3,
+            6
+          ],
+          -1
+        ],
+        "expected": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "args": [
+          [
+            0,
+            1,
+            1,
+            3,
+            4,
+            4,
+            5,
+            7,
+            8
+          ],
+          0
+        ],
+        "expected": [
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

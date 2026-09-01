@@ -1,0 +1,6 @@
+[project]
+name = "python-weightroom"
+version = "0.1.0"
+description = "Local Python skill-reinforcement trainer"
+requires-python = ">=3.12"
+dependencies = ["flask"]

@@ -1,0 +1,2952 @@
+[
+  {
+    "id": "advanced-01-anagram-groups",
+    "title": "Group Anagrams",
+    "level": "advanced",
+    "topics": [
+      "dicts",
+      "strings",
+      "algorithms"
+    ],
+    "prompt": "Write a function `group_anagrams(words)` that returns a list of lists, each containing words that are anagrams of each other. Preserve first-occurrence order: within each group, list words in the order they appear in the input; order the groups themselves by each group's first occurrence in the input.\n\ngroup_anagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']) -> [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]",
+    "func_name": "group_anagrams",
+    "starter_code": "def group_anagrams(words):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            "eat",
+            "tea",
+            "tan",
+            "ate",
+            "nat",
+            "bat"
+          ]
+        ],
+        "expected": [
+          [
+            "eat",
+            "tea",
+            "ate"
+          ],
+          [
+            "tan",
+            "nat"
+          ],
+          [
+            "bat"
+          ]
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "advanced-02-lru-cache",
+    "title": "LRU Cache",
+    "level": "advanced",
+    "topics": [
+      "data structures",
+      "oop"
+    ],
+    "prompt": "Write a function `lru_trace(capacity, ops)` where ops is a list of (\"put\", key, value) or (\"get\", key) tuples applied in order to an LRU cache of the given capacity. Return a list of the results of each \"get\" op in order (use None for a cache miss).\n\nlru_trace(1, [['put', 1, 10], ['get', 1], ['put', 2, 20], ['get', 1]]) -> [10, None]",
+    "func_name": "lru_trace",
+    "starter_code": "def lru_trace(capacity, ops):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          2,
+          [
+            [
+              "put",
+              1,
+              1
+            ],
+            [
+              "put",
+              2,
+              2
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "put",
+              3,
+              3
+            ],
+            [
+              "get",
+              2
+            ],
+            [
+              "get",
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          null,
+          3
+        ]
+      },
+      {
+        "args": [
+          1,
+          [
+            [
+              "put",
+              1,
+              10
+            ],
+            [
+              "get",
+              1
+            ],
+            [
+              "put",
+              2,
+              20
+            ],
+            [
+              "get",
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          10,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "id": "advanced-03-topo-sort",
+    "title": "Course Order",
+    "level": "advanced",
+    "topics": [
+      "graphs",
+      "algorithms"
+    ],
+    "prompt": "Write a function `course_order(num_courses, prereqs)` where prereqs is a list of [course, prerequisite] pairs. Return a valid order to take all courses, or [] if impossible (a cycle exists).\n\ncourse_order(2, [[1, 0], [0, 1]]) -> []",
+    "func_name": "course_order",
+    "starter_code": "def course_order(num_courses, prereqs):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          2,
+          [
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          1
+        ]
+      },
+      {
+        "args": [
+          2,
+          [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "advanced-04-longest-increasing-subsequence",
+    "title": "Longest Increasing Subsequence Length",
+    "level": "advanced",
+    "topics": [
+      "dynamic programming"
+    ],
+    "prompt": "Write a function `lis_length(nums)` that returns the length of the longest strictly increasing subsequence of nums.\n\nlis_length([10, 9, 2, 5, 3, 7, 101, 18]) -> 4",
+    "func_name": "lis_length",
+    "starter_code": "def lis_length(nums):\n    pass\n",
+    "tests": [
+      {
+        "args": [
+          [
+            10,
+            9,
+            2,
+            5,
+            3,
+            7,
+            101,
+            18
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "advanced-05-memoized-decorator",
+    "title": "Write Your Own memoize",
+    "level": "advanced",
+    "topics": [
+      "decorators",
+      "higher-order functions"
+    ],
+    "prompt": "Write a function `memoize(fn)` that returns a memoized version of fn (caches results by positional args). Then write `slow_square(n)` decorated with memoize that returns n * n. `slow_square` must equal `memoize(slow_square)`'s behavior \u2014 decorate it directly with `@memoize`.\n\nslow_square(-3) -> 9",
+    "func_name": "slow_square",
+    "starter_code": "def memoize(fn):\n    pass\n\n\n@memoize\ndef slow_square(n):\n    return n * n\n",
+    "tests": [
+      {
+        "args": [
+          4
+        ],
+        "expected": 16
+      },
+      {
+        "args": [
+          -3
+        ],
+        "expected": 9
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-min-bribes",
+    "title": "New Year Chaos (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "arrays",
+      "greedy"
+    ],
+    "prompt": "People start in a queue labeled 1..n by their original position. Anyone\ncan bribe the person directly in front of them to swap places, but keeps\ntheir original label. Nobody bribes more than 2 people (so nobody's final\nposition can be more than 2 ahead of their original label).\n\nGiven the final queue order q (q[i] = original label of the person now at\nposition i, 0-indexed), return the minimum number of bribes that occurred,\nor the string 'Too chaotic' if any single person bribed more than 2 people.\n\n[2,1,5,3,4] -> 3\n[2,5,1,3,4] -> 'Too chaotic'   (person 5 moved from position 5 to position 2)",
+    "func_name": "minimumBribes",
+    "starter_code": "def minimumBribes(q):\n    # q: list[int], a permutation of 1..len(q) -- final queue order\n    # each person's original label is q[i]; nobody can have moved forward\n    # more than 2 positions (bribed more than 2 people)\n    # return: int min bribes, or the string 'Too chaotic' if anyone broke the rule\n    ...\n",
+    "hint": "Chaos check first: for person p now at 0-indexed position i, if p - (i+1) > 2 they moved forward more than 2 spots -- impossible, bail out. Otherwise, total bribes = total inversions: for each i, count how many people BEFORE position i have a HIGHER original label than q[i] (only need to look back to max(0, p-2), not all the way to 0 -- anyone further back couldn't have gotten past this person under the 2-bribe limit).",
+    "tests": [
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            5,
+            1,
+            3,
+            4
+          ]
+        ],
+        "expected": "Too chaotic"
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            7
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            2,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            1,
+            5,
+            4,
+            6
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            4,
+            5,
+            6,
+            7,
+            3,
+            8
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-min-swaps",
+    "title": "Minimum Swaps 2 (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "graphs",
+      "cycles"
+    ],
+    "prompt": "arr is an unordered permutation of 1..n. You may swap ANY two elements\n(not just adjacent ones, unlike the bribes problem). Return the minimum\nnumber of swaps needed to sort arr into ascending order.\n\n[7, 1, 3, 2, 4, 5, 6] -> 5\n[4, 3, 1, 2]          -> 3\n[2, 3, 4, 1, 5]       -> 3",
+    "func_name": "minimumSwaps",
+    "starter_code": "def minimumSwaps(arr):\n    # arr: list[int], a permutation of 1..len(arr), no duplicates\n    # you may swap any two elements (not just adjacent)\n    # return: int, minimum swaps to sort arr ascending\n    ...\n",
+    "hint": "Cycle decomposition: since arr holds 1..n exactly once, value v BELONGS at index v-1. Follow where each element wants to go (i -> arr[i]-1 -> ...) until you're back where you started -- that's one cycle. A cycle of length k needs exactly k-1 swaps to resolve. Sum (cycle_size - 1) over every cycle, using a visited[] array so you never re-walk the same cycle twice.",
+    "tests": [
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            5,
+            6,
+            4,
+            7,
+            13,
+            3,
+            9,
+            10,
+            11,
+            12,
+            1,
+            2,
+            8
+          ]
+        ],
+        "expected": 12
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            1
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            12,
+            3,
+            7,
+            10,
+            5,
+            6,
+            11,
+            4,
+            8,
+            9,
+            1,
+            2
+          ]
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          [
+            6,
+            4,
+            2,
+            3,
+            9,
+            8,
+            7,
+            5,
+            1
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            3,
+            1,
+            4,
+            5,
+            2
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            6,
+            7,
+            8,
+            5,
+            4,
+            9,
+            3,
+            1,
+            2
+          ]
+        ],
+        "expected": 7
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            1
+          ]
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-array-manipulation",
+    "title": "Array Manipulation (HackerRank hard warmup)",
+    "level": "advanced",
+    "topics": [
+      "arrays",
+      "difference-array"
+    ],
+    "prompt": "Start with a 1-indexed array of n zeros. Each query is (a, b, k): add k\nto every element from index a to b, inclusive. After all queries, return the\nmax value anywhere in the array. n can be up to 10**7 and there can be up to\n2*10**5 queries -- looping a..b per query is too slow.\n\nn=5, queries=[(1,2,100),(2,5,100),(3,4,100)] -> 200",
+    "func_name": "arrayManipulation",
+    "starter_code": "def arrayManipulation(n, queries):\n    # n: int, size of a 1-indexed array of zeros\n    # queries: list[tuple[a, b, k]] -- add k to every element from index a to b, inclusive\n    # n can be up to 10**7, queries up to 2*10**5 -- do not build/touch the array per element\n    # return: int, the max value in the array after all queries\n    ...\n",
+    "hint": "Difference array: instead of adding k to every element a..b (too slow), only touch two positions per query -- diff[a] += k, diff[b+1] -= k. Size diff as n+2 so diff[b+1] never runs off the end even when b == n. Then ONE pass, running total += diff[i] for i in 1..n, tracking the max as you go -- that running total at each i equals the real array's value there.",
+    "tests": [
+      {
+        "args": [
+          1,
+          [
+            [
+              1,
+              1,
+              5
+            ]
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          5,
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          5,
+          [
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              5,
+              -3
+            ]
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          25,
+          [
+            [
+              4,
+              4,
+              2
+            ],
+            [
+              19,
+              19,
+              2
+            ],
+            [
+              4,
+              15,
+              4
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              12,
+              22,
+              10
+            ],
+            [
+              16,
+              25,
+              8
+            ],
+            [
+              5,
+              7,
+              3
+            ]
+          ]
+        ],
+        "expected": 20
+      },
+      {
+        "args": [
+          23,
+          [
+            [
+              1,
+              17,
+              8
+            ]
+          ]
+        ],
+        "expected": 8
+      },
+      {
+        "args": [
+          29,
+          [
+            [
+              3,
+              24,
+              9
+            ],
+            [
+              15,
+              16,
+              10
+            ],
+            [
+              22,
+              23,
+              9
+            ]
+          ]
+        ],
+        "expected": 19
+      },
+      {
+        "args": [
+          19,
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          9,
+          [
+            [
+              2,
+              6,
+              8
+            ],
+            [
+              6,
+              8,
+              4
+            ],
+            [
+              4,
+              7,
+              9
+            ],
+            [
+              1,
+              9,
+              2
+            ],
+            [
+              1,
+              6,
+              3
+            ],
+            [
+              8,
+              9,
+              3
+            ],
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              8,
+              8,
+              2
+            ]
+          ]
+        ],
+        "expected": 26
+      },
+      {
+        "args": [
+          18,
+          [
+            [
+              5,
+              5,
+              6
+            ],
+            [
+              4,
+              12,
+              3
+            ],
+            [
+              10,
+              17,
+              1
+            ]
+          ]
+        ],
+        "expected": 9
+      },
+      {
+        "args": [
+          14,
+          [
+            [
+              11,
+              11,
+              3
+            ],
+            [
+              5,
+              7,
+              5
+            ],
+            [
+              14,
+              14,
+              8
+            ],
+            [
+              1,
+              10,
+              7
+            ]
+          ]
+        ],
+        "expected": 12
+      },
+      {
+        "args": [
+          25,
+          [
+            [
+              16,
+              21,
+              10
+            ],
+            [
+              15,
+              22,
+              1
+            ],
+            [
+              16,
+              25,
+              3
+            ],
+            [
+              15,
+              23,
+              8
+            ],
+            [
+              10,
+              18,
+              2
+            ]
+          ]
+        ],
+        "expected": 24
+      },
+      {
+        "args": [
+          25,
+          [
+            [
+              14,
+              20,
+              2
+            ],
+            [
+              17,
+              18,
+              8
+            ]
+          ]
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          13,
+          [
+            [
+              5,
+              8,
+              6
+            ],
+            [
+              2,
+              13,
+              3
+            ],
+            [
+              10,
+              12,
+              3
+            ],
+            [
+              12,
+              13,
+              8
+            ],
+            [
+              12,
+              12,
+              2
+            ],
+            [
+              7,
+              8,
+              1
+            ],
+            [
+              5,
+              5,
+              4
+            ],
+            [
+              9,
+              9,
+              6
+            ],
+            [
+              5,
+              12,
+              2
+            ],
+            [
+              10,
+              12,
+              2
+            ]
+          ]
+        ],
+        "expected": 20
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-sherlock-anagrams",
+    "title": "Sherlock and Anagrams (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "strings",
+      "dicts"
+    ],
+    "prompt": "Find the number of pairs of substrings of s that are anagrams of each\nother -- same characters, same quantities, order doesn't matter. Substrings\nare distinguished by position: two occurrences of the exact same text at\ndifferent start/end positions still form a valid pair.\n\n'abba' -> 4\n'abcd' -> 0\n'kkkk' -> 10",
+    "func_name": "sherlockAndAnagrams",
+    "starter_code": "def sherlockAndAnagrams(s):\n    # s: str\n    # return: int, number of pairs of substrings of s that are anagrams of\n    # each other (same multiset of chars). Substrings are distinguished by\n    # POSITION, not just text -- two occurrences of identical text at\n    # different positions still count as a pair.\n    ...\n",
+    "hint": "Generate every substring (nested loop: i=start, j=end exclusive, j must reach len(s)+1 or you'll miss substrings ending at the last char). For each, join(sorted(...)) it into a hashable signature -- identical for every anagram of that substring. Counter (or a plain dict with .get(key,0)+1 if imports aren't allowed) tallies how many substrings share each signature. A group of size c contributes c*(c-1)//2 pairs -- NOT c -- sum that over every group. Same 'group size -> pair count' relationship as min_swaps' cycles.",
+    "tests": [
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "a"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "abba"
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          "a"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "aaabaaaab"
+        ],
+        "expected": 68
+      },
+      {
+        "args": [
+          "baaacaacb"
+        ],
+        "expected": 29
+      },
+      {
+        "args": [
+          "b"
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "aababbbba"
+        ],
+        "expected": 39
+      },
+      {
+        "args": [
+          "aaababb"
+        ],
+        "expected": 16
+      },
+      {
+        "args": [
+          ""
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          "baaaaabaa"
+        ],
+        "expected": 64
+      },
+      {
+        "args": [
+          "abbcaab"
+        ],
+        "expected": 12
+      },
+      {
+        "args": [
+          "abab"
+        ],
+        "expected": 5
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-count-triplets",
+    "title": "Count Triplets (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "dicts",
+      "combinatorics"
+    ],
+    "prompt": "Count index triplets (i, j, k) with i < j < k such that arr[j] == arr[i]*r\nand arr[k] == arr[j]*r -- i.e. arr[i], arr[j], arr[k] form a geometric\nprogression with common ratio r. arr can be up to 10**5 elements -- the\nnaive O(n^3) triple loop will TLE.\n\n[1, 5, 5, 25, 1], r=5 -> 2   (triplets at indices (0,1,3) and (0,2,3))\n[1, 3, 9, 9, 27, 81], r=3 -> 6",
+    "func_name": "count_triplets",
+    "starter_code": "def count_triplets(arr, r):\n    # arr: list[int], r: int (ratio)\n    # count index triplets i<j<k where arr[j] == arr[i]*r and arr[k] == arr[j]*r\n    # (a geometric progression with common ratio r). arr can be up to 10**5 --\n    # the O(n^3) brute force will TLE.\n    ...\n",
+    "hint": "Walk the array ONCE, treating each element x as the MIDDLE of a potential triplet. Keep two running counters: left (values seen so far, BEFORE this index) and right (values not yet reached, starts as a full count of arr and gets decremented as you pass each element). At x: first decrement right[x] (x itself is no longer 'to the right'), then if x is divisible by r, add left[x // r] * right[x * r] to the total (needed-first count times needed-third count), THEN increment left[x] for future middles. Order matters: decrement right before counting, increment left after.",
+    "tests": [
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            2
+          ],
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            4,
+            1,
+            1,
+            1,
+            5,
+            1,
+            1,
+            1,
+            3,
+            2,
+            1,
+            1
+          ],
+          1
+        ],
+        "expected": 56
+      },
+      {
+        "args": [
+          [
+            5,
+            4,
+            5,
+            4,
+            2
+          ],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            1
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            1,
+            5,
+            4,
+            1,
+            5,
+            1
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            5,
+            1,
+            3,
+            4,
+            3,
+            3,
+            2
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            4,
+            5,
+            1
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          2
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            4,
+            4
+          ],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            4,
+            2,
+            1,
+            5,
+            2,
+            2,
+            1,
+            3,
+            1
+          ],
+          3
+        ],
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-freq-queries",
+    "title": "Frequency Queries (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "dicts",
+      "queues"
+    ],
+    "prompt": "Process a list of queries against a multiset, each [op, val]:\n  op 1: insert val\n  op 2: delete ONE occurrence of val (no-op if val isn't currently present)\n  op 3: is there any value currently present with frequency EXACTLY val?\n        append 1 if yes, 0 if no\n\nReturn the list of op-3 results, in order. Up to 10**5 queries -- scanning\nall current frequencies on every op-3 (checking `val in counts.values()`)\nis too slow.\n\n[[1,1],[1,2],[1,3],[2,2],[3,2],[3,1]] -> [0, 1]",
+    "func_name": "freqQuery",
+    "starter_code": "def freqQuery(queries):\n    # queries: list[[op, val]] -- op 1: insert val; op 2: delete one val\n    # (no-op if val isn't present); op 3: does any value currently have\n    # frequency exactly val? append 1 or 0 to the result.\n    # up to 10**5 queries -- checking 'val in counts.values()' per op-3 is too slow.\n    # return: list[int], one entry per op-3 query, in order\n    ...\n",
+    "hint": "Two dicts, not one. count[val] tracks each value's current frequency (same as always). The new piece: freq_of_freq[f] tracks how many DISTINCT values currently have frequency f -- that's what makes op-3 O(1): the answer is just 'is freq_of_freq[val] > 0'. Every insert/delete has to keep BOTH dicts in sync: when count[x] changes from old to new, decrement freq_of_freq[old] and increment freq_of_freq[new] (skip incrementing when new is 0 -- frequency 0 isn't a real frequency to track).",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              3,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              2,
+              5
+            ]
+          ]
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              2,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              3,
+              4
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              3,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              4
+            ]
+          ]
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-fraud-notifications",
+    "title": "Fraudulent Activity Notifications (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "sliding-window",
+      "median"
+    ],
+    "prompt": "expenditure[i] is spending on day i, each value in 0..200. For every day\nfrom index d onward, look at the PRECEDING d days (a sliding window) and\ncompute their median. If today's spending is >= 2 * that median, it's a\nfraud notification. Return the total notification count.\n\nexpenditure can be up to 2*10**5 days -- re-sorting a d-sized window on\nevery day (O(n*d log d)) will TLE. The values being bounded to 0..200 is\nthe hint: use a counting array, not a sort.\n\nactivityNotifications([11, 3, 5, 8, 4, 10, 14, 2, 2, 12, 6], 4) -> 3",
+    "func_name": "activityNotifications",
+    "starter_code": "def activityNotifications(expenditure, d):\n    # expenditure: list[int], each value 0..200\n    # d: int, lookback window size\n    # for each day from index d onward, compute the median of the PRECEDING\n    # d days; if today's spend >= 2*median, that's a notification\n    # return: int, total notification count\n    # expenditure can be up to 2*10**5 long -- re-sorting the window each\n    # day (O(n*d log d)) will TLE\n    ...\n",
+    "hint": "Instead of sorting a d-sized window every day, keep a counts[] array of size 201 -- counts[v] = how many of the last d days spent exactly v. To find the median, walk v from 0 to 200 accumulating counts until the running total reaches the middle rank(s) (d//2+1 for odd d; average the values at ranks d//2 and d//2+1 for even d) -- 201 is a constant, so this whole scan is O(1) per day, not O(d log d). Slide the window by decrementing counts[expenditure[i-d]] and incrementing counts[expenditure[i]] after checking each day, not before.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            4,
+            2,
+            3,
+            6,
+            8,
+            4,
+            5
+          ],
+          5
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            3,
+            0,
+            2,
+            1,
+            2,
+            3,
+            11,
+            7,
+            0,
+            0,
+            0,
+            11,
+            15
+          ],
+          8
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            4,
+            2,
+            5,
+            3,
+            0,
+            15,
+            7,
+            2,
+            14,
+            2
+          ],
+          8
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            1,
+            8,
+            2,
+            9,
+            15,
+            11,
+            8,
+            7,
+            6,
+            14
+          ],
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          [
+            0,
+            2,
+            0,
+            10,
+            4,
+            15,
+            12,
+            5,
+            1,
+            2,
+            15,
+            5,
+            2,
+            6,
+            4
+          ],
+          9
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            3
+          ],
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            9,
+            14,
+            1,
+            13,
+            8,
+            1,
+            5,
+            8,
+            4
+          ],
+          3
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            14,
+            1,
+            12,
+            11,
+            15
+          ],
+          2
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            14,
+            15,
+            1,
+            15,
+            5,
+            14
+          ],
+          5
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            14,
+            9,
+            8,
+            3,
+            5,
+            13,
+            13,
+            3,
+            3,
+            15,
+            12,
+            8
+          ],
+          9
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            11,
+            3,
+            5,
+            8,
+            4,
+            10,
+            14,
+            2,
+            2,
+            12,
+            6
+          ],
+          4
+        ],
+        "expected": 3
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-count-inversions",
+    "title": "Merge Sort: Counting Inversions (HackerRank warmup)",
+    "level": "advanced",
+    "topics": [
+      "merge-sort",
+      "divide-and-conquer"
+    ],
+    "prompt": "Count the number of inversions in arr -- pairs (i, j) with i < j and\narr[i] > arr[j]. arr can be up to 10**5 elements -- the O(n^2) brute-force\ndouble loop will TLE. Use merge sort's divide-and-conquer to count them in\nO(n log n) while sorting.\n\n[2, 1, 3, 1, 2] -> 4",
+    "func_name": "countInversions",
+    "starter_code": "def countInversions(arr):\n    # arr: list[int]\n    # an inversion is a pair (i, j) with i < j and arr[i] > arr[j]\n    # arr can be up to 10**5 -- the O(n^2) brute-force pair count will TLE\n    # return: int, total number of inversions\n    ...\n",
+    "hint": "This is min_bribes' 'minimum bribes == total inversions' insight, run backwards through a divide-and-conquer sort instead of a single linear scan. Split the array in half, recursively sort+count each half, then during the MERGE step: whenever you take an element from the right half before the left half is exhausted, EVERY remaining element in the left half is greater than it (both halves are already individually sorted at that point) -- that's `len(left) - i` inversions in one shot, not one at a time. Total inversions = left's inversions + right's inversions + inversions found during this merge.",
+    "tests": [
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            2,
+            1,
+            2,
+            1,
+            2,
+            2,
+            6,
+            4,
+            1,
+            1,
+            1,
+            6,
+            8,
+            8
+          ]
+        ],
+        "expected": 22
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            2,
+            1
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            4,
+            2,
+            8,
+            2,
+            2,
+            1,
+            5,
+            2,
+            5,
+            8,
+            6,
+            5,
+            4,
+            4,
+            8
+          ]
+        ],
+        "expected": 32
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            1,
+            6
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            8,
+            7,
+            3,
+            1
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            8,
+            3
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            4,
+            3
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            2,
+            3,
+            5,
+            8,
+            1,
+            7,
+            5,
+            1,
+            3,
+            5,
+            3
+          ]
+        ],
+        "expected": 24
+      }
+    ]
+  },
+  {
+    "id": "advanced-drill-sessionize-log",
+    "title": "Parse a raw event log and assign session IDs per user",
+    "level": "advanced",
+    "topics": [
+      "strings",
+      "dicts",
+      "parsing"
+    ],
+    "prompt": "Each line looks like:\n\n    1699999999 user=42 event=play content=movie_a\n\nSome lines are malformed (missing fields) -- skip them silently. The log is\nNOT sorted, and events from different users are interleaved.\n\nFor each user, assign a session ID starting at 1. A new session starts when\nthe gap since that user's PREVIOUS event exceeds `gap_minutes` (strictly\ngreater than). This is the SQL sessionize problem, starting from raw text\ninstead of a clean table -- combined with parse_log's line-parsing.\n\nReturn: list of (user_id, ts, session_id), sorted by user_id then ts.\n\nsessionize_log(['1300 user=1 event=play content=m1', '1900 user=1 event=play content=m3', '1600 user=1 event=play content=m1', '6630 user=2 event=play content=m2', '6000 user=2', '11900 user=1 event=play content=m1', '6600 user=2 event=play content=m1', '6900 user=1 event=play content=m1', '8630 user=2 event=play content=m3'], 60) -> [['1', 1300, 1], ['1', 1600, 1], ['1', 1900, 1], ['1', 6900, 2], ['1', 11900, 3], ['2', 6600, 1], ['2', 6630, 1], ['2', 8630, 1]]",
+    "func_name": "sessionize_log",
+    "starter_code": "def sessionize_log(lines, gap_minutes=30):\n    # lines: list[str] like '1699999999 user=42 event=play content=movie_a'\n    # (malformed lines -- missing ts/user/event -- skip silently)\n    # return: list[(user_id(str), ts(int), session_id(int))], sorted by user_id then ts\n    ...\n",
+    "hint": "Parse into {user: [ts,...]} like parse_log, but keep the ts (not just the count). THEN run sessionize_py's flag-and-counter walk per user, on sorted timestamps -- the log itself is unsorted and interleaved across users.",
+    "tests": [
+      {
+        "args": [
+          [],
+          30
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "1000 user=1 event=play content=movie_a"
+          ],
+          30
+        ],
+        "expected": [
+          [
+            "1",
+            1000,
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "3390 user=4 event=play content=m1",
+            "6030 user=1",
+            "1330 user=4 event=play content=m3",
+            "1030 user=2 event=play content=m1",
+            "1300 user=4",
+            "3360 user=4 event=play content=m2",
+            "13990 user=4 event=play content=m2",
+            "1030 user=1",
+            "3330 user=4 event=play content=m1",
+            "13390 user=4",
+            "8390 user=4 event=play content=m2",
+            "1060 user=2",
+            "1600 user=3 event=play content=m2"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "2",
+            1030,
+            1
+          ],
+          [
+            "3",
+            1600,
+            1
+          ],
+          [
+            "4",
+            1330,
+            1
+          ],
+          [
+            "4",
+            3330,
+            1
+          ],
+          [
+            "4",
+            3360,
+            1
+          ],
+          [
+            "4",
+            3390,
+            1
+          ],
+          [
+            "4",
+            8390,
+            2
+          ],
+          [
+            "4",
+            13990,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "13200 user=3",
+            "2530 user=4",
+            "2860 user=2 event=play content=m2",
+            "1030 user=1",
+            "3600 user=3",
+            "1030 user=2 event=play content=m1",
+            "8200 user=3 event=play content=m1",
+            "1900 user=4 event=play content=m3",
+            "7900 user=3 event=play content=m1",
+            "1600 user=4 event=play content=m2",
+            "1300 user=4 event=play content=m3",
+            "1630 user=2 event=play content=m2",
+            "2230 user=2 event=play content=m1",
+            "5600 user=3 event=play content=m3",
+            "5900 user=3 event=play content=m3",
+            "3330 user=1",
+            "15200 user=3 event=play content=m3",
+            "2830 user=2 event=play content=m2",
+            "2500 user=4 event=play content=m2",
+            "1600 user=3 event=play content=m2",
+            "3030 user=1 event=play content=m3",
+            "2530 user=2 event=play content=m2"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "1",
+            3030,
+            1
+          ],
+          [
+            "2",
+            1030,
+            1
+          ],
+          [
+            "2",
+            1630,
+            1
+          ],
+          [
+            "2",
+            2230,
+            1
+          ],
+          [
+            "2",
+            2530,
+            1
+          ],
+          [
+            "2",
+            2830,
+            1
+          ],
+          [
+            "2",
+            2860,
+            1
+          ],
+          [
+            "3",
+            1600,
+            1
+          ],
+          [
+            "3",
+            5600,
+            2
+          ],
+          [
+            "3",
+            5900,
+            2
+          ],
+          [
+            "3",
+            7900,
+            2
+          ],
+          [
+            "3",
+            8200,
+            2
+          ],
+          [
+            "3",
+            15200,
+            3
+          ],
+          [
+            "4",
+            1300,
+            1
+          ],
+          [
+            "4",
+            1600,
+            1
+          ],
+          [
+            "4",
+            1900,
+            1
+          ],
+          [
+            "4",
+            2500,
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "12200 user=4 event=play content=m1",
+            "13630 user=2 event=play content=m3",
+            "7500 user=1",
+            "21200 user=4 event=play content=m2",
+            "8630 user=3 event=play content=m2",
+            "14200 user=4 event=play content=m2",
+            "6600 user=1 event=play content=m2",
+            "1630 user=3 event=play content=m3",
+            "19200 user=4 event=play content=m2",
+            "7200 user=4 event=play content=m2",
+            "13030 user=2",
+            "1030 user=3 event=play content=m3",
+            "1600 user=4 event=play content=m1",
+            "6000 user=2 event=play content=m3",
+            "8030 user=2 event=play content=m1",
+            "6600 user=4",
+            "6900 user=1 event=play content=m1",
+            "1600 user=1 event=play content=m1",
+            "13660 user=2 event=play content=m1",
+            "3630 user=3 event=play content=m2",
+            "8000 user=2 event=play content=m1"
+          ],
+          30
+        ],
+        "expected": [
+          [
+            "1",
+            1600,
+            1
+          ],
+          [
+            "1",
+            6600,
+            2
+          ],
+          [
+            "1",
+            6900,
+            2
+          ],
+          [
+            "2",
+            6000,
+            1
+          ],
+          [
+            "2",
+            8000,
+            2
+          ],
+          [
+            "2",
+            8030,
+            2
+          ],
+          [
+            "2",
+            13630,
+            3
+          ],
+          [
+            "2",
+            13660,
+            3
+          ],
+          [
+            "3",
+            1030,
+            1
+          ],
+          [
+            "3",
+            1630,
+            1
+          ],
+          [
+            "3",
+            3630,
+            2
+          ],
+          [
+            "3",
+            8630,
+            3
+          ],
+          [
+            "4",
+            1600,
+            1
+          ],
+          [
+            "4",
+            7200,
+            2
+          ],
+          [
+            "4",
+            12200,
+            3
+          ],
+          [
+            "4",
+            14200,
+            4
+          ],
+          [
+            "4",
+            19200,
+            5
+          ],
+          [
+            "4",
+            21200,
+            6
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "11860 user=1 event=play content=m3",
+            "5660 user=1 event=play content=m2",
+            "5060 user=1 event=play content=m3",
+            "6930 user=2 event=play content=m3",
+            "1330 user=2 event=play content=m2",
+            "6960 user=2 event=play content=m2",
+            "5000 user=1 event=play content=m1",
+            "1030 user=2 event=play content=m3",
+            "1930 user=2 event=play content=m1",
+            "6860 user=1 event=play content=m2",
+            "3000 user=1 event=play content=m3",
+            "5030 user=1 event=play content=m2",
+            "6260 user=1 event=play content=m3"
+          ],
+          15
+        ],
+        "expected": [
+          [
+            "1",
+            3000,
+            1
+          ],
+          [
+            "1",
+            5000,
+            2
+          ],
+          [
+            "1",
+            5030,
+            2
+          ],
+          [
+            "1",
+            5060,
+            2
+          ],
+          [
+            "1",
+            5660,
+            2
+          ],
+          [
+            "1",
+            6260,
+            2
+          ],
+          [
+            "1",
+            6860,
+            2
+          ],
+          [
+            "1",
+            11860,
+            3
+          ],
+          [
+            "2",
+            1030,
+            1
+          ],
+          [
+            "2",
+            1330,
+            1
+          ],
+          [
+            "2",
+            1930,
+            1
+          ],
+          [
+            "2",
+            6930,
+            2
+          ],
+          [
+            "2",
+            6960,
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "8930 user=1 event=play content=m3",
+            "1930 user=1 event=play content=m2",
+            "6930 user=1 event=play content=m2",
+            "1600 user=1 event=play content=m3",
+            "1900 user=1 event=play content=m1"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "1",
+            1600,
+            1
+          ],
+          [
+            "1",
+            1900,
+            1
+          ],
+          [
+            "1",
+            1930,
+            1
+          ],
+          [
+            "1",
+            6930,
+            2
+          ],
+          [
+            "1",
+            8930,
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "16000 user=2 event=play content=m1",
+            "16030 user=2 event=play content=m1",
+            "6000 user=2 event=play content=m2",
+            "1600 user=1",
+            "6600 user=1 event=play content=m3",
+            "11000 user=2 event=play content=m2",
+            "12200 user=1",
+            "11600 user=1 event=play content=m1",
+            "14800 user=1 event=play content=m3",
+            "19800 user=1",
+            "12800 user=1 event=play content=m3"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "1",
+            6600,
+            1
+          ],
+          [
+            "1",
+            11600,
+            2
+          ],
+          [
+            "1",
+            12800,
+            2
+          ],
+          [
+            "1",
+            14800,
+            2
+          ],
+          [
+            "2",
+            6000,
+            1
+          ],
+          [
+            "2",
+            11000,
+            2
+          ],
+          [
+            "2",
+            16000,
+            3
+          ],
+          [
+            "2",
+            16030,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "1300 user=1",
+            "21900 user=2 event=play content=m2",
+            "1330 user=1 event=play content=m1",
+            "6630 user=1 event=play content=m1",
+            "16300 user=2 event=play content=m2",
+            "7230 user=1 event=play content=m1",
+            "5030 user=3 event=play content=m2",
+            "1300 user=2 event=play content=m2",
+            "12830 user=1 event=play content=m2",
+            "11300 user=2 event=play content=m1",
+            "12230 user=1 event=play content=m3",
+            "6330 user=1 event=play content=m3",
+            "21300 user=2 event=play content=m2",
+            "3030 user=3 event=play content=m3",
+            "3000 user=3 event=play content=m1",
+            "6300 user=2 event=play content=m1"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "1",
+            1330,
+            1
+          ],
+          [
+            "1",
+            6330,
+            2
+          ],
+          [
+            "1",
+            6630,
+            2
+          ],
+          [
+            "1",
+            7230,
+            2
+          ],
+          [
+            "1",
+            12230,
+            3
+          ],
+          [
+            "1",
+            12830,
+            3
+          ],
+          [
+            "2",
+            1300,
+            1
+          ],
+          [
+            "2",
+            6300,
+            2
+          ],
+          [
+            "2",
+            11300,
+            3
+          ],
+          [
+            "2",
+            16300,
+            4
+          ],
+          [
+            "2",
+            21300,
+            5
+          ],
+          [
+            "2",
+            21900,
+            5
+          ],
+          [
+            "3",
+            3000,
+            1
+          ],
+          [
+            "3",
+            3030,
+            1
+          ],
+          [
+            "3",
+            5030,
+            1
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "2530 user=3 event=play content=m1",
+            "1330 user=3 event=play content=m2",
+            "13930 user=2 event=play content=m3",
+            "15930 user=2 event=play content=m2",
+            "1030 user=3",
+            "6300 user=1",
+            "13630 user=2 event=play content=m3",
+            "3000 user=2",
+            "8000 user=2",
+            "9560 user=3 event=play content=m3",
+            "1930 user=3 event=play content=m1",
+            "2560 user=3 event=play content=m2",
+            "20930 user=2",
+            "8600 user=2 event=play content=m3",
+            "6000 user=1 event=play content=m3",
+            "4560 user=3 event=play content=m2",
+            "1630 user=3 event=play content=m3",
+            "8630 user=2 event=play content=m2"
+          ],
+          15
+        ],
+        "expected": [
+          [
+            "1",
+            6000,
+            1
+          ],
+          [
+            "2",
+            8600,
+            1
+          ],
+          [
+            "2",
+            8630,
+            1
+          ],
+          [
+            "2",
+            13630,
+            2
+          ],
+          [
+            "2",
+            13930,
+            2
+          ],
+          [
+            "2",
+            15930,
+            3
+          ],
+          [
+            "3",
+            1330,
+            1
+          ],
+          [
+            "3",
+            1630,
+            1
+          ],
+          [
+            "3",
+            1930,
+            1
+          ],
+          [
+            "3",
+            2530,
+            1
+          ],
+          [
+            "3",
+            2560,
+            1
+          ],
+          [
+            "3",
+            4560,
+            2
+          ],
+          [
+            "3",
+            9560,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "3000 user=3 event=play content=m1",
+            "3600 user=3 event=play content=m2",
+            "15630 user=3 event=play content=m3",
+            "15930 user=3 event=play content=m1",
+            "8000 user=1 event=play content=m1",
+            "10600 user=1 event=play content=m1",
+            "3000 user=1 event=play content=m3",
+            "8600 user=1 event=play content=m1",
+            "3000 user=2 event=play content=m1",
+            "17930 user=3 event=play content=m2",
+            "8030 user=2",
+            "8600 user=3 event=play content=m3",
+            "8000 user=2 event=play content=m1",
+            "8630 user=3 event=play content=m1",
+            "13630 user=3 event=play content=m1",
+            "8330 user=2 event=play content=m2",
+            "15600 user=1 event=play content=m2"
+          ],
+          15
+        ],
+        "expected": [
+          [
+            "1",
+            3000,
+            1
+          ],
+          [
+            "1",
+            8000,
+            2
+          ],
+          [
+            "1",
+            8600,
+            2
+          ],
+          [
+            "1",
+            10600,
+            3
+          ],
+          [
+            "1",
+            15600,
+            4
+          ],
+          [
+            "2",
+            3000,
+            1
+          ],
+          [
+            "2",
+            8000,
+            2
+          ],
+          [
+            "2",
+            8330,
+            2
+          ],
+          [
+            "3",
+            3000,
+            1
+          ],
+          [
+            "3",
+            3600,
+            1
+          ],
+          [
+            "3",
+            8600,
+            2
+          ],
+          [
+            "3",
+            8630,
+            2
+          ],
+          [
+            "3",
+            13630,
+            3
+          ],
+          [
+            "3",
+            15630,
+            4
+          ],
+          [
+            "3",
+            15930,
+            4
+          ],
+          [
+            "3",
+            17930,
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            "1300 user=1 event=play content=m1",
+            "1900 user=1 event=play content=m3",
+            "1600 user=1 event=play content=m1",
+            "6630 user=2 event=play content=m2",
+            "6000 user=2",
+            "11900 user=1 event=play content=m1",
+            "6600 user=2 event=play content=m1",
+            "6900 user=1 event=play content=m1",
+            "8630 user=2 event=play content=m3"
+          ],
+          60
+        ],
+        "expected": [
+          [
+            "1",
+            1300,
+            1
+          ],
+          [
+            "1",
+            1600,
+            1
+          ],
+          [
+            "1",
+            1900,
+            1
+          ],
+          [
+            "1",
+            6900,
+            2
+          ],
+          [
+            "1",
+            11900,
+            3
+          ],
+          [
+            "2",
+            6600,
+            1
+          ],
+          [
+            "2",
+            6630,
+            1
+          ],
+          [
+            "2",
+            8630,
+            1
+          ]
+        ]
+      }
+    ]
+  }
+]

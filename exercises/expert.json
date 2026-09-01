@@ -1,0 +1,1081 @@
+[
+  {
+    "id": "expert-functional-closures",
+    "title": "Closures: Independent Accumulators",
+    "level": "expert",
+    "cluster": "Functional Foundations",
+    "topics": [
+      "closures",
+      "functional"
+    ],
+    "prompt": "Write `make_accumulator()` returning a function that adds its argument to a running total and returns the new total. Each call to `make_accumulator()` must start its own independent total (no shared state between accumulators). Then write `independent_totals(nums1, nums2)` that creates two separate accumulators, feeds `nums1` into the first and `nums2` into the second, and returns `[running_totals_1, running_totals_2]`.\n\nindependent_totals([1, 2, 3], [10, 20]) -> [[1, 3, 6], [10, 30]]",
+    "func_name": "independent_totals",
+    "starter_code": "def make_accumulator():\n    # return a function f(n) that adds n to a running total and\n    # returns the new total -- each call to make_accumulator() must\n    # start a fresh, independent total\n    ...\n\n\ndef independent_totals(nums1, nums2):\n    ...\n",
+    "hint": "`nonlocal` lets the inner function mutate a variable in the enclosing scope. The bug to avoid: using a variable outside make_accumulator (e.g. a global) would leak state between separate accumulators.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            10,
+            20
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            3,
+            6
+          ],
+          [
+            10,
+            30
+          ]
+        ]
+      },
+      {
+        "args": [
+          [],
+          []
+        ],
+        "expected": [
+          [],
+          []
+        ]
+      },
+      {
+        "args": [
+          [
+            5
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            5
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-functional-partial",
+    "title": "functools.partial: Pre-bound Multiplier",
+    "level": "expert",
+    "cluster": "Functional Foundations",
+    "topics": [
+      "functools",
+      "functional"
+    ],
+    "prompt": "Using `functools.partial`, write `make_multiplier(n)` that returns a callable which multiplies its argument by `n`. Then write `apply_multiplier(n, x)` that builds the multiplier and applies it to `x`.\n\napply_multiplier(2, 5) -> 10",
+    "func_name": "apply_multiplier",
+    "starter_code": "from functools import partial\nimport operator\n\n\ndef make_multiplier(n):\n    ...\n\n\ndef apply_multiplier(n, x):\n    ...\n",
+    "hint": "`partial(operator.mul, n)` pre-binds the first argument of `mul`, giving you a one-argument function back.",
+    "tests": [
+      {
+        "args": [
+          2,
+          5
+        ],
+        "expected": 10
+      },
+      {
+        "args": [
+          0,
+          100
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          -3,
+          4
+        ],
+        "expected": -12
+      }
+    ]
+  },
+  {
+    "id": "expert-functional-reduce",
+    "title": "functools.reduce: Product of a List",
+    "level": "expert",
+    "cluster": "Functional Foundations",
+    "topics": [
+      "functools",
+      "functional"
+    ],
+    "prompt": "Write `product_via_reduce(nums)` that returns the product of all numbers in `nums` using `functools.reduce` (not a loop). An empty list returns 1.\n\nproduct_via_reduce([1, 2, 3, 4]) -> 24",
+    "func_name": "product_via_reduce",
+    "starter_code": "def product_via_reduce(nums):\n    ...\n",
+    "hint": "`reduce(fn, iterable, initial)` folds the iterable into one value. The initial value of 1 is what makes the empty-list case correct.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 24
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            5
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          [
+            2,
+            -3
+          ]
+        ],
+        "expected": -6
+      }
+    ]
+  },
+  {
+    "id": "expert-decorators-count-calls",
+    "title": "Decorators: Counting Calls",
+    "level": "expert",
+    "cluster": "Decorators",
+    "topics": [
+      "decorators"
+    ],
+    "prompt": "Write a decorator `count_calls` that wraps a function and tracks how many times it has been called, exposed as `wrapper.calls`. Then write `call_n_times(n)` that decorates a no-op function with `@count_calls`, calls it `n` times, and returns the final call count.\n\ncall_n_times(0) -> 0",
+    "func_name": "call_n_times",
+    "starter_code": "import functools\n\n\ndef count_calls(func):\n    ...\n\n\ndef call_n_times(n):\n    @count_calls\n    def noop():\n        return None\n\n    for _ in range(n):\n        noop()\n    return noop.calls\n",
+    "hint": "Attach the counter to the wrapper function itself (`wrapper.calls = 0` right after defining it), and increment it inside the wrapper before calling through to the original function.",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "id": "expert-decorators-retry",
+    "title": "Decorators: Parameterized Retry",
+    "level": "expert",
+    "cluster": "Decorators",
+    "topics": [
+      "decorators"
+    ],
+    "prompt": "Write a parameterized decorator `retry(times)` that retries a failing function up to `times` attempts total, re-raising the last exception if every attempt fails. Then write `attempts_until_success(fail_count, times)`: it builds a function that raises `ValueError` for its first `fail_count` calls then succeeds, wraps it with `@retry(times=times)`, calls it once, and returns how many calls happened before success. If `fail_count + 1 > times`, the function never succeeds in the allotted attempts and the exception should propagate out of `attempts_until_success`.\n\nattempts_until_success(0, 3) -> 1",
+    "func_name": "attempts_until_success",
+    "starter_code": "def retry(times):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            ...\n        return wrapper\n    return decorator\n\n\ndef attempts_until_success(fail_count, times):\n    state = {\"calls\": 0}\n\n    @retry(times=times)\n    def flaky():\n        state[\"calls\"] += 1\n        if state[\"calls\"] <= fail_count:\n            raise ValueError(\"not yet\")\n        return \"ok\"\n\n    flaky()\n    return state[\"calls\"]\n",
+    "hint": "Loop up to `times` attempts, catching and remembering the exception each time; if the loop finishes without returning, re-raise the last exception you caught.",
+    "tests": [
+      {
+        "args": [
+          0,
+          3
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          2,
+          5
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          2,
+          2
+        ],
+        "expect_error": "ValueError"
+      }
+    ]
+  },
+  {
+    "id": "expert-decorators-backoff",
+    "title": "Decorators: Exponential Backoff",
+    "level": "expert",
+    "cluster": "Decorators",
+    "topics": [
+      "decorators",
+      "data-engineering"
+    ],
+    "prompt": "Write `retry_with_backoff(times, base_delay, sleep_fn)`: a parameterized decorator that retries a failing function up to `times` attempts, calling `sleep_fn(delay)` between attempts with `delay` doubling each time starting from `base_delay` (no sleep before the first attempt or after the final one). `sleep_fn` is injected so tests don't have to actually sleep -- in production you'd pass `time.sleep`, but here it just needs to be *called* with the right delay each time. Then write `backoff_delays(fail_count, base_delay)`: build a function that fails its first `fail_count` calls, wrap it with the decorator (passing a list's `.append` as `sleep_fn`) using enough attempts to eventually succeed, and return the list of delays that were used.\n\nbackoff_delays(3, 1) -> [1, 2, 4]",
+    "func_name": "backoff_delays",
+    "starter_code": "def retry_with_backoff(times, base_delay, sleep_fn):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            ...\n        return wrapper\n    return decorator\n\n\ndef backoff_delays(fail_count, base_delay):\n    delays = []\n\n    @retry_with_backoff(times=fail_count + 1, base_delay=base_delay, sleep_fn=delays.append)\n    def flaky():\n        if len(delays) < fail_count:\n            raise ValueError(\"not yet\")\n        return \"ok\"\n\n    flaky()\n    return delays\n",
+    "hint": "Don't sleep before the first attempt, and don't sleep after the final (last-chance) attempt -- only between attempts. Double the delay each time you do sleep.",
+    "tests": [
+      {
+        "args": [
+          3,
+          1
+        ],
+        "expected": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "args": [
+          1,
+          1
+        ],
+        "expected": [
+          1
+        ]
+      },
+      {
+        "args": [
+          0,
+          5
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          2,
+          10
+        ],
+        "expected": [
+          10,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-generators-lazy-fib",
+    "title": "Generators: Lazy Infinite Sequence",
+    "level": "expert",
+    "cluster": "Generators & Iteration",
+    "topics": [
+      "generators"
+    ],
+    "prompt": "Write `lazy_fib()` as a generator that yields the Fibonacci sequence forever (0, 1, 1, 2, 3, 5, ...) -- it must never terminate on its own, so it has to be consumed lazily. Then write `first_n_fib(n)` that returns the first `n` values as a list, using `itertools.islice`.\n\nfirst_n_fib(0) -> []",
+    "func_name": "first_n_fib",
+    "starter_code": "import itertools\n\n\ndef lazy_fib():\n    ...\n\n\ndef first_n_fib(n):\n    return list(itertools.islice(lazy_fib(), n))\n",
+    "hint": "`yield` inside a `while True` loop is what makes it infinite-but-lazy -- nothing runs until something (like `islice`) pulls values from it.",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "args": [
+          7
+        ],
+        "expected": [
+          0,
+          1,
+          1,
+          2,
+          3,
+          5,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-generators-chunked",
+    "title": "Generators: Chunking a Stream",
+    "level": "expert",
+    "cluster": "Generators & Iteration",
+    "topics": [
+      "generators",
+      "data-engineering"
+    ],
+    "prompt": "Write `chunked(iterable, size)` as a generator that yields successive lists of length `size` from `iterable`, with a final shorter chunk if the length isn't a multiple of `size`. This is the pattern you'd use to batch records for a bulk API call without loading everything into memory at once. Then write `chunked_list(items, size)` that returns `list(chunked(items, size))`.\n\nchunked_list([1, 2, 3, 4, 5], 2) -> [[1, 2], [3, 4], [5]]",
+    "func_name": "chunked_list",
+    "starter_code": "def chunked(iterable, size):\n    ...\n\n\ndef chunked_list(items, size):\n    return list(chunked(items, size))\n",
+    "hint": "Accumulate into a local list; yield and reset it once it hits `size`. Don't forget to yield a final partial chunk after the loop if anything's left.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          2
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      },
+      {
+        "args": [
+          [],
+          3
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          3
+        ],
+        "expected": [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          5
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-generators-itertools-pipeline",
+    "title": "itertools Pipeline: Flatten, Collapse, Limit",
+    "level": "expert",
+    "cluster": "Generators & Iteration",
+    "topics": [
+      "generators",
+      "itertools"
+    ],
+    "prompt": "Write `summarize(nested, limit)`: flatten `nested` (a list of lists) with `itertools.chain.from_iterable`, collapse consecutive equal values into `[value, count]` pairs with `itertools.groupby`, then take at most `limit` of those pairs with `itertools.islice`. Return the result as a list.\n\nsummarize([[1, 1, 2], [2, 3, 3, 3]], 10) -> [(1, 2), (2, 2), (3, 3)]",
+    "func_name": "summarize",
+    "starter_code": "from itertools import chain, groupby, islice\n\n\ndef summarize(nested, limit):\n    ...\n",
+    "hint": "`groupby` only collapses *consecutive* equal values -- that's why flattening first matters: [1,1,2],[2,3,3,3] flattened is 1,1,2,2,3,3,3, so the two 2's end up adjacent and collapse into one group.",
+    "tests": [
+      {
+        "args": [
+          [
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              2,
+              3,
+              3,
+              3
+            ]
+          ],
+          10
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              2,
+              3,
+              3,
+              3
+            ]
+          ],
+          2
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            []
+          ],
+          5
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "expert-generators-custom-iterator",
+    "title": "Custom Iterator Protocol",
+    "level": "expert",
+    "cluster": "Generators & Iteration",
+    "topics": [
+      "generators",
+      "dunder-methods"
+    ],
+    "prompt": "Implement the iterator protocol directly (without `yield`): write a class `Countdown(start)` with `__iter__` and `__next__` that counts down from `start` to `0` inclusive, then raises `StopIteration`. Then write `countdown_list(start)` that returns `list(Countdown(start))`.\n\ncountdown_list(3) -> [3, 2, 1, 0]",
+    "func_name": "countdown_list",
+    "starter_code": "class Countdown:\n    def __init__(self, start):\n        ...\n\n    def __iter__(self):\n        ...\n\n    def __next__(self):\n        ...\n\n\ndef countdown_list(start):\n    return list(Countdown(start))\n",
+    "hint": "`__iter__` just needs to return `self` since the object is its own iterator. `__next__` computes the next value and raises `StopIteration` (not `return`) when there's nothing left.",
+    "tests": [
+      {
+        "args": [
+          3
+        ],
+        "expected": [
+          3,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": [
+          0
+        ]
+      },
+      {
+        "args": [
+          -1
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "expert-context-managers-class",
+    "title": "Context Managers: Class-Based",
+    "level": "expert",
+    "cluster": "Context Managers",
+    "topics": [
+      "context-managers"
+    ],
+    "prompt": "Write a class `EventLog` usable as `with EventLog() as log:` that records `\"enter\"` on `__enter__`, `\"error\"` then `\"exit\"` on `__exit__` if the block raised, or just `\"exit\"` if it didn't -- and suppresses the exception either way. `self.events` should hold the list. Then write `run_block(should_raise)` that uses it and returns `log.events`.\n\nrun_block(False) -> ['enter', 'exit']",
+    "func_name": "run_block",
+    "starter_code": "class EventLog:\n    def __init__(self):\n        self.events = []\n\n    def __enter__(self):\n        ...\n\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        ...\n\n\ndef run_block(should_raise):\n    log = EventLog()\n    with log:\n        if should_raise:\n            raise ValueError(\"boom\")\n    return log.events\n",
+    "hint": "`__exit__` receives the exception info as its 3 arguments (all `None` if nothing went wrong); returning a truthy value from `__exit__` tells Python the exception has been handled and shouldn't propagate.",
+    "tests": [
+      {
+        "args": [
+          false
+        ],
+        "expected": [
+          "enter",
+          "exit"
+        ]
+      },
+      {
+        "args": [
+          true
+        ],
+        "expected": [
+          "enter",
+          "error",
+          "exit"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-context-managers-decorator",
+    "title": "Context Managers: @contextmanager",
+    "level": "expert",
+    "cluster": "Context Managers",
+    "topics": [
+      "context-managers",
+      "decorators"
+    ],
+    "prompt": "Write `logging_block(log)` as a generator-based context manager using `@contextlib.contextmanager`: append `\"start\"` to `log` before yielding, and append `\"end\"` after the block finishes (in a `finally`) -- and if the block raised, append `\"error\"` before re-raising. Then write `run_logged(should_raise)` that uses it and returns the log, swallowing the exception itself with a try/except around the `with`.\n\nrun_logged(False) -> ['start', 'end']",
+    "func_name": "run_logged",
+    "starter_code": "from contextlib import contextmanager\n\n\n@contextmanager\ndef logging_block(log):\n    ...\n\n\ndef run_logged(should_raise):\n    log = []\n    try:\n        with logging_block(log):\n            if should_raise:\n                raise ValueError(\"boom\")\n    except ValueError:\n        pass\n    return log\n",
+    "hint": "Everything before `yield` runs on entry, everything after runs on exit. Wrap the `yield` in try/except/finally to distinguish the error path from the always-runs cleanup path.",
+    "tests": [
+      {
+        "args": [
+          false
+        ],
+        "expected": [
+          "start",
+          "end"
+        ]
+      },
+      {
+        "args": [
+          true
+        ],
+        "expected": [
+          "start",
+          "error",
+          "end"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-oop-dunder-methods",
+    "title": "Operator Overloading with Dunder Methods",
+    "level": "expert",
+    "cluster": "OOP & Dunder Methods",
+    "topics": [
+      "dunder-methods",
+      "oop"
+    ],
+    "prompt": "Write a class `Vector(x, y)` supporting `+` (returns a new `Vector`), `==` (compares `x` and `y`), and a `__repr__` that returns `\"Vector(x, y)\"` (e.g. `\"Vector(4, 6)\"`). Then write `vector_ops(x1, y1, x2, y2)` that builds `v1 = Vector(x1, y1)` and `v2 = Vector(x2, y2)`, and returns `[str(v1 + v2), v1 == Vector(x1, y1), v1 == v2]`.\n\nvector_ops(1, 2, 3, 4) -> ['Vector(4, 6)', True, False]",
+    "func_name": "vector_ops",
+    "starter_code": "class Vector:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n\n    def __add__(self, other):\n        ...\n\n    def __eq__(self, other):\n        ...\n\n    def __repr__(self):\n        ...\n\n\ndef vector_ops(x1, y1, x2, y2):\n    v1, v2 = Vector(x1, y1), Vector(x2, y2)\n    return [str(v1 + v2), v1 == Vector(x1, y1), v1 == v2]\n",
+    "hint": "`str(obj)` falls back to `__repr__` if `__str__` isn't defined, so one method covers both here.",
+    "tests": [
+      {
+        "args": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "expected": [
+          "Vector(4, 6)",
+          true,
+          false
+        ]
+      },
+      {
+        "args": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "expected": [
+          "Vector(0, 0)",
+          true,
+          true
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-oop-property",
+    "title": "Validated Attributes with @property",
+    "level": "expert",
+    "cluster": "OOP & Dunder Methods",
+    "topics": [
+      "properties",
+      "oop"
+    ],
+    "prompt": "Write a class `Temperature(celsius=0)` with a `celsius` property whose setter raises `ValueError` if the value is below absolute zero (-273.15), and a read-only `fahrenheit` property computed from it. Then write `safe_set_celsius(value)` that constructs `Temperature(value)` and returns its `.fahrenheit`, or the string `\"invalid\"` if construction raised.\n\nsafe_set_celsius(0) -> 32.0",
+    "func_name": "safe_set_celsius",
+    "starter_code": "class Temperature:\n    def __init__(self, celsius=0):\n        self.celsius = celsius\n\n    @property\n    def celsius(self):\n        ...\n\n    @celsius.setter\n    def celsius(self, value):\n        ...\n\n    @property\n    def fahrenheit(self):\n        ...\n\n\ndef safe_set_celsius(value):\n    try:\n        return Temperature(value).fahrenheit\n    except ValueError:\n        return \"invalid\"\n",
+    "hint": "Store the real value under a different name (e.g. `self._celsius`) inside the setter -- the property name itself can't hold the value directly, that would recurse into the setter forever.",
+    "tests": [
+      {
+        "args": [
+          0
+        ],
+        "expected": 32.0
+      },
+      {
+        "args": [
+          100
+        ],
+        "expected": 212.0
+      },
+      {
+        "args": [
+          -40
+        ],
+        "expected": -40.0
+      },
+      {
+        "args": [
+          -300
+        ],
+        "expected": "invalid"
+      }
+    ]
+  },
+  {
+    "id": "expert-oop-dataclass",
+    "title": "@dataclass with Validation",
+    "level": "expert",
+    "cluster": "OOP & Dunder Methods",
+    "topics": [
+      "dataclasses",
+      "oop"
+    ],
+    "prompt": "Write a `@dataclass class Point` with fields `x` and `y`, using `__post_init__` to raise `ValueError` if either coordinate is negative. Then write `make_point(x, y)` that returns `[point.x, point.y]`, or the string `\"invalid\"` if construction raised.\n\nmake_point(3, 4) -> [3, 4]",
+    "func_name": "make_point",
+    "starter_code": "from dataclasses import dataclass\n\n\n@dataclass\nclass Point:\n    x: float\n    y: float\n\n    def __post_init__(self):\n        ...\n\n\ndef make_point(x, y):\n    try:\n        p = Point(x, y)\n        return [p.x, p.y]\n    except ValueError:\n        return \"invalid\"\n",
+    "hint": "`@dataclass` auto-generates `__init__`; `__post_init__` runs right after it, which is where validation that needs to inspect the assembled object goes.",
+    "tests": [
+      {
+        "args": [
+          3,
+          4
+        ],
+        "expected": [
+          3,
+          4
+        ]
+      },
+      {
+        "args": [
+          -1,
+          2
+        ],
+        "expected": "invalid"
+      },
+      {
+        "args": [
+          0,
+          0
+        ],
+        "expected": [
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-exceptions-hierarchy",
+    "title": "Custom Exception Hierarchy",
+    "level": "expert",
+    "cluster": "Exceptions",
+    "topics": [
+      "exceptions"
+    ],
+    "prompt": "Write an exception hierarchy: a base `AgeError(Exception)`, and two subclasses `NegativeAgeError(AgeError)` and `UnrealisticAgeError(AgeError)`. Then write `validate_age(age)`: raise `NegativeAgeError` if `age < 0`, `UnrealisticAgeError` if `age > 150`, otherwise return `age` unchanged.\n\nvalidate_age(30) -> 30",
+    "func_name": "validate_age",
+    "starter_code": "class AgeError(Exception):\n    pass\n\n\nclass NegativeAgeError(AgeError):\n    pass\n\n\nclass UnrealisticAgeError(AgeError):\n    pass\n\n\ndef validate_age(age):\n    ...\n",
+    "hint": "Each specific exception must actually subclass `AgeError` -- that's what lets calling code catch `AgeError` once to handle every age problem, or catch a specific subclass to handle just one case.",
+    "tests": [
+      {
+        "args": [
+          30
+        ],
+        "expected": 30
+      },
+      {
+        "args": [
+          0
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          -5
+        ],
+        "expect_error": "NegativeAgeError"
+      },
+      {
+        "args": [
+          -5
+        ],
+        "expect_error": "AgeError"
+      },
+      {
+        "args": [
+          200
+        ],
+        "expect_error": "UnrealisticAgeError"
+      },
+      {
+        "args": [
+          200
+        ],
+        "expect_error": "AgeError"
+      }
+    ]
+  },
+  {
+    "id": "expert-caching-lru-cache",
+    "title": "functools.lru_cache in Practice",
+    "level": "expert",
+    "cluster": "Caching",
+    "topics": [
+      "functools",
+      "caching"
+    ],
+    "prompt": "Write `expensive(n)` decorated with `@functools.lru_cache(maxsize=None)`, counting real (non-cached) calls on `expensive.calls`, and returning `n * n`. Then write `call_and_count(values)` that calls `expensive` on each value in `values` in order and returns `[results, expensive.calls]` -- repeated arguments should hit the cache instead of recomputing.\n\ncall_and_count([2, 3, 2, 3, 2]) -> [[4, 9, 4, 9, 4], 2]",
+    "func_name": "call_and_count",
+    "starter_code": "from functools import lru_cache\n\n\n@lru_cache(maxsize=None)\ndef expensive(n):\n    ...\n\n\nexpensive.calls = 0\n\n\ndef call_and_count(values):\n    results = [expensive(v) for v in values]\n    return [results, expensive.calls]\n",
+    "hint": "`lru_cache` caches by argument value -- the body only actually runs on the first call for a given `n`; every repeat returns the cached result without incrementing `.calls`.",
+    "tests": [
+      {
+        "args": [
+          [
+            2,
+            3,
+            2,
+            3,
+            2
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            9,
+            4,
+            9,
+            4
+          ],
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            1,
+            1
+          ],
+          3
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": [
+          [],
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-patterns-singleton",
+    "title": "Design Patterns: Singleton",
+    "level": "expert",
+    "cluster": "Design Patterns",
+    "topics": [
+      "design-patterns",
+      "oop"
+    ],
+    "prompt": "Write a class `Config` that only ever allows one instance to exist -- every call to `Config()` returns the same object (override `__new__`). Then write `singleton_check(value)`: create two `Config()` references `a` and `b`, set `a.value = value`, and return `[a is b, b.value == value]`.\n\nsingleton_check(42) -> [True, True]",
+    "func_name": "singleton_check",
+    "starter_code": "class Config:\n    _instance = None\n\n    def __new__(cls):\n        ...\n\n\ndef singleton_check(value):\n    a = Config()\n    b = Config()\n    a.value = value\n    return [a is b, b.value == value]\n",
+    "hint": "`__new__` runs before `__init__` and decides which object gets returned -- cache the first instance on the class itself and hand it back every time.",
+    "tests": [
+      {
+        "args": [
+          42
+        ],
+        "expected": [
+          true,
+          true
+        ]
+      },
+      {
+        "args": [
+          "x"
+        ],
+        "expected": [
+          true,
+          true
+        ]
+      }
+    ]
+  },
+  {
+    "id": "expert-patterns-factory",
+    "title": "Design Patterns: Factory",
+    "level": "expert",
+    "cluster": "Design Patterns",
+    "topics": [
+      "design-patterns",
+      "oop"
+    ],
+    "prompt": "Write `Circle(radius)` and `Rectangle(width, height)` classes, each with an `.area()` method. Write a factory function `create_shape(kind, *params)` that instantiates the right class based on the string `kind` (`\"circle\"` or `\"rectangle\"`), raising `ValueError` for anything else. Then write `shape_area(kind, params)` that returns `round(create_shape(kind, *params).area(), 2)`.\n\nshape_area('circle', [2]) -> 12.57",
+    "func_name": "shape_area",
+    "starter_code": "import math\n\n\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        ...\n\n\nclass Rectangle:\n    def __init__(self, width, height):\n        self.width, self.height = width, height\n\n    def area(self):\n        ...\n\n\ndef create_shape(kind, *params):\n    ...\n\n\ndef shape_area(kind, params):\n    return round(create_shape(kind, *params).area(), 2)\n",
+    "hint": "The factory function is the only place that needs to know about every concrete class -- callers just pass a string and never construct `Circle` or `Rectangle` directly.",
+    "tests": [
+      {
+        "args": [
+          "circle",
+          [
+            2
+          ]
+        ],
+        "expected": 12.57
+      },
+      {
+        "args": [
+          "rectangle",
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": 12
+      },
+      {
+        "args": [
+          "circle",
+          [
+            1
+          ]
+        ],
+        "expected": 3.14
+      },
+      {
+        "args": [
+          "triangle",
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expect_error": "ValueError"
+      }
+    ]
+  },
+  {
+    "id": "expert-patterns-strategy",
+    "title": "Design Patterns: Strategy",
+    "level": "expert",
+    "cluster": "Design Patterns",
+    "topics": [
+      "design-patterns",
+      "oop"
+    ],
+    "prompt": "Write three functions `strategy_sum`, `strategy_max`, `strategy_mean`, each taking a list and returning a number. Put them in a dict `STRATEGIES` keyed by `\"sum\"`, `\"max\"`, `\"mean\"`. Write `compute(strategy_name, data)` that looks up and calls the right strategy, letting `KeyError` propagate for an unknown name.\n\ncompute('sum', [1, 2, 3]) -> 6",
+    "func_name": "compute",
+    "starter_code": "def strategy_sum(data):\n    ...\n\n\ndef strategy_max(data):\n    ...\n\n\ndef strategy_mean(data):\n    ...\n\n\nSTRATEGIES = {\"sum\": strategy_sum, \"max\": strategy_max, \"mean\": strategy_mean}\n\n\ndef compute(strategy_name, data):\n    return STRATEGIES[strategy_name](data)\n",
+    "hint": "The whole point of Strategy is that `compute` never has an if/elif chain of algorithms -- swapping behavior is just picking a different dict entry.",
+    "tests": [
+      {
+        "args": [
+          "sum",
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          "max",
+          [
+            1,
+            5,
+            3
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          "mean",
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "expected": 4.0
+      },
+      {
+        "args": [
+          "bogus",
+          [
+            1
+          ]
+        ],
+        "expect_error": "KeyError"
+      }
+    ]
+  },
+  {
+    "id": "expert-patterns-observer",
+    "title": "Design Patterns: Observer",
+    "level": "expert",
+    "cluster": "Design Patterns",
+    "topics": [
+      "design-patterns",
+      "oop"
+    ],
+    "prompt": "Write a class `Subject` with `subscribe(observer)` (adds a callable to an internal list) and `notify(event)` (calls every subscribed observer with `event`, in subscription order). Then write `notify_all(events)`: create a `Subject`, subscribe two observers that append `f\"A:{event}\"` and `f\"B:{event}\"` respectively to a shared `received` list, call `notify` for each item in `events` in order, and return `received`.\n\nnotify_all(['x', 'y']) -> ['A:x', 'B:x', 'A:y', 'B:y']",
+    "func_name": "notify_all",
+    "starter_code": "class Subject:\n    def __init__(self):\n        self._observers = []\n\n    def subscribe(self, observer):\n        ...\n\n    def notify(self, event):\n        ...\n\n\ndef notify_all(events):\n    received = []\n    subject = Subject()\n    subject.subscribe(lambda e: received.append(f\"A:{e}\"))\n    subject.subscribe(lambda e: received.append(f\"B:{e}\"))\n    for e in events:\n        subject.notify(e)\n    return received\n",
+    "hint": "`notify` shouldn't know or care what its observers do -- it just calls each one in the order they subscribed.",
+    "tests": [
+      {
+        "args": [
+          [
+            "x",
+            "y"
+          ]
+        ],
+        "expected": [
+          "A:x",
+          "B:x",
+          "A:y",
+          "B:y"
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "expert-capstone-mutable-default",
+    "title": "Capstone: Fix the Mutable Default Argument",
+    "level": "expert",
+    "cluster": "Capstone",
+    "topics": [
+      "anti-patterns",
+      "debugging"
+    ],
+    "prompt": "This function has a classic Python bug:\n\n    def add_item(item, target_list=[]):\n        target_list.append(item)\n        return target_list\n\nThe default `[]` is created ONCE when the function is defined, not on each call -- so separate calls that don't pass `target_list` explicitly all share and mutate the same list. Fix `add_item` so each call that omits `target_list` gets a fresh, independent list. Then write `add_items_independently(batches)` that calls `add_item(item)` once per item in `batches` (never passing `target_list`) and returns the list of each call's result.\n\nadd_items_independently([1, 2, 3]) -> [[1], [2], [3]]",
+    "func_name": "add_items_independently",
+    "starter_code": "def add_item(item, target_list=None):\n    ...\n\n\ndef add_items_independently(batches):\n    return [add_item(item) for item in batches]\n",
+    "hint": "The standard fix: default to `None`, then inside the function body do `if target_list is None: target_list = []` -- that creates a brand-new list on every call that needs one.",
+    "tests": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      },
+      {
+        "args": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "expected": [
+          [
+            "a"
+          ],
+          [
+            "b"
+          ]
+        ]
+      }
+    ]
+  }
+]
