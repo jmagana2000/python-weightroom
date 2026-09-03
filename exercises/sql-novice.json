@@ -142,5 +142,5189 @@
         ]
       }
     ]
+  },
+  {
+    "id": "sql-novice-select-filtering-01",
+    "title": "Customers Without a Phone Number",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "is-null",
+      "where"
+    ],
+    "prompt": "The support team keeps a customers table with columns customer_id (integer), name (text), email (text), and phone (text, which is left blank/unset for customers who never provided one). Return the customer_id and name of every customer who has no phone number on file, ordered by customer_id ascending.",
+    "hint": "A missing phone number is stored as NULL, and NULL values need the IS NULL comparison rather than an equality check.",
+    "schema_sql": "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, name TEXT, email TEXT, phone TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice','alice@x.com','555-1000');INSERT INTO customers VALUES (2,'Bob','bob@x.com',NULL);INSERT INTO customers VALUES (3,'Carol','carol@x.com','555-2000');INSERT INTO customers VALUES (4,'Dan','dan@x.com',NULL);",
+        "expected": [
+          [
+            2,
+            "Bob"
+          ],
+          [
+            4,
+            "Dan"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Eve','eve@x.com','555-3000');INSERT INTO customers VALUES (2,'Frank','frank@x.com','555-4000');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Gina','gina@x.com',NULL);INSERT INTO customers VALUES (2,'Hank','hank@x.com','');INSERT INTO customers VALUES (3,'Ivy','ivy@x.com',NULL);",
+        "expected": [
+          [
+            1,
+            "Gina"
+          ],
+          [
+            3,
+            "Ivy"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-02",
+    "title": "Mid-Range Product Prices",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "between",
+      "where"
+    ],
+    "prompt": "A products table has columns product_id (integer), name (text), and price (a real number in dollars). Return the product_id and name of every product priced between $20 and $50, inclusive of both endpoints, ordered by price from lowest to highest.",
+    "hint": "BETWEEN lets you express an inclusive range check in one condition instead of two comparisons.",
+    "schema_sql": "CREATE TABLE products (product_id INTEGER PRIMARY KEY, name TEXT, price REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Widget',19.99);INSERT INTO products VALUES (2,'Gadget',20.00);INSERT INTO products VALUES (3,'Gizmo',35.50);INSERT INTO products VALUES (4,'Doohickey',50.00);INSERT INTO products VALUES (5,'Thingamajig',50.01);",
+        "expected": [
+          [
+            2,
+            "Gadget"
+          ],
+          [
+            3,
+            "Gizmo"
+          ],
+          [
+            4,
+            "Doohickey"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Cheap',5.00);INSERT INTO products VALUES (2,'Pricey',99.99);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'A',20.00);INSERT INTO products VALUES (2,'B',30.00);INSERT INTO products VALUES (3,'C',49.99);",
+        "expected": [
+          [
+            1,
+            "A"
+          ],
+          [
+            2,
+            "B"
+          ],
+          [
+            3,
+            "C"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-03",
+    "title": "Orders from Selected States",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "in-operator",
+      "where"
+    ],
+    "prompt": "An orders table has columns order_id (integer), customer_name (text), state (a two-letter text code), and total (a real number). A regional carrier handles shipments to California, Oregon, and Washington only. Return the order_id and customer_name of every order shipped to one of those three states, ordered by order_id ascending.",
+    "hint": "The IN operator checks membership in a list of values without chaining several OR comparisons.",
+    "schema_sql": "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_name TEXT, state TEXT, total REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Alice','CA',100);INSERT INTO orders VALUES (2,'Bob','TX',50);INSERT INTO orders VALUES (3,'Carol','OR',75);INSERT INTO orders VALUES (4,'Dan','WA',200);INSERT INTO orders VALUES (5,'Eve','NY',30);",
+        "expected": [
+          [
+            1,
+            "Alice"
+          ],
+          [
+            3,
+            "Carol"
+          ],
+          [
+            4,
+            "Dan"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'A','TX',10);INSERT INTO orders VALUES (2,'B','NY',20);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Only','WA',999);",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-04",
+    "title": "Gmail Subscribers",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "like",
+      "wildcard"
+    ],
+    "prompt": "A subscribers table has columns subscriber_id (integer), name (text), and email (text). Marketing wants to target subscribers whose email address is hosted directly at gmail.com. Return the subscriber_id and email of every subscriber whose email address ends with \"@gmail.com\", ordered by subscriber_id ascending.",
+    "hint": "LIKE with a leading % wildcard matches text at the end of a string, so anchor the pattern with the @ symbol to avoid matching look-alike domains.",
+    "schema_sql": "CREATE TABLE subscribers (subscriber_id INTEGER PRIMARY KEY, name TEXT, email TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO subscribers VALUES (1,'Alice','alice@gmail.com');INSERT INTO subscribers VALUES (2,'Bob','bob@yahoo.com');INSERT INTO subscribers VALUES (3,'Carol','carol@notgmail.com');INSERT INTO subscribers VALUES (4,'Dan','dan@gmail.com');",
+        "expected": [
+          [
+            1,
+            "alice@gmail.com"
+          ],
+          [
+            4,
+            "dan@gmail.com"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO subscribers VALUES (1,'A','a@yahoo.com');INSERT INTO subscribers VALUES (2,'B','b@hotmail.com');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO subscribers VALUES (1,'Only','only@gmail.com');INSERT INTO subscribers VALUES (2,'Sub','sub@mail.gmail.com');",
+        "expected": [
+          [
+            1,
+            "only@gmail.com"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-05",
+    "title": "Books From the 1990s",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "between",
+      "filtering"
+    ],
+    "prompt": "A books table has columns book_id (integer), title (text), and published_year (integer). Return the book_id and title of every book published between 1990 and 1999, inclusive, ordered by published_year ascending.",
+    "hint": "BETWEEN works on integer years just as well as on prices, and both endpoints you give it are included.",
+    "schema_sql": "CREATE TABLE books (book_id INTEGER PRIMARY KEY, title TEXT, published_year INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'A',1989);INSERT INTO books VALUES (2,'B',1990);INSERT INTO books VALUES (3,'C',1995);INSERT INTO books VALUES (4,'D',1999);INSERT INTO books VALUES (5,'E',2000);",
+        "expected": [
+          [
+            2,
+            "B"
+          ],
+          [
+            3,
+            "C"
+          ],
+          [
+            4,
+            "D"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'X',1985);INSERT INTO books VALUES (2,'Y',2005);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'Only',1999);",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-06",
+    "title": "Unassigned Open Tickets",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "is-null",
+      "and"
+    ],
+    "prompt": "A tickets table has columns ticket_id (integer), subject (text), status (text, e.g. 'open' or 'closed'), and assigned_agent (text, left blank/unset when nobody has claimed the ticket yet). Return the ticket_id and subject of every ticket that is still open AND has no agent assigned, ordered by ticket_id ascending.",
+    "hint": "Combine an equality check on status with an IS NULL check on assigned_agent using AND.",
+    "schema_sql": "CREATE TABLE tickets (ticket_id INTEGER PRIMARY KEY, subject TEXT, status TEXT, assigned_agent TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'Login issue','open',NULL);INSERT INTO tickets VALUES (2,'Billing question','open','Sam');INSERT INTO tickets VALUES (3,'Password reset','closed',NULL);INSERT INTO tickets VALUES (4,'Cannot log in','open',NULL);",
+        "expected": [
+          [
+            1,
+            "Login issue"
+          ],
+          [
+            4,
+            "Cannot log in"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'A','open','Sam');INSERT INTO tickets VALUES (2,'B','closed',NULL);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'Only open unassigned','open',NULL);INSERT INTO tickets VALUES (2,'Assigned open','open','Pat');",
+        "expected": [
+          [
+            1,
+            "Only open unassigned"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-07",
+    "title": "Usernames Starting With A",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "like",
+      "wildcard"
+    ],
+    "prompt": "A users table has columns user_id (integer) and username (text). Return the user_id and username of every user whose username starts with the letter \"a\", ordered by user_id ascending.",
+    "hint": "A % wildcard placed after a fixed prefix in a LIKE pattern matches anything that follows that prefix.",
+    "schema_sql": "CREATE TABLE users (user_id INTEGER PRIMARY KEY, username TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'alice');INSERT INTO users VALUES (2,'bob');INSERT INTO users VALUES (3,'Aaron');INSERT INTO users VALUES (4,'anna');INSERT INTO users VALUES (5,'Zach');",
+        "expected": [
+          [
+            1,
+            "alice"
+          ],
+          [
+            3,
+            "Aaron"
+          ],
+          [
+            4,
+            "anna"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'bob');INSERT INTO users VALUES (2,'carl');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'banana');INSERT INTO users VALUES (2,'apple');",
+        "expected": [
+          [
+            2,
+            "apple"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-08",
+    "title": "Delayed Flights from Hub Airports",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "in-operator",
+      "and",
+      "comparison"
+    ],
+    "prompt": "A flights table has columns flight_id (integer), origin (a three-letter airport code, text), and delay_minutes (integer). Operations wants to review flights that both departed from one of the three hub airports \"JFK\", \"ORD\", or \"DFW\" and were delayed more than 30 minutes. Return flight_id, origin, and delay_minutes for those flights, ordered by delay_minutes from highest to lowest.",
+    "hint": "Combine an IN membership check on origin with a strict greater-than comparison on delay_minutes using AND.",
+    "schema_sql": "CREATE TABLE flights (flight_id INTEGER PRIMARY KEY, origin TEXT, delay_minutes INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO flights VALUES (1,'JFK',45);INSERT INTO flights VALUES (2,'LAX',60);INSERT INTO flights VALUES (3,'ORD',20);INSERT INTO flights VALUES (4,'DFW',90);INSERT INTO flights VALUES (5,'ORD',31);",
+        "expected": [
+          [
+            4,
+            "DFW",
+            90
+          ],
+          [
+            1,
+            "JFK",
+            45
+          ],
+          [
+            5,
+            "ORD",
+            31
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO flights VALUES (1,'JFK',10);INSERT INTO flights VALUES (2,'ORD',5);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO flights VALUES (1,'DFW',30);INSERT INTO flights VALUES (2,'DFW',31);",
+        "expected": [
+          [
+            2,
+            "DFW",
+            31
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-09",
+    "title": "Products Needing Attention",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "or",
+      "where"
+    ],
+    "prompt": "A products table has columns product_id (integer), name (text), in_stock (integer, 1 if any units are available and 0 if none are), and discontinued (integer, 1 if the product has been discontinued and 0 otherwise). Warehouse staff want a list of products needing attention: those that are out of stock or have been discontinued (or both). Return the product_id and name of every such product, ordered by product_id ascending.",
+    "hint": "OR returns a row when at least one of the two conditions is true, so a product only needs to fail one check to qualify.",
+    "schema_sql": "CREATE TABLE products (product_id INTEGER PRIMARY KEY, name TEXT, in_stock INTEGER, discontinued INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'A',0,0);INSERT INTO products VALUES (2,'B',1,0);INSERT INTO products VALUES (3,'C',1,1);INSERT INTO products VALUES (4,'D',0,1);INSERT INTO products VALUES (5,'E',1,0);",
+        "expected": [
+          [
+            1,
+            "A"
+          ],
+          [
+            3,
+            "C"
+          ],
+          [
+            4,
+            "D"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'X',1,0);INSERT INTO products VALUES (2,'Y',1,0);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Only',0,1);",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-10",
+    "title": "Employees Outside Sales and Marketing",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "not-in",
+      "where"
+    ],
+    "prompt": "An employees table has columns employee_id (integer), name (text), and department (text, left blank/unset for a few employees not yet assigned to a department). HR needs a roster of everyone who does not work in Sales or Marketing. Return the employee_id and name of every employee whose department is neither \"Sales\" nor \"Marketing\", ordered by employee_id ascending. An employee with no department on file should not appear on this roster.",
+    "hint": "NOT IN excludes rows matching any value in the list, but remember that an unset (NULL) department will not satisfy the condition either way.",
+    "schema_sql": "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, name TEXT, department TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Alice','Sales');INSERT INTO employees VALUES (2,'Bob','Engineering');INSERT INTO employees VALUES (3,'Carol','Marketing');INSERT INTO employees VALUES (4,'Dan','HR');INSERT INTO employees VALUES (5,'Eve','Engineering');",
+        "expected": [
+          [
+            2,
+            "Bob"
+          ],
+          [
+            4,
+            "Dan"
+          ],
+          [
+            5,
+            "Eve"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'A','Sales');INSERT INTO employees VALUES (2,'B','Marketing');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Only','Finance');INSERT INTO employees VALUES (2,'Unknown',NULL);",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-11",
+    "title": "Extreme Movie Ratings",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "not-between",
+      "comparison"
+    ],
+    "prompt": "A movies table has columns movie_id (integer), title (text), and rating (a real number on a 0-to-10 scale, left blank/unset for a few movies that have not yet been rated). The review team wants to spot outliers: movies that are either poorly rated or highly rated, meaning their rating falls outside the middle range of 4 to 8, inclusive. Return the movie_id and title of every such movie, ordered by rating ascending. An unrated movie should not appear in the results.",
+    "hint": "NOT BETWEEN excludes the inclusive middle range, leaving only ratings strictly below the low bound or strictly above the high bound.",
+    "schema_sql": "CREATE TABLE movies (movie_id INTEGER PRIMARY KEY, title TEXT, rating REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'A',2.5);INSERT INTO movies VALUES (2,'B',5.0);INSERT INTO movies VALUES (3,'C',9.0);INSERT INTO movies VALUES (4,'D',4.0);INSERT INTO movies VALUES (5,'E',8.0);INSERT INTO movies VALUES (6,'F',8.1);",
+        "expected": [
+          [
+            1,
+            "A"
+          ],
+          [
+            6,
+            "F"
+          ],
+          [
+            3,
+            "C"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'X',4);INSERT INTO movies VALUES (2,'Y',6);INSERT INTO movies VALUES (3,'Z',8);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'Only',10.0);INSERT INTO movies VALUES (2,'Unknown',NULL);",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-select-filtering-12",
+    "title": "High-Priority Patients Without Follow-Up",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "is-null",
+      "in-operator",
+      "and"
+    ],
+    "prompt": "A patients table has columns patient_id (integer), name (text), priority (text, e.g. 'low', 'high', or 'urgent'), and followup_date (text, left blank/unset when no follow-up has been scheduled yet). The clinic needs to call every patient marked \"high\" or \"urgent\" priority who does not yet have a follow-up date scheduled. Return the patient_id and name of every such patient, ordered by patient_id ascending.",
+    "hint": "Combine an IN membership check on priority with an IS NULL check on followup_date using AND.",
+    "schema_sql": "CREATE TABLE patients (patient_id INTEGER PRIMARY KEY, name TEXT, priority TEXT, followup_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'Alice','high',NULL);INSERT INTO patients VALUES (2,'Bob','low',NULL);INSERT INTO patients VALUES (3,'Carol','urgent','2026-01-05');INSERT INTO patients VALUES (4,'Dan','urgent',NULL);INSERT INTO patients VALUES (5,'Eve','high','2026-02-01');",
+        "expected": [
+          [
+            1,
+            "Alice"
+          ],
+          [
+            4,
+            "Dan"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'A','low',NULL);INSERT INTO patients VALUES (2,'B','high','2026-01-01');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'Only','urgent',NULL);INSERT INTO patients VALUES (2,'Scheduled','high','2026-03-01');",
+        "expected": [
+          [
+            1,
+            "Only"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-01",
+    "title": "Top Three Bestselling Products",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "limit",
+      "tie-breaking",
+      "top-n"
+    ],
+    "prompt": "A store tracks each product it sells in a table called products, with columns id, name, and units_sold. Write a query that returns the name and units_sold of the three products with the highest units_sold, ordered from most units sold to fewest. If two products have the same units_sold, break the tie by ordering their names alphabetically.",
+    "hint": "Sort the whole table by units_sold before cutting it down to the first few rows.",
+    "schema_sql": "\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    units_sold INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Widget',120),(2,'Gadget',95),(3,'Gizmo',150),(4,'Doohickey',60),(5,'Thingamajig',80);",
+        "expected": [
+          [
+            "Gizmo",
+            150
+          ],
+          [
+            "Widget",
+            120
+          ],
+          [
+            "Gadget",
+            95
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Alpha',100),(2,'Beta',100),(3,'Charlie',90),(4,'Delta',80);",
+        "expected": [
+          [
+            "Alpha",
+            100
+          ],
+          [
+            "Beta",
+            100
+          ],
+          [
+            "Charlie",
+            90
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Solo',10),(2,'Duet',20);",
+        "expected": [
+          [
+            "Duet",
+            20
+          ],
+          [
+            "Solo",
+            10
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-02",
+    "title": "Second-Highest Priced Item",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "offset",
+      "limit",
+      "nth-highest"
+    ],
+    "prompt": "A catalog table called items has columns id, name, and price. Write a query that returns the name and price, as a single row, of the item that appears second when every item is sorted from most expensive to least expensive, breaking ties in price alphabetically by name. If the table has fewer than two items, return no rows.",
+    "hint": "Order the rows by price, then use LIMIT and OFFSET together to skip past the first row.",
+    "schema_sql": "\nCREATE TABLE items (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Hammer',25.0),(2,'Wrench',40.0),(3,'Drill',60.0),(4,'Saw',15.0);",
+        "expected": [
+          [
+            "Wrench",
+            40.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Anvil',100.0),(2,'Bolt',100.0),(3,'Chisel',50.0);",
+        "expected": [
+          [
+            "Bolt",
+            100.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Lonely',9.99);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-03",
+    "title": "Three Most Recently Hired Employees",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "limit",
+      "dates",
+      "tie-breaking"
+    ],
+    "prompt": "An employees table has columns id, name, and hire_date (stored as text in YYYY-MM-DD format). Write a query that returns the name and hire_date of the three employees who were hired most recently, ordered from most recently hired to least recently. Break ties in hire_date alphabetically by name.",
+    "hint": "Text dates in YYYY-MM-DD format sort correctly with a plain ORDER BY on the column.",
+    "schema_sql": "\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    hire_date TEXT NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Ana','2020-01-15'),(2,'Ben','2022-06-01'),(3,'Cory','2019-03-20'),(4,'Dee','2023-11-05'),(5,'Eli','2021-08-10');",
+        "expected": [
+          [
+            "Dee",
+            "2023-11-05"
+          ],
+          [
+            "Ben",
+            "2022-06-01"
+          ],
+          [
+            "Eli",
+            "2021-08-10"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Zara','2022-01-01'),(2,'Amir','2022-01-01'),(3,'Mona','2021-05-05'),(4,'Ivy','2020-02-02');",
+        "expected": [
+          [
+            "Amir",
+            "2022-01-01"
+          ],
+          [
+            "Zara",
+            "2022-01-01"
+          ],
+          [
+            "Mona",
+            "2021-05-05"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Solo','2020-01-01'),(2,'Duo','2021-01-01');",
+        "expected": [
+          [
+            "Duo",
+            "2021-01-01"
+          ],
+          [
+            "Solo",
+            "2020-01-01"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-04",
+    "title": "Earliest Three Registered Users",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-asc",
+      "limit",
+      "dates",
+      "tie-breaking"
+    ],
+    "prompt": "A users table has columns id, username, and signup_date (text, YYYY-MM-DD). Write a query that returns the username and signup_date of the three earliest-registered users, ordered from earliest to latest signup. Break ties in signup_date alphabetically by username.",
+    "hint": "Sorting ascending puts the smallest (earliest) values first, so LIMIT can grab them directly.",
+    "schema_sql": "\nCREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    username TEXT NOT NULL,\n    signup_date TEXT NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'kate','2021-05-01'),(2,'liu','2019-02-10'),(3,'moe','2020-07-15'),(4,'nia','2022-01-01'),(5,'omar','2018-11-30');",
+        "expected": [
+          [
+            "omar",
+            "2018-11-30"
+          ],
+          [
+            "liu",
+            "2019-02-10"
+          ],
+          [
+            "moe",
+            "2020-07-15"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'zed','2020-01-01'),(2,'abe','2020-01-01'),(3,'mia','2020-06-06'),(4,'raj','2021-01-01');",
+        "expected": [
+          [
+            "abe",
+            "2020-01-01"
+          ],
+          [
+            "zed",
+            "2020-01-01"
+          ],
+          [
+            "mia",
+            "2020-06-06"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'only','2020-01-01');",
+        "expected": [
+          [
+            "only",
+            "2020-01-01"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-05",
+    "title": "Lowest Two Test Scores",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-asc",
+      "limit",
+      "bottom-n",
+      "tie-breaking"
+    ],
+    "prompt": "A students table has columns id, name, and score (a test score out of 100). Write a query that returns the name and score of the two students with the lowest scores, ordered from lowest to highest. Break ties in score alphabetically by name.",
+    "hint": "The lowest values come first when you sort ascending, so LIMIT can take them straight off the top.",
+    "schema_sql": "\nCREATE TABLE students (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    score INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Tom',75),(2,'Sam',60),(3,'Ray',45),(4,'Jan',90),(5,'Wes',30);",
+        "expected": [
+          [
+            "Wes",
+            30
+          ],
+          [
+            "Ray",
+            45
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Beth',50),(2,'Andy',50),(3,'Cara',70);",
+        "expected": [
+          [
+            "Andy",
+            50
+          ],
+          [
+            "Beth",
+            50
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Solo',88);",
+        "expected": [
+          [
+            "Solo",
+            88
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-06",
+    "title": "Second Page of the Customer Directory",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-asc",
+      "limit",
+      "offset",
+      "pagination"
+    ],
+    "prompt": "A customers table has columns id and name. The directory app displays customers in alphabetical order by name, five per page. Write a query that returns the name column for the second page of results (the customers ranked 6th through 10th alphabetically), in alphabetical order.",
+    "hint": "OFFSET lets you skip the rows that belong to earlier pages before LIMIT takes the current page.",
+    "schema_sql": "\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Aaron'),(2,'Beth'),(3,'Carl'),(4,'Dana'),(5,'Evan'),(6,'Faye'),(7,'Gus'),(8,'Hana'),(9,'Ivan'),(10,'Jill');",
+        "expected": [
+          [
+            "Faye"
+          ],
+          [
+            "Gus"
+          ],
+          [
+            "Hana"
+          ],
+          [
+            "Ivan"
+          ],
+          [
+            "Jill"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Amy'),(2,'Bob'),(3,'Cid'),(4,'Dee'),(5,'Eve'),(6,'Fox'),(7,'Gia'),(8,'Hal');",
+        "expected": [
+          [
+            "Fox"
+          ],
+          [
+            "Gia"
+          ],
+          [
+            "Hal"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Ann'),(2,'Bea'),(3,'Cid');",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-07",
+    "title": "Longest-Serving Board Members",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-asc",
+      "limit",
+      "dates",
+      "top-n"
+    ],
+    "prompt": "A board_members table has columns id, name, and term_start (text, YYYY-MM-DD, the date their board term began). Write a query that returns the name and term_start of the three longest-serving board members (the ones whose terms started earliest), ordered from earliest term_start to most recent. Break ties in term_start alphabetically by name.",
+    "hint": "The earliest dates are the smallest values, so sorting ascending puts the longest-serving members first.",
+    "schema_sql": "\nCREATE TABLE board_members (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    term_start TEXT NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO board_members VALUES (1,'Pat','2010-01-01'),(2,'Lee','2005-06-15'),(3,'Sam','2015-03-10'),(4,'Kim','2000-09-09'),(5,'Ari','2018-07-07');",
+        "expected": [
+          [
+            "Kim",
+            "2000-09-09"
+          ],
+          [
+            "Lee",
+            "2005-06-15"
+          ],
+          [
+            "Pat",
+            "2010-01-01"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO board_members VALUES (1,'Zoe','1999-01-01'),(2,'Abe','1999-01-01'),(3,'Mo','2003-05-05'),(4,'Ray','2010-01-01');",
+        "expected": [
+          [
+            "Abe",
+            "1999-01-01"
+          ],
+          [
+            "Zoe",
+            "1999-01-01"
+          ],
+          [
+            "Mo",
+            "2003-05-05"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO board_members VALUES (1,'Solo','2001-01-01'),(2,'Duo','1995-01-01');",
+        "expected": [
+          [
+            "Duo",
+            "1995-01-01"
+          ],
+          [
+            "Solo",
+            "2001-01-01"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-08",
+    "title": "Fastest Three Race Finishers",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-asc",
+      "limit",
+      "tie-breaking",
+      "top-n"
+    ],
+    "prompt": "A race_results table has columns id, runner_name, and finish_seconds (the time it took the runner to finish, in seconds). Write a query that returns the runner_name and finish_seconds of the three fastest finishers, ordered from fastest to slowest. Break ties in finish_seconds alphabetically by runner_name.",
+    "hint": "A lower finish_seconds is faster, so ascending order puts the fastest runners first.",
+    "schema_sql": "\nCREATE TABLE race_results (\n    id INTEGER PRIMARY KEY,\n    runner_name TEXT NOT NULL,\n    finish_seconds INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO race_results VALUES (1,'Nia',720),(2,'Omar',680),(3,'Petra',695),(4,'Quin',710),(5,'Rex',750);",
+        "expected": [
+          [
+            "Omar",
+            680
+          ],
+          [
+            "Petra",
+            695
+          ],
+          [
+            "Quin",
+            710
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO race_results VALUES (1,'Zane',600),(2,'Abby',600),(3,'Milo',650),(4,'Tara',700);",
+        "expected": [
+          [
+            "Abby",
+            600
+          ],
+          [
+            "Zane",
+            600
+          ],
+          [
+            "Milo",
+            650
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO race_results VALUES (1,'Solo',500);",
+        "expected": [
+          [
+            "Solo",
+            500
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-09",
+    "title": "Top Rated Restaurants, Ties Broken Alphabetically",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "multi-column-sort",
+      "limit",
+      "tie-breaking"
+    ],
+    "prompt": "A restaurants table has columns id, name, and rating (a number from 1 to 5). Write a query that returns the name and rating of the three highest-rated restaurants, ordered from highest rating to lowest. When two or more restaurants share the same rating, list those tied restaurants in alphabetical order by name.",
+    "hint": "List rating first and name second in ORDER BY so the name only decides order when ratings match.",
+    "schema_sql": "\nCREATE TABLE restaurants (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    rating REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO restaurants VALUES (1,'Pasta Place',4.5),(2,'Sushi Spot',4.8),(3,'Taco Town',4.5),(4,'Burger Barn',4.2),(5,'Curry Corner',4.8);",
+        "expected": [
+          [
+            "Curry Corner",
+            4.8
+          ],
+          [
+            "Sushi Spot",
+            4.8
+          ],
+          [
+            "Pasta Place",
+            4.5
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO restaurants VALUES (1,'Zeta',3.0),(2,'Alpha',3.0),(3,'Mango',3.0),(4,'Beta',3.0);",
+        "expected": [
+          [
+            "Alpha",
+            3.0
+          ],
+          [
+            "Beta",
+            3.0
+          ],
+          [
+            "Mango",
+            3.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO restaurants VALUES (1,'Only',5.0),(2,'Other',4.0);",
+        "expected": [
+          [
+            "Only",
+            5.0
+          ],
+          [
+            "Other",
+            4.0
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-10",
+    "title": "Hottest Sensor Readings, Ignoring Missing Data",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "where-filter",
+      "order-by-desc",
+      "limit",
+      "null-handling"
+    ],
+    "prompt": "A sensor_readings table has columns id, sensor_name, and temperature_f. Some sensors failed to report and their temperature_f is left blank (NULL). Write a query that returns the sensor_name and temperature_f of the three highest temperature readings among sensors that did report a value, ordered from hottest to coolest. Break ties in temperature_f alphabetically by sensor_name.",
+    "hint": "Filter out the missing readings before you sort and limit, or they can slip into the result.",
+    "schema_sql": "\nCREATE TABLE sensor_readings (\n    id INTEGER PRIMARY KEY,\n    sensor_name TEXT NOT NULL,\n    temperature_f REAL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO sensor_readings VALUES (1,'North',72.5),(2,'South',NULL),(3,'East',80.1),(4,'West',75.0),(5,'Central',NULL);",
+        "expected": [
+          [
+            "East",
+            80.1
+          ],
+          [
+            "West",
+            75.0
+          ],
+          [
+            "North",
+            72.5
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO sensor_readings VALUES (1,'A',60.0),(2,'B',60.0),(3,'C',NULL),(4,'D',55.0);",
+        "expected": [
+          [
+            "A",
+            60.0
+          ],
+          [
+            "B",
+            60.0
+          ],
+          [
+            "D",
+            55.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO sensor_readings VALUES (1,'X',NULL),(2,'Y',NULL);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-11",
+    "title": "Third Page of Search Results",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "limit",
+      "offset",
+      "pagination"
+    ],
+    "prompt": "A search engine stores its results in a search_results table with columns id, title, and relevance_score. Results are displayed 3 per page, most relevant first (ties broken alphabetically by title). Write a query that returns the title and relevance_score for the third page of results (the 7th, 8th, and 9th most relevant results).",
+    "hint": "Figure out how many rows come before page three, then skip that many with OFFSET.",
+    "schema_sql": "\nCREATE TABLE search_results (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    relevance_score INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO search_results VALUES (1,'R1',100),(2,'R2',95),(3,'R3',90),(4,'R4',85),(5,'R5',80),(6,'R6',75),(7,'R7',70),(8,'R8',65),(9,'R9',60),(10,'R10',55);",
+        "expected": [
+          [
+            "R7",
+            70
+          ],
+          [
+            "R8",
+            65
+          ],
+          [
+            "R9",
+            60
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO search_results VALUES (1,'A',80),(2,'B',70),(3,'C',60),(4,'D',50),(5,'E',40),(6,'F',30),(7,'G',20),(8,'H',10);",
+        "expected": [
+          [
+            "G",
+            20
+          ],
+          [
+            "H",
+            10
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO search_results VALUES (1,'P1',50),(2,'P2',40),(3,'P3',30),(4,'P4',20),(5,'P5',10);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-sorting-limiting-12",
+    "title": "Slowest Shipments by Delivery Time",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by-desc",
+      "limit",
+      "tie-breaking",
+      "top-n"
+    ],
+    "prompt": "A shipments table has columns id, tracking_id, and delivery_days (how many days a shipment took to arrive). Write a query that returns the tracking_id and delivery_days of the three slowest shipments, ordered from slowest to fastest. Break ties in delivery_days alphabetically by tracking_id.",
+    "hint": "The slowest shipments have the largest delivery_days, so sort in descending order before limiting.",
+    "schema_sql": "\nCREATE TABLE shipments (\n    id INTEGER PRIMARY KEY,\n    tracking_id TEXT NOT NULL,\n    delivery_days INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO shipments VALUES (1,'TRK100',5),(2,'TRK101',12),(3,'TRK102',3),(4,'TRK103',20),(5,'TRK104',8);",
+        "expected": [
+          [
+            "TRK103",
+            20
+          ],
+          [
+            "TRK101",
+            12
+          ],
+          [
+            "TRK104",
+            8
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO shipments VALUES (1,'TRK200',15),(2,'TRK199',15),(3,'TRK150',9),(4,'TRK120',4);",
+        "expected": [
+          [
+            "TRK199",
+            15
+          ],
+          [
+            "TRK200",
+            15
+          ],
+          [
+            "TRK150",
+            9
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO shipments VALUES (1,'TRK1',2),(2,'TRK2',7);",
+        "expected": [
+          [
+            "TRK2",
+            7
+          ],
+          [
+            "TRK1",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-01",
+    "title": "Orders per Customer",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "count",
+      "group-by",
+      "order-by"
+    ],
+    "prompt": "A shop tracks orders in a table called orders with columns order_id, customer_name, and amount. Return each customer_name along with the number of orders they placed, as columns customer_name and order_count. Order the results by order_count descending, then by customer_name ascending to break ties.",
+    "hint": "Group the rows by customer_name and count how many rows fall into each group.",
+    "schema_sql": "CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT,\n  amount REAL\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Alice',50.0),(2,'Alice',30.0),(3,'Bob',20.0),(4,'Carol',10.0),(5,'Carol',15.0),(6,'Carol',5.0);",
+        "expected": [
+          [
+            "Carol",
+            3
+          ],
+          [
+            "Alice",
+            2
+          ],
+          [
+            "Bob",
+            1
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Dan',10.0),(2,'Dan',20.0),(3,'Eve',5.0),(4,'Eve',5.0),(5,'Frank',1.0);",
+        "expected": [
+          [
+            "Dan",
+            2
+          ],
+          [
+            "Eve",
+            2
+          ],
+          [
+            "Frank",
+            1
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Grace',100.0);",
+        "expected": [
+          [
+            "Grace",
+            1
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-02",
+    "title": "Average Sale Amount by Region",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "avg",
+      "group-by",
+      "rounding"
+    ],
+    "prompt": "A company records sales in a table called sales with columns sale_id, region, and amount. Return each region along with the average sale amount for that region, rounded to 2 decimal places, as columns region and avg_amount. Order the results by region alphabetically.",
+    "hint": "Use AVG() grouped by region, and wrap it in ROUND() to control the decimal places.",
+    "schema_sql": "CREATE TABLE sales (\n  sale_id INTEGER PRIMARY KEY,\n  region TEXT,\n  amount REAL\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO sales VALUES (1,'East',100),(2,'East',200),(3,'West',50),(4,'West',150),(5,'North',300);",
+        "expected": [
+          [
+            "East",
+            150.0
+          ],
+          [
+            "North",
+            300.0
+          ],
+          [
+            "West",
+            100.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO sales VALUES (1,'South',10),(2,'South',10),(3,'South',11);",
+        "expected": [
+          [
+            "South",
+            10.33
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO sales VALUES (1,'Central',5),(2,'Central',6);",
+        "expected": [
+          [
+            "Central",
+            5.5
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-03",
+    "title": "Products With Multiple Suppliers",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "count-distinct",
+      "having",
+      "group-by"
+    ],
+    "prompt": "A store tracks which suppliers provide each product in a table called product_suppliers with columns id, product_name, and supplier_name (a product may appear on more than one row if multiple suppliers provide it, and the same supplier might even be listed twice for the same product). Return the product_name and the number of distinct suppliers, as columns product_name and supplier_count, for each product that has more than one distinct supplier. Order the results by product_name alphabetically.",
+    "hint": "Group by product_name, count distinct supplier_name values, and filter groups with HAVING.",
+    "schema_sql": "CREATE TABLE product_suppliers (\n  id INTEGER PRIMARY KEY,\n  product_name TEXT,\n  supplier_name TEXT\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO product_suppliers VALUES (1,'Widget','Acme'),(2,'Widget','Bolt Co'),(3,'Gadget','Acme'),(4,'Gizmo','Acme'),(5,'Gizmo','Bolt Co'),(6,'Gizmo','Circuit Inc');",
+        "expected": [
+          [
+            "Gizmo",
+            3
+          ],
+          [
+            "Widget",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO product_suppliers VALUES (1,'Nail','Acme'),(2,'Screw','Bolt Co');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO product_suppliers VALUES (1,'Hammer','Acme'),(2,'Hammer','Acme'),(3,'Hammer','Bolt Co');",
+        "expected": [
+          [
+            "Hammer",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-04",
+    "title": "Category Revenue Totals",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "sum",
+      "group-by",
+      "order-by"
+    ],
+    "prompt": "An online store records purchased line items in a table called line_items with columns id, category, unit_price, and quantity. Return each category along with its total revenue (unit_price multiplied by quantity, summed across all rows in that category), as columns category and total_revenue. Order the results by total_revenue descending.",
+    "hint": "Multiply unit_price by quantity inside the SUM(), grouped by category.",
+    "schema_sql": "CREATE TABLE line_items (\n  id INTEGER PRIMARY KEY,\n  category TEXT,\n  unit_price REAL,\n  quantity INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO line_items VALUES (1,'Books',10,2),(2,'Books',5,1),(3,'Toys',20,3),(4,'Toys',10,1);",
+        "expected": [
+          [
+            "Toys",
+            70
+          ],
+          [
+            "Books",
+            25
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO line_items VALUES (1,'Electronics',100,1);",
+        "expected": [
+          [
+            "Electronics",
+            100
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO line_items VALUES (1,'Clothing',50,0),(2,'Clothing',20,5),(3,'Food',3,10),(4,'Food',2,5);",
+        "expected": [
+          [
+            "Clothing",
+            100
+          ],
+          [
+            "Food",
+            40
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-05",
+    "title": "Perfect Attendance Students",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "min",
+      "having",
+      "group-by"
+    ],
+    "prompt": "A school tracks daily class attendance in a table called attendance with columns id, student_name, class_date, and present (1 if the student attended that day, 0 if absent). Return the student_name of every student who was present on all of their recorded class days (never marked absent), as a single column student_name. Order the results by student_name alphabetically.",
+    "hint": "Group by student_name and use HAVING with MIN(present) to require that no absence (0) shows up in the group.",
+    "schema_sql": "CREATE TABLE attendance (\n  id INTEGER PRIMARY KEY,\n  student_name TEXT,\n  class_date TEXT,\n  present INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO attendance VALUES (1,'Amy','2024-01-01',1),(2,'Amy','2024-01-02',1),(3,'Ben','2024-01-01',1),(4,'Ben','2024-01-02',0),(5,'Cara','2024-01-01',1);",
+        "expected": [
+          [
+            "Amy"
+          ],
+          [
+            "Cara"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO attendance VALUES (1,'Dee','2024-01-01',0),(2,'Eli','2024-01-01',1),(3,'Eli','2024-01-02',0);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO attendance VALUES (1,'Fay','2024-01-01',1),(2,'Gus','2024-01-01',1),(3,'Gus','2024-01-02',1);",
+        "expected": [
+          [
+            "Fay"
+          ],
+          [
+            "Gus"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-06",
+    "title": "Genres With Long Runtimes",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "avg",
+      "having",
+      "rounding"
+    ],
+    "prompt": "A movie catalog is stored in a table called movies with columns id, title, genre, and runtime_minutes. Return each genre along with its average runtime rounded to 1 decimal place, as columns genre and avg_runtime, but only for genres whose average runtime is at least 120 minutes. Order the results by avg_runtime descending.",
+    "hint": "Group by genre, compute AVG(runtime_minutes), and filter the groups with HAVING before ordering.",
+    "schema_sql": "CREATE TABLE movies (\n  id INTEGER PRIMARY KEY,\n  title TEXT,\n  genre TEXT,\n  runtime_minutes INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'A','Epic',150),(2,'B','Epic',170),(3,'C','Comedy',90),(4,'D','Comedy',95),(5,'E','Drama',125);",
+        "expected": [
+          [
+            "Epic",
+            160.0
+          ],
+          [
+            "Drama",
+            125.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'F','Short',60),(2,'G','Short',70);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'H','Action',121),(2,'I','Action',122),(3,'J','Fantasy',300);",
+        "expected": [
+          [
+            "Fantasy",
+            300.0
+          ],
+          [
+            "Action",
+            121.5
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-07",
+    "title": "Warehouses Understocked",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "where",
+      "having",
+      "group-by"
+    ],
+    "prompt": "A distribution company tracks stock in a table called inventory with columns id, warehouse, item_name, and quantity. Return each warehouse along with the number of distinct items that have a quantity of less than 10 in that warehouse, as columns warehouse and low_stock_count, but only include warehouses with at least 2 such low-stock items. Order the results by warehouse alphabetically.",
+    "hint": "Filter low-quantity rows first with WHERE, then group by warehouse and use HAVING to keep only warehouses with enough low-stock items.",
+    "schema_sql": "CREATE TABLE inventory (\n  id INTEGER PRIMARY KEY,\n  warehouse TEXT,\n  item_name TEXT,\n  quantity INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO inventory VALUES (1,'North','Bolt',5),(2,'North','Nut',3),(3,'North','Screw',50),(4,'South','Bolt',20),(5,'South','Nut',8),(6,'East','Bolt',2),(7,'East','Nut',4),(8,'East','Screw',1);",
+        "expected": [
+          [
+            "East",
+            3
+          ],
+          [
+            "North",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO inventory VALUES (1,'West','A',5),(2,'West','B',50);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO inventory VALUES (1,'Central','A',10),(2,'Central','B',9),(3,'Central','C',9),(4,'Central','D',9);",
+        "expected": [
+          [
+            "Central",
+            3
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-08",
+    "title": "Repeat Customers",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "count-distinct",
+      "having",
+      "order-by"
+    ],
+    "prompt": "A store logs each purchase in a table called purchases with columns id, customer_email, and order_id (a customer may place multiple separate orders, each with its own order_id, and a single order_id can have more than one purchase row if several items were bought together). Return each customer_email along with the number of distinct orders they've placed, as columns customer_email and order_count, but only for customers with more than one distinct order. Order the results by order_count descending, then by customer_email ascending to break ties.",
+    "hint": "Group by customer_email, count distinct order_id values, and filter with HAVING.",
+    "schema_sql": "CREATE TABLE purchases (\n  id INTEGER PRIMARY KEY,\n  customer_email TEXT,\n  order_id INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO purchases VALUES (1,'a@x.com',100),(2,'a@x.com',100),(3,'a@x.com',101),(4,'b@x.com',200),(5,'c@x.com',300),(6,'c@x.com',301),(7,'c@x.com',302);",
+        "expected": [
+          [
+            "c@x.com",
+            3
+          ],
+          [
+            "a@x.com",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO purchases VALUES (1,'d@x.com',1),(2,'d@x.com',2),(3,'e@x.com',3),(4,'e@x.com',4),(5,'f@x.com',5);",
+        "expected": [
+          [
+            "d@x.com",
+            2
+          ],
+          [
+            "e@x.com",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO purchases VALUES (1,'g@x.com',1),(2,'h@x.com',2);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-09",
+    "title": "Monthly Support Ticket Counts",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "count",
+      "group-by",
+      "string-functions"
+    ],
+    "prompt": "A helpdesk logs tickets in a table called tickets with columns id, opened_date (text in YYYY-MM-DD format), and subject. Return each calendar month the ticket was opened in (formatted as YYYY-MM) along with the number of tickets opened that month, as columns month and ticket_count. Order the results by month ascending.",
+    "hint": "Extract the year-month portion of opened_date (its first 7 characters) to group by, then count the rows per group.",
+    "schema_sql": "CREATE TABLE tickets (\n  id INTEGER PRIMARY KEY,\n  opened_date TEXT,\n  subject TEXT\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'2024-01-05','A'),(2,'2024-01-15','B'),(3,'2024-02-01','C'),(4,'2024-03-10','D'),(5,'2024-03-11','E'),(6,'2024-03-12','F');",
+        "expected": [
+          [
+            "2024-01",
+            2
+          ],
+          [
+            "2024-02",
+            1
+          ],
+          [
+            "2024-03",
+            3
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'2023-12-25','X');",
+        "expected": [
+          [
+            "2023-12",
+            1
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'2023-12-31','A'),(2,'2024-01-01','B'),(3,'2024-01-02','C');",
+        "expected": [
+          [
+            "2023-12",
+            1
+          ],
+          [
+            "2024-01",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-10",
+    "title": "Well-Rated Restaurants",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "avg",
+      "count",
+      "having"
+    ],
+    "prompt": "A food review app stores reviews in a table called reviews with columns id, restaurant_name, and rating (an integer from 1 to 5). Return each restaurant_name along with its average rating (rounded to 2 decimal places) and its number of reviews, as columns restaurant_name, avg_rating, and review_count, but only include restaurants with at least 3 reviews and an average rating of 4 or higher. Order the results by avg_rating descending.",
+    "hint": "Group by restaurant_name, then use HAVING with two conditions, on COUNT and on AVG, joined by AND.",
+    "schema_sql": "CREATE TABLE reviews (\n  id INTEGER PRIMARY KEY,\n  restaurant_name TEXT,\n  rating INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,'Pasta Place',5),(2,'Pasta Place',5),(3,'Pasta Place',4),(4,'Burger Barn',3),(5,'Burger Barn',3),(6,'Burger Barn',3),(7,'Sushi Spot',5),(8,'Sushi Spot',4);",
+        "expected": [
+          [
+            "Pasta Place",
+            4.67,
+            3
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,'Taco Town',5),(2,'Taco Town',5),(3,'Taco Town',5),(4,'Pizza Palace',4),(5,'Pizza Palace',4),(6,'Pizza Palace',4),(7,'Pizza Palace',5);",
+        "expected": [
+          [
+            "Taco Town",
+            5.0,
+            3
+          ],
+          [
+            "Pizza Palace",
+            4.25,
+            4
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,'Diner',3),(2,'Diner',3),(3,'Diner',3);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-11",
+    "title": "Frequently Borrowed Books",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "count",
+      "having",
+      "order-by"
+    ],
+    "prompt": "A library logs each time a book is checked out in a table called checkouts with columns id, book_title, and patron_name. Return the book_title and total number of times checked out, as columns book_title and checkout_count, for every book that has been checked out more than 2 times. Order the results by checkout_count descending, then by book_title ascending to break ties.",
+    "hint": "Group by book_title, count the rows in each group, and filter groups with HAVING.",
+    "schema_sql": "CREATE TABLE checkouts (\n  id INTEGER PRIMARY KEY,\n  book_title TEXT,\n  patron_name TEXT\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO checkouts VALUES (1,'Dune','A'),(2,'Dune','B'),(3,'Dune','C'),(4,'Dune','D'),(5,'Hobbit','A'),(6,'Hobbit','B'),(7,'Hobbit','C'),(8,'1984','A'),(9,'1984','B');",
+        "expected": [
+          [
+            "Dune",
+            4
+          ],
+          [
+            "Hobbit",
+            3
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO checkouts VALUES (1,'Emma','A'),(2,'Emma','B'),(3,'Emma','C'),(4,'Clue','A'),(5,'Clue','B'),(6,'Clue','C');",
+        "expected": [
+          [
+            "Clue",
+            3
+          ],
+          [
+            "Emma",
+            3
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO checkouts VALUES (1,'Rare Book','A'),(2,'Rare Book','B');",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-aggregates-group-by-12",
+    "title": "Score Spread by Team",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "min",
+      "max",
+      "group-by"
+    ],
+    "prompt": "A trivia league records each player's score per game in a table called game_scores with columns id, team_name, player_name, and score. Return each team_name along with its lowest score and highest score recorded, as columns team_name, lowest_score, and highest_score. Order the results by team_name alphabetically.",
+    "hint": "Group by team_name and use MIN() and MAX() on the score column.",
+    "schema_sql": "CREATE TABLE game_scores (\n  id INTEGER PRIMARY KEY,\n  team_name TEXT,\n  player_name TEXT,\n  score INTEGER\n);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO game_scores VALUES (1,'Alpha','P1',10),(2,'Alpha','P2',25),(3,'Alpha','P3',15),(4,'Beta','P4',5),(5,'Beta','P5',5),(6,'Beta','P6',30);",
+        "expected": [
+          [
+            "Alpha",
+            10,
+            25
+          ],
+          [
+            "Beta",
+            5,
+            30
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO game_scores VALUES (1,'Gamma','P1',42);",
+        "expected": [
+          [
+            "Gamma",
+            42,
+            42
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO game_scores VALUES (1,'Delta','P1',-5),(2,'Delta','P2',10),(3,'Delta','P3',0);",
+        "expected": [
+          [
+            "Delta",
+            -5,
+            10
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-01",
+    "title": "Customers Without Orders",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "left-join",
+      "anti-join",
+      "order-by"
+    ],
+    "prompt": "A shop keeps a 'customers' table (columns: id, name) and an 'orders' table (columns: id, customer_id, order_date) where orders.customer_id refers to customers.id. Some customers have never placed an order. Return the name of every customer who has never placed an order, ordered alphabetically by name.",
+    "hint": "Think about which join type keeps unmatched rows, and what a NULL on the orders side of the join tells you.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice'),(2,'Bob'),(3,'Carla');\nINSERT INTO orders VALUES (1,1,'2024-01-01'),(2,3,'2024-01-05');",
+        "expected": [
+          [
+            "Bob"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Dan'),(2,'Eve');\nINSERT INTO orders VALUES (1,1,'2024-02-01'),(2,2,'2024-02-02');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Frank'),(2,'Grace'),(3,'Hank');\n",
+        "expected": [
+          [
+            "Frank"
+          ],
+          [
+            "Grace"
+          ],
+          [
+            "Hank"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-02",
+    "title": "Order Totals with Customer Names",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "order-by",
+      "multi-column-sort"
+    ],
+    "prompt": "A 'customers' table (columns: id, name) and an 'orders' table (columns: id, customer_id, order_date, amount) track sales, where orders.customer_id refers to customers.id. Return the order id, the customer's name, and the order amount for every order, ordered by order_date ascending, and by order id ascending to break ties on the same date.",
+    "hint": "Join the two tables on the matching id column, then sort by the two columns the prompt names.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date TEXT, amount REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice'),(2,'Bob');\nINSERT INTO orders VALUES (1,1,'2024-01-03',20.0),(2,2,'2024-01-01',15.5),(3,1,'2024-01-02',9.99);",
+        "expected": [
+          [
+            2,
+            "Bob",
+            15.5
+          ],
+          [
+            3,
+            "Alice",
+            9.99
+          ],
+          [
+            1,
+            "Alice",
+            20.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Cara'),(2,'Deon');\nINSERT INTO orders VALUES (1,1,'2024-03-01',5.0),(2,2,'2024-03-01',7.25);",
+        "expected": [
+          [
+            1,
+            "Cara",
+            5.0
+          ],
+          [
+            2,
+            "Deon",
+            7.25
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Elle');\nINSERT INTO orders VALUES (1,1,'2024-05-05',100.0);",
+        "expected": [
+          [
+            1,
+            "Elle",
+            100.0
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-03",
+    "title": "Total Revenue Per Customer",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "group-by",
+      "aggregation"
+    ],
+    "prompt": "Using the same 'customers' table (columns: id, name) and 'orders' table (columns: id, customer_id, order_date, amount), return each customer's name together with the total amount they have spent (the sum of their order amounts). Only include customers who have placed at least one order. Order the results by total spent descending, then by name ascending to break ties.",
+    "hint": "Join and group by customer before summing, so each customer produces exactly one output row.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, order_date TEXT, amount REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice'),(2,'Bob'),(3,'Carla');\nINSERT INTO orders VALUES (1,1,'2024-01-01',30.0),(2,1,'2024-01-05',20.0),(3,2,'2024-01-02',10.0);",
+        "expected": [
+          [
+            "Alice",
+            50.0
+          ],
+          [
+            "Bob",
+            10.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Dan'),(2,'Eve');\nINSERT INTO orders VALUES (1,1,'2024-02-01',25.0),(2,2,'2024-02-01',25.0);",
+        "expected": [
+          [
+            "Dan",
+            25.0
+          ],
+          [
+            "Eve",
+            25.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Frank'),(2,'Grace');\nINSERT INTO orders VALUES (1,1,'2024-03-01',5.5);",
+        "expected": [
+          [
+            "Frank",
+            5.5
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-04",
+    "title": "Products Never Ordered",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "left-join",
+      "anti-join",
+      "order-by"
+    ],
+    "prompt": "A 'products' table (columns: id, name) lists items for sale, and an 'order_items' table (columns: id, product_id, quantity) records each product sold in an order, where order_items.product_id refers to products.id. Return the name of every product that has never appeared in order_items, ordered alphabetically by name.",
+    "hint": "A LEFT JOIN followed by a check for NULL on the order_items side will surface unmatched products.",
+    "schema_sql": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE order_items (id INTEGER PRIMARY KEY, product_id INTEGER, quantity INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Hammer'),(2,'Wrench'),(3,'Drill');\nINSERT INTO order_items VALUES (1,1,2),(2,3,1);",
+        "expected": [
+          [
+            "Wrench"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Nail'),(2,'Screw');\nINSERT INTO order_items VALUES (1,1,10),(2,2,5);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Ladder'),(2,'Bucket');\n",
+        "expected": [
+          [
+            "Bucket"
+          ],
+          [
+            "Ladder"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-05",
+    "title": "Suppliers and Their Product Counts",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "left-join",
+      "group-by",
+      "count"
+    ],
+    "prompt": "A 'suppliers' table (columns: id, name) and a 'products' table (columns: id, supplier_id, name) track which supplier provides each product, where products.supplier_id refers to suppliers.id. Return each supplier's name together with the number of products they supply, including suppliers that currently supply zero products (shown as 0). Order the results by product count descending, then by supplier name ascending to break ties.",
+    "hint": "Use a LEFT JOIN so suppliers with no products still appear, then count the matched product rows per supplier.",
+    "schema_sql": "CREATE TABLE suppliers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE products (id INTEGER PRIMARY KEY, supplier_id INTEGER, name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Acme'),(2,'Zeta'),(3,'Nova');\nINSERT INTO products VALUES (1,1,'Widget'),(2,1,'Gadget'),(3,2,'Gizmo');",
+        "expected": [
+          [
+            "Acme",
+            2
+          ],
+          [
+            "Zeta",
+            1
+          ],
+          [
+            "Nova",
+            0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Bolt Co'),(2,'Iron Works');\nINSERT INTO products VALUES (1,1,'Bolt'),(2,2,'Beam');",
+        "expected": [
+          [
+            "Bolt Co",
+            1
+          ],
+          [
+            "Iron Works",
+            1
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Lonely Corp');\n",
+        "expected": [
+          [
+            "Lonely Corp",
+            0
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-06",
+    "title": "Students Enrolled in a Specific Course",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "three-table-join",
+      "where-filter"
+    ],
+    "prompt": "A school tracks a 'students' table (columns: id, name), a 'courses' table (columns: id, title), and an 'enrollments' table (columns: id, student_id, course_id) linking students to the courses they take, where enrollments.student_id refers to students.id and enrollments.course_id refers to courses.id. Return the name of every student enrolled in the course titled 'Algebra I', ordered alphabetically by name.",
+    "hint": "Join all three tables together, then filter on the course's title.",
+    "schema_sql": "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE courses (id INTEGER PRIMARY KEY, title TEXT);\nCREATE TABLE enrollments (id INTEGER PRIMARY KEY, student_id INTEGER, course_id INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Amy'),(2,'Ben'),(3,'Cody');\nINSERT INTO courses VALUES (1,'Algebra I'),(2,'History');\nINSERT INTO enrollments VALUES (1,1,1),(2,2,2),(3,3,1);",
+        "expected": [
+          [
+            "Amy"
+          ],
+          [
+            "Cody"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Dee'),(2,'Evan');\nINSERT INTO courses VALUES (1,'Algebra I'),(2,'Biology');\nINSERT INTO enrollments VALUES (1,1,2),(2,2,2);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Fay'),(2,'Gus'),(3,'Hana');\nINSERT INTO courses VALUES (1,'Algebra I'),(2,'Art');\nINSERT INTO enrollments VALUES (1,1,1),(2,2,1),(3,3,1);",
+        "expected": [
+          [
+            "Fay"
+          ],
+          [
+            "Gus"
+          ],
+          [
+            "Hana"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-07",
+    "title": "Library Loans With Member and Book Titles",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "three-table-join",
+      "order-by"
+    ],
+    "prompt": "A library tracks a 'members' table (columns: id, name), a 'books' table (columns: id, title), and a 'loans' table (columns: id, member_id, book_id, loan_date) where loans.member_id refers to members.id and loans.book_id refers to books.id. Return the member's name, the book's title, and the loan_date for every loan, ordered by loan_date ascending, and by loan id ascending to break ties on the same date.",
+    "hint": "Join loans to both members and books so you can pull in the two names you need.",
+    "schema_sql": "CREATE TABLE members (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE books (id INTEGER PRIMARY KEY, title TEXT);\nCREATE TABLE loans (id INTEGER PRIMARY KEY, member_id INTEGER, book_id INTEGER, loan_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Ivy'),(2,'Jax');\nINSERT INTO books VALUES (1,'Dune'),(2,'Emma');\nINSERT INTO loans VALUES (1,1,1,'2024-01-10'),(2,2,2,'2024-01-05');",
+        "expected": [
+          [
+            "Jax",
+            "Emma",
+            "2024-01-05"
+          ],
+          [
+            "Ivy",
+            "Dune",
+            "2024-01-10"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Kim');\nINSERT INTO books VALUES (1,'1984'),(2,'Brave New World');\nINSERT INTO loans VALUES (1,1,1,'2024-02-01'),(2,1,2,'2024-02-01');",
+        "expected": [
+          [
+            "Kim",
+            "1984",
+            "2024-02-01"
+          ],
+          [
+            "Kim",
+            "Brave New World",
+            "2024-02-01"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Leo');\nINSERT INTO books VALUES (1,'Sapiens');\nINSERT INTO loans VALUES (1,1,1,'2024-03-15');",
+        "expected": [
+          [
+            "Leo",
+            "Sapiens",
+            "2024-03-15"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-08",
+    "title": "Vendors With Unpaid Invoices",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "where-filter",
+      "distinct"
+    ],
+    "prompt": "A 'vendors' table (columns: id, name) and an 'invoices' table (columns: id, vendor_id, amount, paid) track billing, where invoices.vendor_id refers to vendors.id and paid is 1 if the invoice has been paid and 0 otherwise. Return the distinct name of every vendor that has at least one unpaid invoice, ordered alphabetically by name. Each vendor name should appear only once even if it has several unpaid invoices.",
+    "hint": "Join vendors to invoices, filter for unpaid ones, and remove duplicate vendor names from the result.",
+    "schema_sql": "CREATE TABLE vendors (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE invoices (id INTEGER PRIMARY KEY, vendor_id INTEGER, amount REAL, paid INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Acme Supply'),(2,'Best Parts');\nINSERT INTO invoices VALUES (1,1,100.0,0),(2,1,50.0,0),(3,2,75.0,1);",
+        "expected": [
+          [
+            "Acme Supply"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Cargo Co'),(2,'Delta Tools');\nINSERT INTO invoices VALUES (1,1,200.0,1),(2,2,90.0,1);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Echo Traders');\n",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-09",
+    "title": "Movies and Their Directors",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "order-by"
+    ],
+    "prompt": "A 'directors' table (columns: id, name) and a 'movies' table (columns: id, title, director_id) track films, where movies.director_id refers to directors.id. Return the movie title and the director's name for every movie, ordered alphabetically by movie title.",
+    "hint": "A simple join from movies to directors on the director id will line up the two names.",
+    "schema_sql": "CREATE TABLE directors (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE movies (id INTEGER PRIMARY KEY, title TEXT, director_id INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO directors VALUES (1,'Jordan Reed'),(2,'Mika Sato');\nINSERT INTO movies VALUES (1,'Zenith',1),(2,'Ash Road',2);",
+        "expected": [
+          [
+            "Ash Road",
+            "Mika Sato"
+          ],
+          [
+            "Zenith",
+            "Jordan Reed"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO directors VALUES (1,'Noor Khan');\nINSERT INTO movies VALUES (1,'Blue Harbor',1),(2,'Aurora Falls',1);",
+        "expected": [
+          [
+            "Aurora Falls",
+            "Noor Khan"
+          ],
+          [
+            "Blue Harbor",
+            "Noor Khan"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO directors VALUES (1,'Pia Lund');\nINSERT INTO movies VALUES (1,'Solstice',1);",
+        "expected": [
+          [
+            "Solstice",
+            "Pia Lund"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-10",
+    "title": "Instructors Teaching More Than One Course",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "group-by",
+      "having"
+    ],
+    "prompt": "An 'instructors' table (columns: id, name) and a 'courses' table (columns: id, instructor_id, title) track teaching assignments, where courses.instructor_id refers to instructors.id. Return the name of every instructor who teaches more than one course, along with the number of courses they teach. Order the results by course count descending, then by instructor name ascending to break ties.",
+    "hint": "Group the joined rows by instructor, then keep only the groups whose course count exceeds one.",
+    "schema_sql": "CREATE TABLE instructors (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE courses (id INTEGER PRIMARY KEY, instructor_id INTEGER, title TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO instructors VALUES (1,'Ravi'),(2,'Sana'),(3,'Theo');\nINSERT INTO courses VALUES (1,1,'Calc I'),(2,1,'Calc II'),(3,2,'Physics I'),(4,3,'Art I');",
+        "expected": [
+          [
+            "Ravi",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO instructors VALUES (1,'Uma'),(2,'Vik');\nINSERT INTO courses VALUES (1,1,'Chem I'),(2,2,'Bio I'),(3,2,'Bio II');",
+        "expected": [
+          [
+            "Vik",
+            2
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO instructors VALUES (1,'Wren');\nINSERT INTO courses VALUES (1,1,'Music I');",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-11",
+    "title": "Departments With No Employees",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "left-join",
+      "anti-join",
+      "order-by"
+    ],
+    "prompt": "A 'departments' table (columns: id, name) and an 'employees' table (columns: id, department_id, name) track staffing, where employees.department_id refers to departments.id. Return the name of every department that currently has no employees assigned to it, ordered alphabetically by name.",
+    "hint": "A LEFT JOIN with a NULL check on the employees side reveals departments no one is assigned to.",
+    "schema_sql": "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE employees (id INTEGER PRIMARY KEY, department_id INTEGER, name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO departments VALUES (1,'Sales'),(2,'R&D'),(3,'Legal');\nINSERT INTO employees VALUES (1,1,'Ann'),(2,2,'Bo');",
+        "expected": [
+          [
+            "Legal"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO departments VALUES (1,'Finance'),(2,'Ops');\nINSERT INTO employees VALUES (1,1,'Cal'),(2,2,'Dee');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO departments VALUES (1,'Marketing'),(2,'Support');\n",
+        "expected": [
+          [
+            "Marketing"
+          ],
+          [
+            "Support"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-12",
+    "title": "Patients Without a Scheduled Appointment",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "left-join",
+      "anti-join",
+      "order-by"
+    ],
+    "prompt": "A clinic's 'patients' table (columns: id, name) and 'appointments' table (columns: id, patient_id, appointment_date) track visits, where appointments.patient_id refers to patients.id. Return the name of every patient who has no appointment scheduled, ordered alphabetically by name.",
+    "hint": "Try a LEFT JOIN from patients to appointments and look for the rows where nothing matched.",
+    "schema_sql": "CREATE TABLE patients (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER, appointment_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'Omar'),(2,'Priya'),(3,'Quinn');\nINSERT INTO appointments VALUES (1,1,'2024-04-01'),(2,3,'2024-04-02');",
+        "expected": [
+          [
+            "Priya"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'Rosa'),(2,'Sam');\nINSERT INTO appointments VALUES (1,1,'2024-05-01'),(2,2,'2024-05-02');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO patients VALUES (1,'Tara'),(2,'Umar');\n",
+        "expected": [
+          [
+            "Tara"
+          ],
+          [
+            "Umar"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-basic-joins-13",
+    "title": "Warehouse Shipments With Carrier Names",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Basic Joins",
+    "topics": [
+      "inner-join",
+      "where-filter",
+      "order-by"
+    ],
+    "prompt": "A 'carriers' table (columns: id, name) and a 'shipments' table (columns: id, carrier_id, status, ship_date) track outgoing shipments, where shipments.carrier_id refers to carriers.id. Return the shipment id, the carrier's name, and the ship_date for every shipment whose status is 'delayed', ordered by ship_date ascending.",
+    "hint": "Join shipments to carriers first, then filter the joined rows by status before sorting.",
+    "schema_sql": "CREATE TABLE carriers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE shipments (id INTEGER PRIMARY KEY, carrier_id INTEGER, status TEXT, ship_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO carriers VALUES (1,'FastFreight'),(2,'SwiftShip');\nINSERT INTO shipments VALUES (1,1,'delayed','2024-06-05'),(2,2,'on_time','2024-06-01'),(3,2,'delayed','2024-06-02');",
+        "expected": [
+          [
+            3,
+            "SwiftShip",
+            "2024-06-02"
+          ],
+          [
+            1,
+            "FastFreight",
+            "2024-06-05"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO carriers VALUES (1,'CargoLine');\nINSERT INTO shipments VALUES (1,1,'on_time','2024-07-01'),(2,1,'on_time','2024-07-02');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO carriers VALUES (1,'RoadRunner');\nINSERT INTO shipments VALUES (1,1,'delayed','2024-08-10');",
+        "expected": [
+          [
+            1,
+            "RoadRunner",
+            "2024-08-10"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-01",
+    "title": "Customers Missing Phone Numbers",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "is-null",
+      "where-clause"
+    ],
+    "prompt": "A customers table stores id (integer), name (text), email (text), and phone (text). Phone numbers were never collected for some customers, leaving that column empty in the database. Return the id and name of every customer with no phone number on file, ordered by id ascending.",
+    "hint": "A missing value in SQL is not equal to anything, including itself, so you need a comparison built specifically for it.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, email TEXT, phone TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Ana','ana@x.com','555-1111'),(2,'Ben','ben@x.com',NULL),(3,'Cara','cara@x.com',NULL),(4,'Dan','dan@x.com','555-2222');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            2,
+            "Ben"
+          ],
+          [
+            3,
+            "Cara"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Eve','eve@x.com','555-3333'),(2,'Fay','fay@x.com','555-4444');",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Gus','gus@x.com',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Gus"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-02",
+    "title": "Products Marked Discontinued",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "is-not-null",
+      "where-clause"
+    ],
+    "prompt": "A products table stores id (integer), name (text), and discontinued_date (text, a date string such as '2024-01-15'). A product still being sold has no value in discontinued_date. Return the id and name of every product that has been discontinued (that is, discontinued_date has an actual value), ordered by discontinued_date ascending.",
+    "hint": "Test whether the date column holds a value at all before you compare or sort on it.",
+    "schema_sql": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, discontinued_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Widget',NULL),(2,'Gadget','2023-05-01'),(3,'Gizmo','2022-01-10'),(4,'Doohickey',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            3,
+            "Gizmo"
+          ],
+          [
+            2,
+            "Gadget"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Thingamajig',NULL),(2,'Contraption',NULL);",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Sprocket','2021-09-09');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Sprocket"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-03",
+    "title": "Reviews With Written Feedback",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "count",
+      "aggregation",
+      "group-by"
+    ],
+    "prompt": "A reviews table stores id (integer), product_id (integer), rating (integer), and comment (text). Every review has a rating, but writing a comment was optional, so comment is empty for many rows. For each product_id, return the product_id, the total number of reviews it received, and the number of those reviews that include a written comment. Order by product_id ascending.",
+    "hint": "Counting a specific column skips rows where that column has no value, unlike counting every row.",
+    "schema_sql": "CREATE TABLE reviews (id INTEGER PRIMARY KEY, product_id INTEGER, rating INTEGER, comment TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,10,5,'Great!'),(2,10,4,NULL),(3,10,3,'Ok'),(4,20,5,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            10,
+            3,
+            2
+          ],
+          [
+            20,
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,30,2,NULL),(2,30,1,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            30,
+            2,
+            0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO reviews VALUES (1,40,5,'Loved it');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            40,
+            1,
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-04",
+    "title": "Display Names With Nicknames",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "coalesce",
+      "select"
+    ],
+    "prompt": "A members table stores id (integer), first_name (text), and nickname (text). Nickname is only filled in for members who chose one. Return the id and a display_name for every member: use the nickname when one exists, otherwise fall back to the first_name. Order by id ascending.",
+    "hint": "There is a function that returns the first non-empty value from a list of columns.",
+    "schema_sql": "CREATE TABLE members (id INTEGER PRIMARY KEY, first_name TEXT, nickname TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Robert','Bob'),(2,'Elizabeth',NULL),(3,'Michael','Mike');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Bob"
+          ],
+          [
+            2,
+            "Elizabeth"
+          ],
+          [
+            3,
+            "Mike"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Jonathan',NULL),(2,'Patricia',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Jonathan"
+          ],
+          [
+            2,
+            "Patricia"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO members VALUES (1,'Sam','Sammy');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Sammy"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-05",
+    "title": "Normalize Placeholder Scores",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "nullif",
+      "select"
+    ],
+    "prompt": "An assessments table stores id (integer), student_name (text), and score (integer). Before the grading system supported empty values, ungraded assessments were stored with a placeholder score of -1 instead of leaving the column empty. Return id, student_name, and a normalized_score column that converts any -1 placeholder into a true empty value while leaving all other scores unchanged. Order by id ascending.",
+    "hint": "There is a function that turns a value into an empty one whenever it matches a specific sentinel, and leaves it alone otherwise.",
+    "schema_sql": "CREATE TABLE assessments (id INTEGER PRIMARY KEY, student_name TEXT, score INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO assessments VALUES (1,'Amy',88),(2,'Beth',-1),(3,'Cid',72),(4,'Dee',-1);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Amy",
+            88
+          ],
+          [
+            2,
+            "Beth",
+            null
+          ],
+          [
+            3,
+            "Cid",
+            72
+          ],
+          [
+            4,
+            "Dee",
+            null
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO assessments VALUES (1,'Eli',95),(2,'Fox',60);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Eli",
+            95
+          ],
+          [
+            2,
+            "Fox",
+            60
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO assessments VALUES (1,'Gia',-1);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Gia",
+            null
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-06",
+    "title": "Average Satisfaction Ignoring Skips",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "aggregation",
+      "avg",
+      "count"
+    ],
+    "prompt": "A surveys table stores id (integer), respondent (text), and satisfaction (integer, a 1-5 rating). Some respondents skipped the satisfaction question entirely, leaving it empty. Return a single row with three columns: total_respondents (the count of every survey submitted), answered_count (the count of surveys where satisfaction was actually filled in), and avg_satisfaction (the average satisfaction score).",
+    "hint": "Averages and counts computed on a column silently skip the rows where that column is empty.",
+    "schema_sql": "CREATE TABLE surveys (id INTEGER PRIMARY KEY, respondent TEXT, satisfaction INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO surveys VALUES (1,'Ann',4),(2,'Bo',5),(3,'Cy',NULL),(4,'Di',3);",
+        "order_sensitive": false,
+        "expected": [
+          [
+            4,
+            3,
+            4.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO surveys VALUES (1,'Eb',NULL),(2,'Fi',NULL);",
+        "order_sensitive": false,
+        "expected": [
+          [
+            2,
+            0,
+            null
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO surveys VALUES (1,'Gio',10);",
+        "order_sensitive": false,
+        "expected": [
+          [
+            1,
+            1,
+            10.0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-07",
+    "title": "Sort Unassigned Tasks Last",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "order-by",
+      "is-null"
+    ],
+    "prompt": "A tasks table stores id (integer), title (text), and due_date (text, a date string). Some tasks have no due date set at all. Return the id, title, and due_date of every task, ordered so that tasks with an earlier due_date come first, tasks with a later due_date come after, and tasks with no due_date at all come last of all.",
+    "hint": "You can order by an expression before the real column, and a comparison like 'this column is empty' evaluates to 0 or 1 in an ORDER BY.",
+    "schema_sql": "CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, due_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO tasks VALUES (1,'Ship report',NULL),(2,'File taxes','2024-04-15'),(3,'Water plants',NULL),(4,'Renew license','2024-02-01');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            4,
+            "Renew license",
+            "2024-02-01"
+          ],
+          [
+            2,
+            "File taxes",
+            "2024-04-15"
+          ],
+          [
+            1,
+            "Ship report",
+            null
+          ],
+          [
+            3,
+            "Water plants",
+            null
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO tasks VALUES (1,'Clean desk','2024-01-01'),(2,'Backup files','2024-01-02');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Clean desk",
+            "2024-01-01"
+          ],
+          [
+            2,
+            "Backup files",
+            "2024-01-02"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO tasks VALUES (1,'Solo task',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Solo task",
+            null
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-08",
+    "title": "Skipped Versus Blank Feedback",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "is-null",
+      "where-clause"
+    ],
+    "prompt": "A feedback table stores id (integer), customer_name (text), and comment (text). Some customers typed real feedback text, some submitted the form with the comment box left as an empty string, and some never had a comment recorded for them at all. Return the id and customer_name of every row where no comment value was recorded at all -- not the ones where the customer submitted an empty comment. Order by id ascending.",
+    "hint": "An empty string is a stored value like any other and is not the same thing as a column having no value.",
+    "schema_sql": "CREATE TABLE feedback (id INTEGER PRIMARY KEY, customer_name TEXT, comment TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO feedback VALUES (1,'Al','Loved it'),(2,'Bea',''),(3,'Cal',NULL),(4,'Deb',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            3,
+            "Cal"
+          ],
+          [
+            4,
+            "Deb"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO feedback VALUES (1,'Ess',''),(2,'Fen','Great job');",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO feedback VALUES (1,'Gil',NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Gil"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-09",
+    "title": "Multi-Level Contact Fallback",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "coalesce",
+      "select"
+    ],
+    "prompt": "A contacts table stores id (integer), name (text), mobile_phone (text), work_phone (text), and home_phone (text); any of the three phone columns may be empty for a given contact. Return id, name, and a best_phone column that picks mobile_phone if present, otherwise work_phone, otherwise home_phone, otherwise the literal text 'No phone on file' if none of the three are filled in. Order by id ascending.",
+    "hint": "The first-non-empty function can take more than two arguments, including a literal fallback at the end.",
+    "schema_sql": "CREATE TABLE contacts (id INTEGER PRIMARY KEY, name TEXT, mobile_phone TEXT, work_phone TEXT, home_phone TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'Ida','555-0001',NULL,NULL),(2,'Jon',NULL,'555-0002',NULL),(3,'Kim',NULL,NULL,'555-0003'),(4,'Lee',NULL,NULL,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Ida",
+            "555-0001"
+          ],
+          [
+            2,
+            "Jon",
+            "555-0002"
+          ],
+          [
+            3,
+            "Kim",
+            "555-0003"
+          ],
+          [
+            4,
+            "Lee",
+            "No phone on file"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'Moe','555-1000','555-2000','555-3000');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Moe",
+            "555-1000"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'Ned',NULL,NULL,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Ned",
+            "No phone on file"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-10",
+    "title": "Spending Totals Including Uncategorized",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "group-by",
+      "aggregation",
+      "is-null"
+    ],
+    "prompt": "An expenses table stores id (integer), category (text), and amount (real). Some expenses were never assigned a category at all. Return the category and the total amount spent for every category, treating all of the uncategorized expenses (no category recorded) as one single group together. Order by category ascending.",
+    "hint": "Grouping does not drop the empty values into separate rows; every uncategorized row lands together in one group.",
+    "schema_sql": "CREATE TABLE expenses (id INTEGER PRIMARY KEY, category TEXT, amount REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO expenses VALUES (1,'Travel',100.0),(2,'Travel',50.0),(3,NULL,20.0),(4,NULL,5.0),(5,'Meals',30.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            null,
+            25.0
+          ],
+          [
+            "Meals",
+            30.0
+          ],
+          [
+            "Travel",
+            150.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO expenses VALUES (1,'Office',15.0),(2,'Office',15.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Office",
+            30.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO expenses VALUES (1,NULL,9.99);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            null,
+            9.99
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-11",
+    "title": "Highlight Real Price Overrides",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "nullif",
+      "select"
+    ],
+    "prompt": "An items table stores id (integer), name (text), list_price (real), and override_price (real). Store staff sometimes re-type the exact same value as the list_price into override_price instead of leaving it empty, even though that is not a real override. Return id, name, and an effective_override column that shows override_price only when it actually differs from list_price, and shows an empty value whenever override_price equals list_price (or was never set). Order by id ascending.",
+    "hint": "There is a function that returns an empty value when two expressions are equal, and returns the first one otherwise.",
+    "schema_sql": "CREATE TABLE items (id INTEGER PRIMARY KEY, name TEXT, list_price REAL, override_price REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Lamp',20.0,15.0),(2,'Chair',50.0,50.0),(3,'Desk',80.0,NULL),(4,'Mug',5.0,4.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Lamp",
+            15.0
+          ],
+          [
+            2,
+            "Chair",
+            null
+          ],
+          [
+            3,
+            "Desk",
+            null
+          ],
+          [
+            4,
+            "Mug",
+            4.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Rug',30.0,30.0),(2,'Vase',12.0,10.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Rug",
+            null
+          ],
+          [
+            2,
+            "Vase",
+            10.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO items VALUES (1,'Shelf',22.0,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Shelf",
+            null
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-null-handling-12",
+    "title": "Total Compensation With Missing Bonus",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "NULL Handling",
+    "topics": [
+      "coalesce",
+      "arithmetic"
+    ],
+    "prompt": "A staff table stores id (integer), name (text), base_salary (real), and bonus (real). Bonus is left empty for any staff member who was not awarded one that year, rather than being stored as zero. Return id, name, and a total_comp column equal to base_salary plus bonus, treating a missing bonus as zero so the total is never left empty just because there was no bonus. Order by id ascending.",
+    "hint": "Adding an empty value to a number produces an empty result unless you substitute a default first.",
+    "schema_sql": "CREATE TABLE staff (id INTEGER PRIMARY KEY, name TEXT, base_salary REAL, bonus REAL);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO staff VALUES (1,'Owen',50000.0,2000.0),(2,'Pia',60000.0,NULL),(3,'Quin',55000.0,1500.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Owen",
+            52000.0
+          ],
+          [
+            2,
+            "Pia",
+            60000.0
+          ],
+          [
+            3,
+            "Quin",
+            56500.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO staff VALUES (1,'Rae',40000.0,NULL),(2,'Sol',45000.0,NULL);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Rae",
+            40000.0
+          ],
+          [
+            2,
+            "Sol",
+            45000.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO staff VALUES (1,'Tam',70000.0,5000.0);",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Tam",
+            75000.0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-01",
+    "title": "Email Domain Extraction",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "substr",
+      "instr",
+      "string-extraction"
+    ],
+    "prompt": "A table named `users` stores registered accounts with columns `id` (integer), `name` (text), and `email` (text, e.g. 'jane@acme.com'). Return each user's `name` along with just the domain portion of their email (everything after the '@' sign), ordered by `name` alphabetically.",
+    "hint": "Find the position of '@' with a lookup function, then take the substring that starts one character after it.",
+    "schema_sql": "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'Jane','jane@acme.com'),(2,'Bob','bob@widgets.io'),(3,'Amy','amy@acme.com');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Amy",
+            "acme.com"
+          ],
+          [
+            "Bob",
+            "widgets.io"
+          ],
+          [
+            "Jane",
+            "acme.com"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'Zed','zed@example.org');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Zed",
+            "example.org"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'Cal','cal@sub.mail.net'),(2,'Ann','ann@sub.mail.net'),(3,'Deb','deb@other.com'),(4,'Ben','ben@other.com');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Ann",
+            "sub.mail.net"
+          ],
+          [
+            "Ben",
+            "other.com"
+          ],
+          [
+            "Cal",
+            "sub.mail.net"
+          ],
+          [
+            "Deb",
+            "other.com"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-02",
+    "title": "Customer Name Case Cleanup",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "upper",
+      "trim",
+      "string-cleaning"
+    ],
+    "prompt": "A table named `customers` holds columns `id` (integer) and `full_name` (text). Because the data was imported from several sources, names have inconsistent capitalization and stray leading/trailing spaces (e.g. '  jane doe '). Return each customer's `id` and their `full_name` cleaned up: whitespace trimmed from both ends and every letter converted to uppercase. Order the results by `id`.",
+    "hint": "Chain a whitespace-trimming function with an uppercase-conversion function.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, full_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'  jane doe '),(2,'Bob SMITH'),(3,'cARL jones  ');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "JANE DOE"
+          ],
+          [
+            2,
+            "BOB SMITH"
+          ],
+          [
+            3,
+            "CARL JONES"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'ana lima');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "ANA LIMA"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'  ALREADY UPPER'),(2,'MiXeD CaSe  '),(3,'  trim   me  ');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "ALREADY UPPER"
+          ],
+          [
+            2,
+            "MIXED CASE"
+          ],
+          [
+            3,
+            "TRIM   ME"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-03",
+    "title": "Product SKU Hyphen Repair",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "replace",
+      "string-transformation"
+    ],
+    "prompt": "A table named `products` has columns `id` (integer) and `sku` (text). A data entry bug caused every hyphen in the SKU to be stored as a double underscore instead, e.g. 'AB__1234' should really be 'AB-1234'. Return each product's `id`, its original `sku`, and a repaired version of the sku with every occurrence of '__' replaced by '-'. Order the results by `id`.",
+    "hint": "Use a find-and-replace string function to swap the double underscore for a hyphen.",
+    "schema_sql": "CREATE TABLE products (id INTEGER PRIMARY KEY, sku TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'AB__1234'),(2,'XY__9900'),(3,'NOFIX123');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "AB__1234",
+            "AB-1234"
+          ],
+          [
+            2,
+            "XY__9900",
+            "XY-9900"
+          ],
+          [
+            3,
+            "NOFIX123",
+            "NOFIX123"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Z__1'),(2,'Q__2__9');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Z__1",
+            "Z-1"
+          ],
+          [
+            2,
+            "Q__2__9",
+            "Q-2-9"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'PLAIN-SKU');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "PLAIN-SKU",
+            "PLAIN-SKU"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-04",
+    "title": "Days Since Last Login",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "julianday",
+      "date-arithmetic",
+      "order-by"
+    ],
+    "prompt": "A table named `users` has columns `id` (integer), `username` (text), and `last_login` (text, a date in 'YYYY-MM-DD' form). Treating today's date as '2026-09-02', return each `username` along with the whole number of days that have passed since their `last_login`, ordered from the most days since login to the fewest.",
+    "hint": "Subtracting the Julian day number of one date from another gives the number of days between them.",
+    "schema_sql": "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, last_login TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'alice','2026-08-30'),(2,'bob','2026-07-01'),(3,'cara','2026-09-01');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "bob",
+            63
+          ],
+          [
+            "alice",
+            3
+          ],
+          [
+            "cara",
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'solo','2026-01-01');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "solo",
+            244
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO users VALUES (1,'dev','2026-09-02'),(2,'ela','2025-09-02');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "ela",
+            365
+          ],
+          [
+            "dev",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-05",
+    "title": "Signups by Day of Week",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "strftime",
+      "group-by",
+      "date-parts"
+    ],
+    "prompt": "A table named `signups` has columns `id` (integer) and `signup_date` (text, a date in 'YYYY-MM-DD' form). Return the day-of-week number (0 for Sunday through 6 for Saturday) and the count of signups that happened on that day of week, for every day of week that has at least one signup. Order the results by the day-of-week number ascending.",
+    "hint": "A date-formatting function can extract the weekday number directly from the date string; group by that value.",
+    "schema_sql": "CREATE TABLE signups (id INTEGER PRIMARY KEY, signup_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO signups VALUES (1,'2026-08-30'),(2,'2026-08-31'),(3,'2026-09-01'),(4,'2026-09-06');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO signups VALUES (1,'2026-09-05');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            6,
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO signups VALUES (1,'2026-01-01'),(2,'2026-01-08'),(3,'2026-01-03');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            4,
+            2
+          ],
+          [
+            6,
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-06",
+    "title": "Full Name Directory Listing",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "concatenation",
+      "order-by",
+      "string-formatting"
+    ],
+    "prompt": "A table named `employees` has columns `id` (integer), `first_name` (text), and `last_name` (text). For a printed staff directory, return each employee's `id` and a single formatted name column written as \"last_name, first_name\" (last name, a comma and a space, then first name). Order the results by last name, then by first name.",
+    "hint": "Build the display string with string concatenation, joining the last name, a literal ', ', and the first name.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Jane','Doe'),(2,'Bob','Ames'),(3,'Amy','Doe');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            2,
+            "Ames, Bob"
+          ],
+          [
+            3,
+            "Doe, Amy"
+          ],
+          [
+            1,
+            "Doe, Jane"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Solo','Person');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Person, Solo"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Carl','Zane'),(2,'Ann','Adams'),(3,'Ben','Adams');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            2,
+            "Adams, Ann"
+          ],
+          [
+            3,
+            "Adams, Ben"
+          ],
+          [
+            1,
+            "Zane, Carl"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-07",
+    "title": "Support Ticket Title Preview",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "substr",
+      "length",
+      "case-expression"
+    ],
+    "prompt": "A table named `tickets` has columns `id` (integer) and `title` (text). For a compact list view, return each ticket's `id` and a preview of its title: if the title is longer than 10 characters, show only the first 10 characters followed by '...'; otherwise show the title unchanged. Order the results by `id`.",
+    "hint": "Measure the title's length first, then decide with a conditional expression whether to shorten it.",
+    "schema_sql": "CREATE TABLE tickets (id INTEGER PRIMARY KEY, title TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'Login page is broken'),(2,'Short'),(3,'Exactly10c');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Login page..."
+          ],
+          [
+            2,
+            "Short"
+          ],
+          [
+            3,
+            "Exactly10c"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'Hi');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "Hi"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO tickets VALUES (1,'1234567890'),(2,'12345678901');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "1234567890"
+          ],
+          [
+            2,
+            "1234567890..."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-08",
+    "title": "Area Code Lookup",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "substr",
+      "string-extraction"
+    ],
+    "prompt": "A table named `contacts` has columns `id` (integer) and `phone` (text), always stored in the fixed form 'XXX-XXX-XXXX'. Return each contact's `id` and their area code (the first three digits of the phone number), ordered by `id`.",
+    "hint": "Since the area code always occupies the same fixed starting position and length, a simple substring slice works.",
+    "schema_sql": "CREATE TABLE contacts (id INTEGER PRIMARY KEY, phone TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'415-555-0100'),(2,'212-555-0199'),(3,'415-555-0200');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "415"
+          ],
+          [
+            2,
+            "212"
+          ],
+          [
+            3,
+            "415"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'909-000-1111');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "909"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO contacts VALUES (1,'800-111-2222'),(2,'800-333-4444');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "800"
+          ],
+          [
+            2,
+            "800"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-09",
+    "title": "Subscription Renewal Countdown",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "julianday",
+      "date-arithmetic",
+      "filtering"
+    ],
+    "prompt": "A table named `subscriptions` has columns `id` (integer), `customer` (text), and `renewal_date` (text, a date in 'YYYY-MM-DD' form). Treating today's date as '2026-09-02', return the `customer` name and the whole number of days remaining until `renewal_date`, but only for subscriptions whose renewal date is still in the future (more than 0 days away). Order the results by days remaining, soonest first.",
+    "hint": "Subtract today's Julian day number from the renewal date's Julian day number, then filter on that difference being positive.",
+    "schema_sql": "CREATE TABLE subscriptions (id INTEGER PRIMARY KEY, customer TEXT, renewal_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO subscriptions VALUES (1,'Acme','2026-09-10'),(2,'Globex','2026-08-15'),(3,'Initech','2026-09-05');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Initech",
+            3
+          ],
+          [
+            "Acme",
+            8
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO subscriptions VALUES (1,'Solo Corp','2026-09-02');",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO subscriptions VALUES (1,'Umbrella','2026-12-25'),(2,'Wayne','2027-01-01');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "Umbrella",
+            114
+          ],
+          [
+            "Wayne",
+            121
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-10",
+    "title": "Employee Hire Month Report",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "strftime",
+      "group-by",
+      "date-parts"
+    ],
+    "prompt": "A table named `employees` has columns `id` (integer), `name` (text), and `hire_date` (text, a date in 'YYYY-MM-DD' form, hires span several different years). Return the two-digit calendar month ('01' through '12') and the count of employees hired in that month, counting all years together, for every month that has at least one hire. Order the results by month ascending.",
+    "hint": "A date-formatting function can pull out just the month portion of the date; group by that value regardless of year.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, hire_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'A','2020-03-15'),(2,'B','2021-03-01'),(3,'C','2019-07-04'),(4,'D','2022-07-20');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "03",
+            2
+          ],
+          [
+            "07",
+            2
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Solo','2018-11-11');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "11",
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'X','2015-01-05'),(2,'Y','2016-01-09'),(3,'Z','2017-01-31');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            "01",
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-11",
+    "title": "Username Length Audit",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "length",
+      "filtering"
+    ],
+    "prompt": "A table named `accounts` has columns `id` (integer) and `username` (text). The system requires usernames to be at least 5 characters long. Return the `id` and `username` of every account whose username is shorter than 5 characters, ordered by `id`.",
+    "hint": "A string-length function tells you how many characters a username has; compare that against the minimum.",
+    "schema_sql": "CREATE TABLE accounts (id INTEGER PRIMARY KEY, username TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO accounts VALUES (1,'bob'),(2,'alice99'),(3,'zed'),(4,'quinn');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "bob"
+          ],
+          [
+            3,
+            "zed"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO accounts VALUES (1,'longenoughname');",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO accounts VALUES (1,'ab'),(2,'cd');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1,
+            "ab"
+          ],
+          [
+            2,
+            "cd"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-string-date-functions-12",
+    "title": "Order Placed on Weekend",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "String & Date Functions",
+    "topics": [
+      "strftime",
+      "date-parts",
+      "filtering"
+    ],
+    "prompt": "A table named `orders` has columns `id` (integer) and `order_date` (text, a date in 'YYYY-MM-DD' form). Return the `id` of every order that was placed on a Saturday or Sunday, ordered by `id`.",
+    "hint": "A date-formatting function can give you the weekday number for a date, where Sunday is 0 and Saturday is 6.",
+    "schema_sql": "CREATE TABLE orders (id INTEGER PRIMARY KEY, order_date TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'2026-08-29'),(2,'2026-08-30'),(3,'2026-08-31'),(4,'2026-09-01');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'2026-09-02');",
+        "order_sensitive": true,
+        "expected": []
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'2026-01-03'),(2,'2026-01-04');",
+        "order_sensitive": true,
+        "expected": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-01",
+    "title": "Books Priced Above Average",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "scalar-subquery",
+      "aggregate-functions",
+      "where-clause"
+    ],
+    "prompt": "A used bookstore keeps a books table with columns book_id (integer, primary key), title (text), and price (real, the selling price in dollars). Return the title and price of every book priced strictly above the average price of all books in the table. Order the results by price descending, and for books tied on price, order alphabetically by title.",
+    "hint": "Compute the average price first, then compare each book's price against it in the WHERE clause.",
+    "schema_sql": "CREATE TABLE books (\n    book_id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    price REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'Alpha',10),(2,'Beta',20),(3,'Gamma',30),(4,'Delta',15);",
+        "expected": [
+          [
+            "Gamma",
+            30.0
+          ],
+          [
+            "Beta",
+            20.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'Alpha',15),(2,'Beta',15),(3,'Gamma',15);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO books VALUES (1,'Zeta',9.99),(2,'Eta',25.50),(3,'Theta',25.50),(4,'Iota',5.00);",
+        "expected": [
+          [
+            "Eta",
+            25.5
+          ],
+          [
+            "Theta",
+            25.5
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-02",
+    "title": "Big-Ticket Orders",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "scalar-subquery",
+      "average",
+      "comparison"
+    ],
+    "prompt": "An orders table has columns order_id (integer, primary key), customer_name (text), and amount (real, the dollar total of that order). Return the order_id and customer_name of every order whose amount is greater than the average amount of all orders in the table. Order the results by amount descending, and for orders tied on amount, order by order_id ascending.",
+    "hint": "An aggregate function inside a subquery can give you a single average value to compare against.",
+    "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL,\n    amount REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Alice',100),(2,'Bob',400),(3,'Carla',250),(4,'Dan',50);",
+        "expected": [
+          [
+            2,
+            "Bob"
+          ],
+          [
+            3,
+            "Carla"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Eve',20),(2,'Fay',20),(3,'Gus',20);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (5,'Hal',500),(2,'Ivy',500),(9,'Joy',10),(1,'Kim',15);",
+        "expected": [
+          [
+            2,
+            "Ivy"
+          ],
+          [
+            5,
+            "Hal"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-03",
+    "title": "Vendors Supplying Expensive Parts",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "in-subquery",
+      "multi-table",
+      "filtering"
+    ],
+    "prompt": "A manufacturing database has vendors (vendor_id integer primary key, vendor_name text) and parts (part_id integer primary key, vendor_id integer, price real), where each part is supplied by one vendor and a vendor may supply many parts. Return the vendor_name of every vendor that supplies at least one part priced above 100, ordered alphabetically by vendor_name.",
+    "hint": "Filter parts by price first, then check which vendor_ids show up in that filtered subquery.",
+    "schema_sql": "CREATE TABLE vendors (\n    vendor_id INTEGER PRIMARY KEY,\n    vendor_name TEXT NOT NULL\n);\nCREATE TABLE parts (\n    part_id INTEGER PRIMARY KEY,\n    vendor_id INTEGER NOT NULL,\n    price REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Acme'),(2,'Bolt Co'),(3,'Crest');INSERT INTO parts VALUES (1,1,150),(2,1,20),(3,2,50),(4,3,200);",
+        "expected": [
+          [
+            "Acme"
+          ],
+          [
+            "Crest"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Delta'),(2,'Echo');INSERT INTO parts VALUES (1,1,50),(2,2,80);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO vendors VALUES (1,'Foxtrot'),(2,'Gamma'),(3,'Helix');INSERT INTO parts VALUES (1,1,101),(2,2,999),(3,2,5),(4,3,100);",
+        "expected": [
+          [
+            "Foxtrot"
+          ],
+          [
+            "Gamma"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-04",
+    "title": "Movies Above Average Rating",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "scalar-subquery",
+      "null-handling",
+      "aggregate-functions"
+    ],
+    "prompt": "A movies table has columns movie_id (integer, primary key), title (text), and rating (real, a score out of 10; some movies have not yet been rated and store NULL there). Return the title of every movie whose rating is above the average rating of all rated movies, ordered alphabetically by title. Unrated movies should not appear in the result.",
+    "hint": "Remember that AVG() automatically skips rows with a NULL rating.",
+    "schema_sql": "CREATE TABLE movies (\n    movie_id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    rating REAL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'Nova',9.0),(2,'Mira',5.0),(3,'Kilo',7.0),(4,'Unrated Film',NULL);",
+        "expected": [
+          [
+            "Nova"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'Only One',8.0);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO movies VALUES (1,'Anthem',6.0),(2,'Bravo',6.0),(3,'Cosmo',NULL),(4,'Delta',2.0);",
+        "expected": [
+          [
+            "Anthem"
+          ],
+          [
+            "Bravo"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-05",
+    "title": "Customers Who Spent Over $1000",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "derived-table",
+      "group-by",
+      "aggregate-functions"
+    ],
+    "prompt": "An orders table records individual purchases with columns order_id (integer, primary key), customer_name (text), and amount (real), where a customer can appear in many order rows. Return the customer_name and their total spending (the sum of amount across all their orders) for every customer whose total spending exceeds 1000. Order the results by total spending descending.",
+    "hint": "Group and sum inside a subquery in the FROM clause, then filter the outer query on that computed total.",
+    "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL,\n    amount REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Alice',600),(2,'Alice',500),(3,'Bob',200),(4,'Bob',100);",
+        "expected": [
+          [
+            "Alice",
+            1100.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Cara',300),(2,'Cara',400);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO orders VALUES (1,'Dee',1500),(2,'Eli',1500),(3,'Fon',10);",
+        "expected": [
+          [
+            "Dee",
+            1500.0
+          ],
+          [
+            "Eli",
+            1500.0
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-06",
+    "title": "Employees Not Assigned to Any Project",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "not-in",
+      "subquery",
+      "multi-table"
+    ],
+    "prompt": "A company tracks employees (employee_id integer primary key, name text) and project_assignments (assignment_id integer primary key, employee_id integer, project_name text), where an employee can be assigned to zero, one, or several projects. Return the name of every employee who is not currently assigned to any project, ordered alphabetically by name.",
+    "hint": "List every employee_id that has an assignment, then find employees whose id isn't in that list.",
+    "schema_sql": "CREATE TABLE employees (\n    employee_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\nCREATE TABLE project_assignments (\n    assignment_id INTEGER PRIMARY KEY,\n    employee_id INTEGER NOT NULL,\n    project_name TEXT NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Amir'),(2,'Bela'),(3,'Cleo');INSERT INTO project_assignments VALUES (1,1,'Apollo'),(2,1,'Zeus');",
+        "expected": [
+          [
+            "Bela"
+          ],
+          [
+            "Cleo"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Drew'),(2,'Ezra');INSERT INTO project_assignments VALUES (1,1,'Orion'),(2,2,'Titan');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Fern'),(2,'Gale');",
+        "expected": [
+          [
+            "Fern"
+          ],
+          [
+            "Gale"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-07",
+    "title": "Cheapest Product in Stock",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "scalar-subquery",
+      "min-function",
+      "ties"
+    ],
+    "prompt": "A products table has columns product_id (integer, primary key), product_name (text), and price (real). Return the product_name and price of the product(s) with the lowest price in the table; more than one product can tie for lowest. Order the results alphabetically by product_name.",
+    "hint": "Find the minimum price with a subquery, then match products whose price equals it exactly.",
+    "schema_sql": "CREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Widget',9.99),(2,'Gadget',4.50),(3,'Gizmo',7.25);",
+        "expected": [
+          [
+            "Gadget",
+            4.5
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Solo Item',12.00);",
+        "expected": [
+          [
+            "Solo Item",
+            12.0
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO products VALUES (1,'Zed',3.00),(2,'Alpha',3.00),(3,'Mid',6.00);",
+        "expected": [
+          [
+            "Alpha",
+            3.0
+          ],
+          [
+            "Zed",
+            3.0
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-08",
+    "title": "Regions With Above-Average Population",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "scalar-subquery",
+      "aggregate-functions",
+      "ordering"
+    ],
+    "prompt": "A regions table has columns region_id (integer, primary key), region_name (text), and population (integer). Return the region_name and population of every region whose population is greater than the average population across all regions. Order the results by population descending, and for regions tied on population, order alphabetically by region_name.",
+    "hint": "A subquery computing the overall average population can be used directly in a WHERE comparison.",
+    "schema_sql": "CREATE TABLE regions (\n    region_id INTEGER PRIMARY KEY,\n    region_name TEXT NOT NULL,\n    population INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO regions VALUES (1,'North',900000),(2,'South',100000),(3,'East',400000),(4,'West',300000);",
+        "expected": [
+          [
+            "North",
+            900000
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO regions VALUES (1,'Only Region',50000);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO regions VALUES (1,'Zeta',700000),(2,'Alpha',700000),(3,'Beta',100000);",
+        "expected": [
+          [
+            "Alpha",
+            700000
+          ],
+          [
+            "Zeta",
+            700000
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-09",
+    "title": "Warehouses With Zero Inventory",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "not-in",
+      "subquery",
+      "anti-join"
+    ],
+    "prompt": "A logistics system tracks warehouses (warehouse_id integer primary key, warehouse_name text) and inventory (inventory_id integer primary key, warehouse_id integer, item_name text, quantity integer), where each inventory row records one item stocked at one warehouse. Return the warehouse_name of every warehouse that currently holds no inventory items at all, ordered alphabetically by warehouse_name.",
+    "hint": "Get the set of warehouse_ids that appear in inventory, then look for warehouses missing from that set.",
+    "schema_sql": "CREATE TABLE warehouses (\n    warehouse_id INTEGER PRIMARY KEY,\n    warehouse_name TEXT NOT NULL\n);\nCREATE TABLE inventory (\n    inventory_id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    item_name TEXT NOT NULL,\n    quantity INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO warehouses VALUES (1,'Northgate'),(2,'Southport'),(3,'Eastfield');INSERT INTO inventory VALUES (1,1,'Boxes',10),(2,1,'Pallets',5);",
+        "expected": [
+          [
+            "Eastfield"
+          ],
+          [
+            "Southport"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO warehouses VALUES (1,'Bayview'),(2,'Rivergate');INSERT INTO inventory VALUES (1,1,'Crates',1),(2,2,'Bins',2);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO warehouses VALUES (1,'Lonewood'),(2,'Farhaven');",
+        "expected": [
+          [
+            "Farhaven"
+          ],
+          [
+            "Lonewood"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-10",
+    "title": "Days With Above-Average Ticket Sales",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "derived-table",
+      "group-by",
+      "scalar-subquery"
+    ],
+    "prompt": "A ticket_sales table records individual transactions with columns sale_id (integer, primary key), sale_date (text, in YYYY-MM-DD format), and quantity (integer, tickets sold in that transaction); a single date can have several transaction rows. Return the sale_date and the total quantity sold that day, for every day whose total exceeds the average of all days' totals. Order the results by total descending, and for days tied on total, order by sale_date ascending.",
+    "hint": "Build a derived table that sums quantity per date, then compare each day's total against the average of those daily totals.",
+    "schema_sql": "CREATE TABLE ticket_sales (\n    sale_id INTEGER PRIMARY KEY,\n    sale_date TEXT NOT NULL,\n    quantity INTEGER NOT NULL\n);\n",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO ticket_sales VALUES (1,'2026-01-01',50),(2,'2026-01-01',20),(3,'2026-01-02',10),(4,'2026-01-03',5);",
+        "expected": [
+          [
+            "2026-01-01",
+            70
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO ticket_sales VALUES (1,'2026-02-01',30),(2,'2026-02-02',30);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO ticket_sales VALUES (1,'2026-03-01',100),(2,'2026-03-02',100),(3,'2026-03-03',1),(4,'2026-03-03',1);",
+        "expected": [
+          [
+            "2026-03-01",
+            100
+          ],
+          [
+            "2026-03-02",
+            100
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-01",
+    "title": "Merged Contact List",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A shop keeps two separate lists of email addresses: `store_customers(id, email)` for people who have made a purchase, and `newsletter_subscribers(id, email)` for people who signed up for the newsletter. Some people appear on both lists. Write a query that returns every distinct email address that appears on at least one of the two lists, with no email listed twice, ordered alphabetically.",
+    "hint": "Combine the two SELECTs with the set operator that automatically removes duplicate rows.",
+    "schema_sql": "CREATE TABLE store_customers (id INTEGER PRIMARY KEY, email TEXT);\nCREATE TABLE newsletter_subscribers (id INTEGER PRIMARY KEY, email TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO store_customers VALUES (1,'ann@mail.com'),(2,'bo@mail.com'); INSERT INTO newsletter_subscribers VALUES (1,'bo@mail.com'),(2,'cy@mail.com');",
+        "expected": [
+          [
+            "ann@mail.com"
+          ],
+          [
+            "bo@mail.com"
+          ],
+          [
+            "cy@mail.com"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO store_customers VALUES (1,'pat@mail.com'); INSERT INTO newsletter_subscribers VALUES (1,'quinn@mail.com');",
+        "expected": [
+          [
+            "pat@mail.com"
+          ],
+          [
+            "quinn@mail.com"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO newsletter_subscribers VALUES (1,'zoe@mail.com'),(2,'zoe@mail.com');",
+        "expected": [
+          [
+            "zoe@mail.com"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-02",
+    "title": "All Task Assignees",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A project tracks who is assigned to engineering work in `engineering_assignments(id, person_name)` and who is assigned to design work in `design_assignments(id, person_name)`. Some people are assigned to both areas. Write a query that returns each distinct person_name who is assigned to at least one of the two areas, with no name repeated, ordered alphabetically.",
+    "hint": "UNION merges two SELECT results and drops duplicate rows on its own.",
+    "schema_sql": "CREATE TABLE engineering_assignments (id INTEGER PRIMARY KEY, person_name TEXT);\nCREATE TABLE design_assignments (id INTEGER PRIMARY KEY, person_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO engineering_assignments VALUES (1,'Maya'),(2,'Owen'); INSERT INTO design_assignments VALUES (1,'Owen'),(2,'Priya');",
+        "expected": [
+          [
+            "Maya"
+          ],
+          [
+            "Owen"
+          ],
+          [
+            "Priya"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO engineering_assignments VALUES (1,'Tom'); INSERT INTO design_assignments VALUES (1,'Tom');",
+        "expected": [
+          [
+            "Tom"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO design_assignments VALUES (1,'Uma');",
+        "expected": [
+          [
+            "Uma"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-03",
+    "title": "Combined Skill Tags",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A content site labels articles with tags in `blog_post_tags(id, tag)` and labels videos with tags in `video_tags(id, tag)`. The same tag can be used by both content types. Write a query that returns each distinct tag used by at least one blog post or video, with no tag repeated, ordered alphabetically.",
+    "hint": "A single UNION between the two tag lists gives you a deduplicated, combined set.",
+    "schema_sql": "CREATE TABLE blog_post_tags (id INTEGER PRIMARY KEY, tag TEXT);\nCREATE TABLE video_tags (id INTEGER PRIMARY KEY, tag TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO blog_post_tags VALUES (1,'python'),(2,'sql'); INSERT INTO video_tags VALUES (1,'sql'),(2,'docker');",
+        "expected": [
+          [
+            "docker"
+          ],
+          [
+            "python"
+          ],
+          [
+            "sql"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO blog_post_tags VALUES (1,'css'); INSERT INTO video_tags VALUES (1,'css');",
+        "expected": [
+          [
+            "css"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-04",
+    "title": "Combined Shipment Log",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union-all",
+      "duplicates",
+      "multi-table"
+    ],
+    "prompt": "A retailer ships orders from two warehouses. `east_warehouse_shipments(id, order_id)` logs one row per package shipped from the east warehouse, and `west_warehouse_shipments(id, order_id)` logs one row per package shipped from the west warehouse. The same order_id can appear more than once across the two logs if it was split into multiple packages. Write a query that returns the order_id of every package shipped from either warehouse, keeping every row (including repeats) rather than collapsing duplicates.",
+    "hint": "Use the set operator that keeps duplicates instead of removing them.",
+    "schema_sql": "CREATE TABLE east_warehouse_shipments (id INTEGER PRIMARY KEY, order_id INTEGER);\nCREATE TABLE west_warehouse_shipments (id INTEGER PRIMARY KEY, order_id INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO east_warehouse_shipments VALUES (1,101),(2,102); INSERT INTO west_warehouse_shipments VALUES (1,101),(2,103);",
+        "expected": [
+          [
+            101
+          ],
+          [
+            102
+          ],
+          [
+            101
+          ],
+          [
+            103
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO west_warehouse_shipments VALUES (1,5),(2,5);",
+        "expected": [
+          [
+            5
+          ],
+          [
+            5
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO east_warehouse_shipments VALUES (1,7);",
+        "expected": [
+          [
+            7
+          ]
+        ],
+        "order_sensitive": false
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-05",
+    "title": "Daily Sales Feed",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union-all",
+      "duplicates",
+      "multi-table"
+    ],
+    "prompt": "A cafe records each morning transaction in `morning_sales(id, amount)` and each afternoon transaction in `afternoon_sales(id, amount)`. Write a query that returns the amount of every transaction from the whole day, morning and afternoon combined, keeping every individual transaction even if two transactions happen to have the same amount.",
+    "hint": "Stack the two result sets with the set operator that does not deduplicate.",
+    "schema_sql": "CREATE TABLE morning_sales (id INTEGER PRIMARY KEY, amount INTEGER);\nCREATE TABLE afternoon_sales (id INTEGER PRIMARY KEY, amount INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO morning_sales VALUES (1,5),(2,10); INSERT INTO afternoon_sales VALUES (1,10),(2,20);",
+        "expected": [
+          [
+            5
+          ],
+          [
+            10
+          ],
+          [
+            10
+          ],
+          [
+            20
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO afternoon_sales VALUES (1,3);",
+        "expected": [
+          [
+            3
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO morning_sales VALUES (1,7),(2,7);",
+        "expected": [
+          [
+            7
+          ],
+          [
+            7
+          ]
+        ],
+        "order_sensitive": false
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-06",
+    "title": "Full Attendance Log",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "union-all",
+      "duplicates",
+      "multi-table"
+    ],
+    "prompt": "A gym logs morning check-ins in `gym_checkins_am(id, member_name)` and evening check-ins in `gym_checkins_pm(id, member_name)`. A member who visits twice in one day (once in the morning, once in the evening) should be counted as two separate visits. Write a query that returns member_name for every check-in of the day, morning and evening combined, without removing any repeated names.",
+    "hint": "Combine both logs with the set operator that preserves every row, even repeats.",
+    "schema_sql": "CREATE TABLE gym_checkins_am (id INTEGER PRIMARY KEY, member_name TEXT);\nCREATE TABLE gym_checkins_pm (id INTEGER PRIMARY KEY, member_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO gym_checkins_am VALUES (1,'Lee'),(2,'Sam'); INSERT INTO gym_checkins_pm VALUES (1,'Lee'),(2,'Nia');",
+        "expected": [
+          [
+            "Lee"
+          ],
+          [
+            "Sam"
+          ],
+          [
+            "Lee"
+          ],
+          [
+            "Nia"
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO gym_checkins_pm VALUES (1,'Kai'),(2,'Kai');",
+        "expected": [
+          [
+            "Kai"
+          ],
+          [
+            "Kai"
+          ]
+        ],
+        "order_sensitive": false
+      },
+      {
+        "seed_sql": "INSERT INTO gym_checkins_am VALUES (1,'Ori');",
+        "expected": [
+          [
+            "Ori"
+          ]
+        ],
+        "order_sensitive": false
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-07",
+    "title": "Customers Who Ordered Both Months",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "intersect",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A shop stores January purchases in `january_orders(id, customer_name)` and February purchases in `february_orders(id, customer_name)`; a customer can appear multiple times in a month if they ordered more than once. Write a query that returns the customer_name of every customer who placed at least one order in January AND at least one order in February, with each qualifying name listed only once, ordered alphabetically.",
+    "hint": "INTERSECT keeps only the rows that show up in both SELECT results, and dedupes them for you.",
+    "schema_sql": "CREATE TABLE january_orders (id INTEGER PRIMARY KEY, customer_name TEXT);\nCREATE TABLE february_orders (id INTEGER PRIMARY KEY, customer_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO january_orders VALUES (1,'Alice'),(2,'Bob'),(3,'Cara'); INSERT INTO february_orders VALUES (1,'Bob'),(2,'Cara'),(3,'Dan');",
+        "expected": [
+          [
+            "Bob"
+          ],
+          [
+            "Cara"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO january_orders VALUES (1,'Xen'),(2,'Yara'); INSERT INTO february_orders VALUES (1,'Zed');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO january_orders VALUES (1,'Quinn'),(2,'Quinn'); INSERT INTO february_orders VALUES (1,'Quinn');",
+        "expected": [
+          [
+            "Quinn"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-08",
+    "title": "Students Passing Both Exams",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "intersect",
+      "where",
+      "multi-table"
+    ],
+    "prompt": "A school records exam outcomes in `math_results(id, student_name, passed)` and `science_results(id, student_name, passed)`, where passed is 1 for a pass and 0 for a fail. Write a query that returns the student_name of every student who passed both the math exam and the science exam, with each name listed only once, ordered alphabetically.",
+    "hint": "Filter each SELECT down to passing rows first, then INTERSECT the two name lists.",
+    "schema_sql": "CREATE TABLE math_results (id INTEGER PRIMARY KEY, student_name TEXT, passed INTEGER);\nCREATE TABLE science_results (id INTEGER PRIMARY KEY, student_name TEXT, passed INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO math_results VALUES (1,'Amir',1),(2,'Beth',0),(3,'Cid',1); INSERT INTO science_results VALUES (1,'Amir',1),(2,'Beth',1),(3,'Cid',0);",
+        "expected": [
+          [
+            "Amir"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO math_results VALUES (1,'Dee',1); INSERT INTO science_results VALUES (1,'Dee',0);",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO math_results VALUES (1,'Eli',1),(2,'Eli',1); INSERT INTO science_results VALUES (1,'Eli',1);",
+        "expected": [
+          [
+            "Eli"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-09",
+    "title": "Members Active at Both Branches",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "intersect",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A gym chain has two locations. `downtown_branch_members(id, member_name)` lists everyone with a membership at the downtown branch, and `uptown_branch_members(id, member_name)` lists everyone with a membership at the uptown branch. Some members hold a membership at both locations. Write a query that returns the member_name of every member who belongs to both branches, with each name listed only once, ordered alphabetically.",
+    "hint": "INTERSECT the two membership lists to keep only names present in both.",
+    "schema_sql": "CREATE TABLE downtown_branch_members (id INTEGER PRIMARY KEY, member_name TEXT);\nCREATE TABLE uptown_branch_members (id INTEGER PRIMARY KEY, member_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO downtown_branch_members VALUES (1,'Ida'),(2,'Joy'); INSERT INTO uptown_branch_members VALUES (1,'Joy'),(2,'Kim');",
+        "expected": [
+          [
+            "Joy"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO downtown_branch_members VALUES (1,'Leo'); INSERT INTO uptown_branch_members VALUES (1,'Mia');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO downtown_branch_members VALUES (1,'Nora'); INSERT INTO uptown_branch_members VALUES (1,'Nora');",
+        "expected": [
+          [
+            "Nora"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-10",
+    "title": "Members Who Left",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "except",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "A club tracks active membership month by month. `last_month_members(id, member_name)` lists everyone who was active last month, and `this_month_members(id, member_name)` lists everyone active this month. Write a query that returns the member_name of every member who was active last month but is no longer active this month, ordered alphabetically.",
+    "hint": "Subtract this month's names from last month's names using the set operator built for that.",
+    "schema_sql": "CREATE TABLE last_month_members (id INTEGER PRIMARY KEY, member_name TEXT);\nCREATE TABLE this_month_members (id INTEGER PRIMARY KEY, member_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO last_month_members VALUES (1,'Ana'),(2,'Bri'),(3,'Cho'); INSERT INTO this_month_members VALUES (1,'Bri'),(2,'Dax');",
+        "expected": [
+          [
+            "Ana"
+          ],
+          [
+            "Cho"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO last_month_members VALUES (1,'Eve'); INSERT INTO this_month_members VALUES (1,'Eve');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO last_month_members VALUES (1,'Fay'),(2,'Fay');",
+        "expected": [
+          [
+            "Fay"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-11",
+    "title": "Unfilled Job Requisitions",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "except",
+      "distinct",
+      "multi-table"
+    ],
+    "prompt": "An HR system logs every job requisition opened this year in `open_positions(id, title)`, and every requisition title that has since been filled in `filled_positions(id, title)`. Write a query that returns the title of every requisition that is still unfilled, ordered alphabetically.",
+    "hint": "Use the set operator that returns rows from the first query with matches in the second removed.",
+    "schema_sql": "CREATE TABLE open_positions (id INTEGER PRIMARY KEY, title TEXT);\nCREATE TABLE filled_positions (id INTEGER PRIMARY KEY, title TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO open_positions VALUES (1,'Recruiter'),(2,'Analyst'),(3,'Engineer'); INSERT INTO filled_positions VALUES (1,'Analyst');",
+        "expected": [
+          [
+            "Engineer"
+          ],
+          [
+            "Recruiter"
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO open_positions VALUES (1,'Nurse'); INSERT INTO filled_positions VALUES (1,'Nurse');",
+        "expected": [],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO open_positions VALUES (1,'Chef');",
+        "expected": [
+          [
+            "Chef"
+          ]
+        ],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-11",
+    "title": "Students Scoring Below the Class Average",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "subquery",
+      "aggregate"
+    ],
+    "prompt": "Table `students(id, name, score)`.\n\nReturn the `name` of every student whose score is below the class average, ordered alphabetically.",
+    "hint": "WHERE score < (SELECT AVG(score) FROM students).",
+    "schema_sql": "CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, score INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Alice',90),(2,'Bob',60),(3,'Cara',70);",
+        "expected": [
+          [
+            "Bob"
+          ],
+          [
+            "Cara"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Dan',50),(2,'Eve',50),(3,'Fay',100);",
+        "expected": [
+          [
+            "Dan"
+          ],
+          [
+            "Eve"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO students VALUES (1,'Gus',80),(2,'Hank',80);",
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-subqueries-basics-12",
+    "title": "Suppliers With No Active Contracts",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Subqueries Basics",
+    "topics": [
+      "subquery",
+      "not-in"
+    ],
+    "prompt": "Tables `suppliers(id, name)` and `contracts(id, supplier_id, active)` where `active` is 1 or 0.\n\nReturn the `name` of every supplier who has no active contract, ordered alphabetically.",
+    "hint": "WHERE id NOT IN (SELECT supplier_id FROM contracts WHERE active = 1).",
+    "schema_sql": "CREATE TABLE suppliers (id INTEGER PRIMARY KEY, name TEXT); CREATE TABLE contracts (id INTEGER PRIMARY KEY, supplier_id INTEGER, active INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Acme'),(2,'Globex'); INSERT INTO contracts VALUES (1,1,1),(2,2,0);",
+        "expected": [
+          [
+            "Globex"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Umbrella'),(2,'Initech'),(3,'Hooli'); INSERT INTO contracts VALUES (1,1,1),(2,2,1);",
+        "expected": [
+          [
+            "Hooli"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO suppliers VALUES (1,'Vandelay'); INSERT INTO contracts VALUES (1,1,1);",
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-set-operations-12",
+    "title": "Products Sold In Store But Not Online",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Set Operations",
+    "topics": [
+      "except",
+      "set-operations"
+    ],
+    "prompt": "Tables `store_sales(id, product_name)` and `online_sales(id, product_name)` log each sale.\n\nReturn the names of products that have been sold in-store but never sold online, with no duplicates, ordered alphabetically.",
+    "hint": "EXCEPT already removes duplicates and matches, so a plain SELECT ... EXCEPT SELECT ... does most of the work.",
+    "schema_sql": "CREATE TABLE store_sales (id INTEGER PRIMARY KEY, product_name TEXT); CREATE TABLE online_sales (id INTEGER PRIMARY KEY, product_name TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO store_sales VALUES (1,'Widget'),(2,'Gadget'),(3,'Widget'); INSERT INTO online_sales VALUES (1,'Widget');",
+        "expected": [
+          [
+            "Gadget"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO store_sales VALUES (1,'Pen'),(2,'Pencil'),(3,'Eraser'); INSERT INTO online_sales VALUES (1,'Pencil');",
+        "expected": [
+          [
+            "Eraser"
+          ],
+          [
+            "Pen"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO store_sales VALUES (1,'Mug'); INSERT INTO online_sales VALUES (1,'Mug');",
+        "expected": []
+      }
+    ]
   }
 ]
