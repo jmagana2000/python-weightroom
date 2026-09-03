@@ -10,11 +10,14 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 
 from runner import run_submission
+from sql_runner import run_sql_submission
 
 BASE_DIR = Path(__file__).parent
 EXERCISES_DIR = BASE_DIR / "exercises"
 PROGRESS_FILE = BASE_DIR / "data" / "progress.json"
-LEVELS = ["novice", "intermediate", "advanced", "expert"]
+PY_LEVELS = ["novice", "intermediate", "advanced", "expert"]
+SQL_LEVELS = ["sql-novice", "sql-intermediate", "sql-advanced", "sql-expert"]
+LEVELS = PY_LEVELS + SQL_LEVELS
 LEVEL_UP_THRESHOLD = 0.8
 PORT = 5050
 
@@ -49,6 +52,7 @@ def load_progress() -> dict:
     else:
         progress = json.loads(PROGRESS_FILE.read_text())
     progress.setdefault("review", {})  # ex_id -> {"interval_days", "next_due"}
+    progress.setdefault("sql_level", "sql-novice")  # SQL track's own current level
     return progress
 
 
@@ -112,7 +116,10 @@ def submit_exercise(exercise_id):
         return jsonify({"error": "not found"}), 404
 
     code = request.get_json(force=True).get("code", "")
-    outcome = run_submission(code, ex["func_name"], ex["tests"])
+    if ex.get("language") == "sql":
+        outcome = run_sql_submission(code, ex["schema_sql"], ex["tests"])
+    else:
+        outcome = run_submission(code, ex["func_name"], ex["tests"])
 
     progress = load_progress()
     attempts = progress["attempts"].setdefault(exercise_id, 0)
@@ -123,9 +130,10 @@ def submit_exercise(exercise_id):
     )
     level_up = None
     already_solved = exercise_id in progress["solved"]
+    chain = SQL_LEVELS if ex["level"] in SQL_LEVELS else PY_LEVELS
     if all_passed and not already_solved:
         progress["solved"].append(exercise_id)
-        level_up = maybe_suggest_level_up(progress)
+        level_up = maybe_suggest_level_up(progress, chain)
     if all_passed:
         schedule_review(progress, exercise_id, is_first_solve=not already_solved)
     elif already_solved:
@@ -168,9 +176,9 @@ def due_review_ids(progress: dict) -> list[str]:
     )
 
 
-def maybe_suggest_level_up(progress: dict) -> str | None:
-    current = progress["level"]
-    if current not in LEVELS or current == LEVELS[-1]:
+def maybe_suggest_level_up(progress: dict, chain: list[str]) -> str | None:
+    current = progress["sql_level"] if chain is SQL_LEVELS else progress["level"]
+    if current not in chain or current == chain[-1]:
         return None
     total = len(load_exercises(current))
     if total == 0:
@@ -179,7 +187,7 @@ def maybe_suggest_level_up(progress: dict) -> str | None:
         1 for ex_id in progress["solved"] if ex_id.startswith(current + "-")
     )
     if solved_at_level / total >= LEVEL_UP_THRESHOLD:
-        return LEVELS[LEVELS.index(current) + 1]
+        return chain[chain.index(current) + 1]
     return None
 
 
@@ -196,7 +204,10 @@ def set_progress():
     if level not in LEVELS:
         return jsonify({"error": f"level must be one of {LEVELS}"}), 400
     progress = load_progress()
-    progress["level"] = level
+    if level in SQL_LEVELS:
+        progress["sql_level"] = level
+    else:
+        progress["level"] = level
     save_progress(progress)
     return jsonify({**progress, "due_for_review": due_review_ids(progress)})
 

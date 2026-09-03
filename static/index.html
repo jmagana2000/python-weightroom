@@ -23,11 +23,21 @@
     <div class="header-right">
       <div id="due-badge" class="due-badge hidden"></div>
       <div id="level-progress" class="level-progress"></div>
+      <div class="level-tabs" id="track-tabs">
+        <button class="level-tab" data-track="python">🐍 Python</button>
+        <button class="level-tab" data-track="sql">🗄️ SQL</button>
+      </div>
       <div class="level-tabs" id="level-tabs">
         <button class="level-tab" data-level="novice">Novice</button>
         <button class="level-tab" data-level="intermediate">Intermediate</button>
         <button class="level-tab" data-level="advanced">Advanced</button>
         <button class="level-tab" data-level="expert">Expert</button>
+      </div>
+      <div class="level-tabs hidden" id="sql-level-tabs">
+        <button class="level-tab" data-level="sql-novice">Novice</button>
+        <button class="level-tab" data-level="sql-intermediate">Intermediate</button>
+        <button class="level-tab" data-level="sql-advanced">Advanced</button>
+        <button class="level-tab" data-level="sql-expert">Expert</button>
       </div>
     </div>
   </header>
@@ -84,6 +94,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

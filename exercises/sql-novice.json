@@ -1,0 +1,146 @@
+[
+  {
+    "id": "sql-novice-01-active-employees",
+    "title": "Active Employees by Salary",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "SELECT & Filtering",
+    "topics": [
+      "select",
+      "where",
+      "order-by"
+    ],
+    "prompt": "Table `employees(id, name, dept, salary, active)` \u2014 `active` is 1 or 0.\n\nWrite a query that returns the `name` and `salary` of every active employee, ordered by `salary` from highest to lowest.",
+    "hint": "WHERE active = 1, then ORDER BY salary DESC.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, dept TEXT, salary INTEGER, active INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Alice','Eng',90000,1),(2,'Bob','Eng',70000,0),(3,'Cara','Sales',85000,1);",
+        "expected": [
+          [
+            "Alice",
+            90000
+          ],
+          [
+            "Cara",
+            85000
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Dan','Ops',50000,1),(2,'Eve','Ops',60000,1),(3,'Fay','Ops',40000,0);",
+        "expected": [
+          [
+            "Eve",
+            60000
+          ],
+          [
+            "Dan",
+            50000
+          ]
+        ],
+        "order_sensitive": true
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Gus','X',30000,0);",
+        "expected": [],
+        "order_sensitive": true
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-02-department-headcount",
+    "title": "Department Headcount",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Aggregates & GROUP BY",
+    "topics": [
+      "group-by",
+      "count"
+    ],
+    "prompt": "Table `employees(id, name, dept)`.\n\nReturn each `dept` and the count of employees in it, as columns `dept, headcount`.",
+    "hint": "GROUP BY dept, then COUNT(*).",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, dept TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'A','Eng'),(2,'B','Eng'),(3,'C','Sales');",
+        "expected": [
+          [
+            "Eng",
+            2
+          ],
+          [
+            "Sales",
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'A','Ops'),(2,'B','Ops'),(3,'C','Ops'),(4,'D','HR');",
+        "expected": [
+          [
+            "Ops",
+            3
+          ],
+          [
+            "HR",
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'A','X');",
+        "expected": [
+          [
+            "X",
+            1
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-novice-03-highest-paid",
+    "title": "Highest-Paid Employee",
+    "level": "sql-novice",
+    "language": "sql",
+    "cluster": "Sorting & Limiting",
+    "topics": [
+      "order-by",
+      "limit"
+    ],
+    "prompt": "Table `employees(id, name, salary)`.\n\nReturn the `name` of the single highest-paid employee.",
+    "hint": "ORDER BY salary DESC, then LIMIT 1.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, salary INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Alice',90000),(2,'Bob',70000);",
+        "expected": [
+          [
+            "Alice"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Cara',50000),(2,'Dan',95000),(3,'Eve',60000);",
+        "expected": [
+          [
+            "Dan"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Fay',100),(2,'Gus',200);",
+        "expected": [
+          [
+            "Gus"
+          ]
+        ]
+      }
+    ]
+  }
+]

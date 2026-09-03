@@ -1,4 +1,6 @@
+const trackTabs = document.getElementById("track-tabs");
 const levelTabs = document.getElementById("level-tabs");
+const sqlLevelTabs = document.getElementById("sql-level-tabs");
 const levelProgress = document.getElementById("level-progress");
 const dueBadge = document.getElementById("due-badge");
 const exerciseList = document.getElementById("exercise-list");
@@ -24,6 +26,11 @@ let progress = null;
 let currentExercise = null;
 let exerciseCache = new Map();
 let editor = null;
+let currentTrack = "python";
+
+function currentLevel() {
+  return currentTrack === "sql" ? progress.sql_level : progress.level;
+}
 
 async function api(path, options) {
   let res;
@@ -71,13 +78,21 @@ async function loadProgress() {
 }
 
 function renderLevelTabs() {
+  trackTabs.querySelectorAll(".level-tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.track === currentTrack);
+  });
+  levelTabs.classList.toggle("hidden", currentTrack !== "python");
+  sqlLevelTabs.classList.toggle("hidden", currentTrack !== "sql");
   levelTabs.querySelectorAll(".level-tab").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.level === progress.level);
+  });
+  sqlLevelTabs.querySelectorAll(".level-tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.level === progress.sql_level);
   });
 }
 
 async function renderLevelProgress() {
-  const exercises = await getExercisesForLevel(progress.level);
+  const exercises = await getExercisesForLevel(currentLevel());
   const solvedCount = exercises.filter((e) => progress.solved.includes(e.id)).length;
   levelProgress.textContent = `${solvedCount} / ${exercises.length} solved`;
 }
@@ -219,9 +234,14 @@ async function openExercise(id) {
       .join("");
     exPrompt.textContent = ex.prompt;
 
-    const args = ex.example.args.map(formatExampleValue).join(", ");
-    exExample.textContent =
-      `${ex.func_name}(${args})\n-> ${formatExampleValue(ex.example.expected)}`;
+    if (ex.language === "sql") {
+      exExample.textContent =
+        `${ex.schema_sql}\n\n${ex.example.seed_sql}\n\n-- your query should return:\n${formatExampleValue(ex.example.expected)}`;
+    } else {
+      const args = ex.example.args.map(formatExampleValue).join(", ");
+      exExample.textContent =
+        `${ex.func_name}(${args})\n-> ${formatExampleValue(ex.example.expected)}`;
+    }
     exHiddenCount.textContent =
       ex.hidden_test_count > 0
         ? `+ ${ex.hidden_test_count} more hidden test${ex.hidden_test_count === 1 ? "" : "s"} run on submit`
@@ -240,6 +260,7 @@ async function openExercise(id) {
     exResults.innerHTML = "";
     emptyState.classList.add("hidden");
     workspace.classList.remove("hidden");
+    getEditor().setOption("mode", ex.language === "sql" ? "text/x-sqlite" : "python");
     getEditor().setValue(ex.starter_code);
     getEditor().refresh();
   } catch (err) {
@@ -277,8 +298,8 @@ async function runTests() {
       // schedule changed either way) -- refresh progress from the server
       // rather than guessing the new review state client-side.
       progress = await api("/api/progress");
-      exerciseCache.delete(progress.level);
-      await loadExercises(progress.level);
+      exerciseCache.delete(currentLevel());
+      await loadExercises(currentLevel());
     }
     if (res.level_up_available) {
       levelUpBanner.textContent = `Ready for ${res.level_up_available} — click to switch`;
@@ -312,12 +333,17 @@ function renderResults(res) {
   }${passCount} / ${results.length} tests passed</div>`;
   const rows = results
     .map((r, i) => {
+      const inputs =
+        r.seed_sql !== undefined
+          ? `with data ${JSON.stringify(r.seed_sql)}`
+          : `args ${JSON.stringify(r.args)}`;
       if (r.passed) {
-        return `<div class="test-row pass"><span class="test-icon">✓</span><span>Test ${i + 1}</span></div>`;
+        const detail = `${inputs} → got ${JSON.stringify(r.actual)}`;
+        return `<div class="test-row pass"><span class="test-icon">✓</span><span>Test ${i + 1}<div class="test-detail">${escapeHtml(detail)}</div></span></div>`;
       }
       const detail = r.error
-        ? r.error
-        : `got ${JSON.stringify(r.actual)}, expected ${JSON.stringify(r.expected)}`;
+        ? `${inputs} → ${r.error}`
+        : `${inputs} → got ${JSON.stringify(r.actual)}, expected ${JSON.stringify(r.expected)}`;
       return `<div class="test-row fail"><span class="test-icon">✕</span><span>Test ${i + 1}<div class="test-detail">${escapeHtml(detail)}</div></span></div>`;
     })
     .join("");
@@ -353,7 +379,23 @@ async function setLevel(level) {
   await loadExercises(level);
 }
 
+async function switchTrack(track) {
+  currentTrack = track;
+  currentExercise = null;
+  renderLevelTabs();
+  levelUpBanner.classList.add("hidden");
+  workspace.classList.add("hidden");
+  emptyState.classList.remove("hidden");
+  await loadExercises(currentLevel());
+}
+
+trackTabs.querySelectorAll(".level-tab").forEach((btn) => {
+  btn.onclick = () => switchTrack(btn.dataset.track);
+});
 levelTabs.querySelectorAll(".level-tab").forEach((btn) => {
+  btn.onclick = () => setLevel(btn.dataset.level);
+});
+sqlLevelTabs.querySelectorAll(".level-tab").forEach((btn) => {
   btn.onclick = () => setLevel(btn.dataset.level);
 });
 runBtn.onclick = runTests;
