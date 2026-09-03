@@ -313,7 +313,8 @@ function renderResults(res) {
   const rows = results
     .map((r, i) => {
       if (r.passed) {
-        return `<div class="test-row pass"><span class="test-icon">✓</span><span>Test ${i + 1}</span></div>`;
+        const detail = `got ${JSON.stringify(r.actual)}`;
+        return `<div class="test-row pass"><span class="test-icon">✓</span><span>Test ${i + 1}<div class="test-detail">${escapeHtml(detail)}</div></span></div>`;
       }
       const detail = r.error
         ? r.error
