@@ -1,0 +1,125 @@
+[
+  {
+    "id": "sql-expert-01-median-salary",
+    "title": "Median Salary",
+    "level": "sql-expert",
+    "language": "sql",
+    "cluster": "Median & Percentile Queries",
+    "topics": [
+      "median",
+      "window-functions"
+    ],
+    "prompt": "Table `employees(id, salary)`.\n\nReturn the median salary as a single value in a column named `median`. If there's an even number of employees, average the two middle values.",
+    "hint": "Rank rows by salary and by COUNT(*) OVER (), then AVG() the row(s) at position (cnt+1)/2 and (cnt+2)/2 (integer division) \u2014 that's one row for odd counts, two for even.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, salary INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,10),(2,20),(3,30);",
+        "expected": [
+          [
+            20.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,10),(2,20),(3,30),(4,40);",
+        "expected": [
+          [
+            25.0
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,42);",
+        "expected": [
+          [
+            42.0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-expert-02-session-count",
+    "title": "Count User Sessions",
+    "level": "sql-expert",
+    "language": "sql",
+    "cluster": "Sessionization",
+    "topics": [
+      "sessionization",
+      "window-functions",
+      "lag"
+    ],
+    "prompt": "Table `events(user_id, event_time)` with `event_time` as 'YYYY-MM-DD HH:MM:SS'.\n\nA new session starts whenever the gap since a user's previous event exceeds 30 minutes (or it's their first event). Return each `user_id` and their total number of sessions.",
+    "hint": "LAG(event_time) OVER (PARTITION BY user_id ORDER BY event_time), flag a new session when the gap (via strftime('%s', ...)) exceeds 1800 seconds or there's no previous row, then SUM the flags per user.",
+    "schema_sql": "CREATE TABLE events (user_id INTEGER, event_time TEXT);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO events VALUES (1,'2024-01-01 10:00:00'),(1,'2024-01-01 10:10:00'),(1,'2024-01-01 11:00:00');",
+        "expected": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO events VALUES (2,'2024-01-01 09:00:00'),(2,'2024-01-01 09:15:00'),(2,'2024-01-01 09:29:00');",
+        "expected": [
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO events VALUES (3,'2024-01-01 08:00:00'),(3,'2024-01-01 09:00:00'),(3,'2024-01-01 10:00:00');",
+        "expected": [
+          [
+            3,
+            3
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-expert-03-earns-more-than-manager",
+    "title": "Employees Who Out-Earn Their Manager",
+    "level": "sql-expert",
+    "language": "sql",
+    "cluster": "Adjacency & Graph-style Queries",
+    "topics": [
+      "self-join",
+      "adjacency"
+    ],
+    "prompt": "Table `employees(id, name, salary, manager_id)`.\n\nReturn the `name` of every employee who earns more than their manager. Employees with no manager are excluded.",
+    "hint": "Self-join employees to itself on manager_id = id, compare salaries.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, salary INTEGER, manager_id INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Boss',100,NULL),(2,'Rich',150,1),(3,'Poor',50,1);",
+        "expected": [
+          [
+            "Rich"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Chief',200,NULL),(2,'A',100,1),(3,'B',300,1),(4,'C',50,2);",
+        "expected": [
+          [
+            "B"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Top',500,NULL),(2,'Sub',400,1);",
+        "expected": []
+      }
+    ]
+  }
+]

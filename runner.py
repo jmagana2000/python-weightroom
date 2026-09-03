@@ -44,17 +44,17 @@ for _t in _tests:
         except Exception as _e:
             _names = [c.__name__ for c in type(_e).__mro__]
             if _wanted in _names:
-                _results.append({{"passed": True, "actual": f"raised {{type(_e).__name__}}", "expected": f"raises {{_wanted}}"}})
+                _results.append({{"passed": True, "actual": f"raised {{type(_e).__name__}}", "expected": f"raises {{_wanted}}", "args": _t["args"]}})
             else:
-                _results.append({{"passed": False, "error": f"raised {{type(_e).__name__}}: {{_e}} (expected {{_wanted}})", "expected": f"raises {{_wanted}}"}})
+                _results.append({{"passed": False, "error": f"raised {{type(_e).__name__}}: {{_e}} (expected {{_wanted}})", "expected": f"raises {{_wanted}}", "args": _t["args"]}})
         else:
-            _results.append({{"passed": False, "error": f"no exception raised (expected {{_wanted}})", "expected": f"raises {{_wanted}}"}})
+            _results.append({{"passed": False, "error": f"no exception raised (expected {{_wanted}})", "expected": f"raises {{_wanted}}", "args": _t["args"]}})
         continue
     try:
         _actual = _normalize({func_name}(*_t["args"]))
-        _results.append({{"passed": _actual == _t["expected"], "actual": _actual, "expected": _t["expected"]}})
+        _results.append({{"passed": _actual == _t["expected"], "actual": _actual, "expected": _t["expected"], "args": _t["args"]}})
     except Exception as _e:
-        _results.append({{"passed": False, "error": f"{{type(_e).__name__}}: {{_e}}", "expected": _t["expected"]}})
+        _results.append({{"passed": False, "error": f"{{type(_e).__name__}}: {{_e}}", "expected": _t["expected"], "args": _t["args"]}})
 
 print("{sentinel}" + json.dumps({{"results": _results}}))
 """

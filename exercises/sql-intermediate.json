@@ -1,0 +1,136 @@
+[
+  {
+    "id": "sql-intermediate-01-orders-with-customers",
+    "title": "Big Orders with Customer Names",
+    "level": "sql-intermediate",
+    "language": "sql",
+    "cluster": "Multi-table Joins",
+    "topics": [
+      "join"
+    ],
+    "prompt": "Tables `customers(id, name)` and `orders(id, customer_id, amount)`.\n\nReturn the order `id`, the customer's `name`, and the `amount` for every order with `amount` greater than 100.",
+    "hint": "JOIN orders to customers on customer_id = customers.id, filter amount > 100.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT); CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, amount INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice'),(2,'Bob'); INSERT INTO orders VALUES (1,1,150),(2,2,50),(3,1,90);",
+        "expected": [
+          [
+            1,
+            "Alice",
+            150
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Cara'); INSERT INTO orders VALUES (1,1,200),(2,1,300);",
+        "expected": [
+          [
+            1,
+            "Cara",
+            200
+          ],
+          [
+            2,
+            "Cara",
+            300
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Dan'); INSERT INTO orders VALUES (1,1,10);",
+        "expected": []
+      }
+    ]
+  },
+  {
+    "id": "sql-intermediate-02-top-earner-per-dept",
+    "title": "Top Earner in Each Department",
+    "level": "sql-intermediate",
+    "language": "sql",
+    "cluster": "Window Functions Intro",
+    "topics": [
+      "window-functions",
+      "rank"
+    ],
+    "prompt": "Table `employees(id, name, dept, salary)`. Assume no salary ties within a department.\n\nReturn the `dept` and `name` of the highest-paid employee in each department.",
+    "hint": "RANK() OVER (PARTITION BY dept ORDER BY salary DESC), then filter rank = 1.",
+    "schema_sql": "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, dept TEXT, salary INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Alice','Eng',90000),(2,'Bob','Eng',70000),(3,'Cara','Sales',85000);",
+        "expected": [
+          [
+            "Eng",
+            "Alice"
+          ],
+          [
+            "Sales",
+            "Cara"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Dan','Ops',50000),(2,'Eve','Ops',60000),(3,'Fay','HR',40000);",
+        "expected": [
+          [
+            "Ops",
+            "Eve"
+          ],
+          [
+            "HR",
+            "Fay"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO employees VALUES (1,'Gus','X',100),(2,'Hank','X',200);",
+        "expected": [
+          [
+            "X",
+            "Hank"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sql-intermediate-03-customers-without-orders",
+    "title": "Customers Without Orders",
+    "level": "sql-intermediate",
+    "language": "sql",
+    "cluster": "Existence & Anti-Join Patterns",
+    "topics": [
+      "anti-join",
+      "subquery"
+    ],
+    "prompt": "Tables `customers(id, name)` and `orders(id, customer_id)`.\n\nReturn the `name` of every customer who has never placed an order.",
+    "hint": "WHERE id NOT IN (SELECT customer_id FROM orders), or a LEFT JOIN ... IS NULL.",
+    "schema_sql": "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT); CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER);",
+    "starter_code": "-- write your query here\n",
+    "tests": [
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Alice'),(2,'Bob'); INSERT INTO orders VALUES (1,1);",
+        "expected": [
+          [
+            "Bob"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Cara'),(2,'Dan'),(3,'Eve'); INSERT INTO orders VALUES (1,1),(2,3);",
+        "expected": [
+          [
+            "Dan"
+          ]
+        ]
+      },
+      {
+        "seed_sql": "INSERT INTO customers VALUES (1,'Fay'); INSERT INTO orders VALUES (1,1);",
+        "expected": []
+      }
+    ]
+  }
+]
