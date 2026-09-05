@@ -173,6 +173,8 @@ body:has(.banner:not(.hidden)) main { height: calc(100vh - 53px - 37px); }
 }
 #exercise-search::placeholder { color: var(--text-faint); }
 
+.expand-all { display: block; margin: 8px 0 0 auto; font-size: 12px; }
+
 #exercise-list {
   flex: 1;
   overflow-y: auto;
