@@ -5,6 +5,7 @@ const levelProgress = document.getElementById("level-progress");
 const dueBadge = document.getElementById("due-badge");
 const exerciseList = document.getElementById("exercise-list");
 const exerciseSearch = document.getElementById("exercise-search");
+const expandAllBtn = document.getElementById("expand-all-btn");
 const workspace = document.getElementById("workspace");
 const emptyState = document.getElementById("empty-state");
 const exTitle = document.getElementById("ex-title");
@@ -67,7 +68,19 @@ function getEditor() {
       indentUnit: 4,
       tabSize: 4,
       indentWithTabs: false,
-      extraKeys: { Tab: (cm) => cm.replaceSelection("    ", "end") },
+      extraKeys: {
+        Tab: (cm) => cm.replaceSelection("    ", "end"),
+        "Cmd-Enter": runTests,
+        "Ctrl-Enter": runTests,
+      },
+    });
+    // Ignore "setValue" changes -- those are us loading starter code or a
+    // draft, not the user typing. Without this, Reset would immediately
+    // re-save starter_code as a draft and clearDraft would be pointless.
+    editor.on("change", (cm, change) => {
+      if (currentExercise && change.origin !== "setValue") {
+        saveDraft(currentExercise.id, cm.getValue());
+      }
     });
   }
   return editor;
@@ -142,6 +155,7 @@ async function loadExercises(level) {
     section.open = isClusterOpen(level, cluster, hasActive);
     section.addEventListener("toggle", () => {
       localStorage.setItem(clusterOpenKey(level, cluster), section.open ? "1" : "0");
+      syncExpandAllLabel();
     });
 
     const summary = document.createElement("summary");
@@ -195,6 +209,7 @@ function filterExercises(rawQuery) {
       section.classList.remove("hidden");
       section.querySelectorAll(".exercise-item").forEach((item) => item.classList.remove("hidden"));
     });
+    syncExpandAllLabel();
     return;
   }
   sections.forEach((section) => {
@@ -207,7 +222,26 @@ function filterExercises(rawQuery) {
     section.classList.toggle("hidden", !anyVisible);
     if (anyVisible) section.open = true;
   });
+  syncExpandAllLabel();
 }
+
+function visibleSections() {
+  return [...exerciseList.querySelectorAll(".cluster-section:not(.hidden)")];
+}
+
+function syncExpandAllLabel() {
+  const sections = visibleSections();
+  expandAllBtn.classList.toggle("hidden", sections.length === 0);
+  expandAllBtn.textContent = sections.some((s) => !s.open) ? "Expand all" : "Collapse all";
+}
+
+expandAllBtn.onclick = () => {
+  const sections = visibleSections();
+  const expand = sections.some((s) => !s.open);
+  // Assigning .open fires each section's own toggle listener, which already
+  // persists the new state to localStorage -- no extra bookkeeping needed.
+  sections.forEach((s) => (s.open = expand));
+};
 
 exerciseSearch.oninput = () => filterExercises(exerciseSearch.value);
 
@@ -261,7 +295,7 @@ async function openExercise(id) {
     emptyState.classList.add("hidden");
     workspace.classList.remove("hidden");
     getEditor().setOption("mode", ex.language === "sql" ? "text/x-sqlite" : "python");
-    getEditor().setValue(ex.starter_code);
+    getEditor().setValue(loadDraft(ex.id) ?? ex.starter_code);
     getEditor().refresh();
   } catch (err) {
     emptyState.classList.add("hidden");
@@ -277,7 +311,9 @@ hintToggle.onclick = () => {
 };
 
 resetBtn.onclick = () => {
-  if (currentExercise) getEditor().setValue(currentExercise.starter_code);
+  if (!currentExercise) return;
+  clearDraft(currentExercise.id);
+  getEditor().setValue(currentExercise.starter_code);
 };
 
 async function runTests() {
